@@ -1,8 +1,10 @@
 {
-  "name": "your-project",
+  "name": "astrological-graph",
   "version": "1.0.0",
-  "description": "Astrological graph generation using Netlify Functions and D3.js",
+  "description": "Astrological graph generation using Node.js and Netlify Functions",
   "main": "index.js",
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "graphlib": "^2.1.8"
+  }
 }
