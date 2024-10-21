@@ -1,7 +1,6 @@
 const graphlib = require('graphlib');
 
 // Define zodiac signs, planets, and aspect strengths
-const zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
 const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
 
 // House lords (simplified Vedic astrology)
@@ -10,7 +9,7 @@ const houseLords = {
     7: "Venus", 8: "Mars", 9: "Jupiter", 10: "Saturn", 11: "Saturn", 12: "Jupiter"
 };
 
-// Parashari aspect strengths
+// Parashari aspect strengths (we still define them but won't use them for edge widths)
 const aspectStrengths = {
     "Mars": {4: 0.75, 8: 0.75},
     "Jupiter": {5: 1.0, 9: 1.0},
@@ -18,7 +17,7 @@ const aspectStrengths = {
 };
 
 // Function to create the astrological graph
-function createAstrologicalGraph(houseSigns, planetHouseAssignment) {
+function createAstrologicalGraph(planetHouseAssignment) {
     const G = new graphlib.Graph();
 
     // Add nodes for planets and houses
@@ -55,14 +54,14 @@ function createAstrologicalGraph(houseSigns, planetHouseAssignment) {
         }
     }
 
-    // Planet-Planet aspects with weighted edges
+    // Planet-Planet aspects (no need to handle weights)
     for (const [planet, house] of Object.entries(planetHouseAssignment)) {
         if (planet in aspectStrengths) {
-            for (const [aspectOffset, strength] of Object.entries(aspectStrengths[planet])) {
+            for (const [aspectOffset] of Object.entries(aspectStrengths[planet])) {
                 const aspectedHouse = (house + parseInt(aspectOffset) - 1) % 12 + 1;
                 const occupants = housePlanets[aspectedHouse];
                 occupants.forEach(occupant => {
-                    G.setEdge(planet, occupant, { relation: "aspect", weight: strength });
+                    G.setEdge(planet, occupant, { relation: "aspect" });
                 });
             }
         }
@@ -74,14 +73,10 @@ function createAstrologicalGraph(houseSigns, planetHouseAssignment) {
 // Netlify function handler
 exports.handler = async (event) => {
     const data = JSON.parse(event.body);
-    const { ascendant, planets } = data;
+    const planetHouseAssignment = data.planets;
 
-    // Placeholder for house signs and planet-house assignments (this would come from the form data)
-    const houseSigns = {};  // Logic to map zodiac signs can be added later
-    const planetHouseAssignment = planets;  // Expect planets object in the request
-
-    // Generate the graph
-    const G = createAstrologicalGraph(houseSigns, planetHouseAssignment);
+    // Generate the graph without calculating eigenvector centrality
+    const G = createAstrologicalGraph(planetHouseAssignment);
 
     // Convert the graph to a JSON representation for return
     const graphJson = graphlib.json.write(G);

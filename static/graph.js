@@ -37,7 +37,6 @@ function drawGraph(graphData) {
         source: edge.v,  // Using the "v" property for the source
         target: edge.w,  // Using the "w" property for the target
         relation: edge.value.relation,
-        weight: edge.value.weight || 1  // Default weight if not provided
     }));
 
     // Create a D3 force simulation for positioning the nodes
@@ -46,14 +45,14 @@ function drawGraph(graphData) {
         .force("charge", d3.forceManyBody().strength(-300))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
-    // Draw the links (edges)
+    // Draw the links (edges) with a default width
     const link = g.append("g")
         .attr("stroke", "#aaa")
         .attr("stroke-opacity", 0.6)
         .selectAll("line")
         .data(links)
         .join("line")
-        .attr("stroke-width", d => Math.sqrt(d.weight * 5));
+        .attr("stroke-width", 2);  // All edges have the same width
 
     // Draw the nodes (planets and houses)
     const node = g.append("g")
