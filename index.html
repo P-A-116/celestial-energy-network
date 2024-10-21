@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrological Graph</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Astrological Graph: Planets, Houses, and Aspects</h1>
+
+    <!-- Horoscope Input Form -->
+    <form id="horoscope-form">
+        <div class="form-row">
+            <!-- Left Column -->
+            <div class="column">
+                <label for="ascendant">Ascendant:</label>
+                <input type="number" id="ascendant" name="ascendant" min="1" max="12" required>
+
+                <label for="sun">Sun:</label>
+                <input type="number" id="sun" name="sun" min="1" max="12" required>
+
+                <label for="moon">Moon:</label>
+                <input type="number" id="moon" name="moon" min="1" max="12" required>
+
+                <label for="mars">Mars:</label>
+                <input type="number" id="mars" name="mars" min="1" max="12" required>
+
+                <label for="rahu">Rahu:</label>
+                <input type="number" id="rahu" name="rahu" min="1" max="12" required>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column">
+                <label for="mercury">Mercury:</label>
+                <input type="number" id="mercury" name="mercury" min="1" max="12" required>
+
+                <label for="venus">Venus:</label>
+                <input type="number" id="venus" name="venus" min="1" max="12" required>
+
+                <label for="jupiter">Jupiter:</label>
+                <input type="number" id="jupiter" name="jupiter" min="1" max="12" required>
+
+                <label for="saturn">Saturn:</label>
+                <input type="number" id="saturn" name="saturn" min="1" max="12" required>
+
+                <label for="ketu">Ketu:</label>
+                <input type="number" id="ketu" name="ketu" min="1" max="12" required>
+            </div>
+        </div>
+
+        <button type="submit">Generate Graph</button>
+    </form>
+
+    <!-- Graph Container -->
+    <div id="graph-container"></div>
+
+    <!-- Load D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="/static/graph.js"></script>
+
+    <script>
+        // Handle form submission and load the graph
+        document.getElementById('horoscope-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form from submitting normally
+
+            const formData = new FormData(event.target);
+            
+            // Create an object with the form data
+            const data = {
+                ascendant: formData.get('ascendant'),
+                planets: {
+                    sun: formData.get('sun'),
+                    moon: formData.get('moon'),
+                    mars: formData.get('mars'),
+                    rahu: formData.get('rahu'),
+                    mercury: formData.get('mercury'),
+                    venus: formData.get('venus'),
+                    jupiter: formData.get('jupiter'),
+                    saturn: formData.get('saturn'),
+                    ketu: formData.get('ketu'),
+                }
+            };
+
+            // Send the form data to the Netlify function
+            fetch('/.netlify/functions/generate_graph', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(graphData => {
+                console.log('Graph Data:', graphData);
+                drawGraph(graphData);  // Call your D3.js function to draw the graph
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

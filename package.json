@@ -1,0 +1,8 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "description": "Astrological graph generation using Netlify Functions and D3.js",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {}
+}
