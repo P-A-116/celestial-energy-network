@@ -58,47 +58,5 @@
     <!-- Load D3.js -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="/static/graph.js"></script>
-
-    <script>
-        // Handle form submission and load the graph
-        document.getElementById('horoscope-form').addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevent form from submitting normally
-
-            const formData = new FormData(event.target);
-            
-            // Create an object with the form data
-            const data = {
-                ascendant: formData.get('ascendant'),
-                planets: {
-                    sun: formData.get('sun'),
-                    moon: formData.get('moon'),
-                    mars: formData.get('mars'),
-                    rahu: formData.get('rahu'),
-                    mercury: formData.get('mercury'),
-                    venus: formData.get('venus'),
-                    jupiter: formData.get('jupiter'),
-                    saturn: formData.get('saturn'),
-                    ketu: formData.get('ketu'),
-                }
-            };
-
-            // Send the form data to the Netlify function
-            fetch('/.netlify/functions/generate_graph', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(graphData => {
-                console.log('Graph Data:', graphData);
-                drawGraph(graphData);  // Call your D3.js function to draw the graph
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
 </body>
 </html>

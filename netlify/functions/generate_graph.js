@@ -1,4 +1,3 @@
-// netlify/functions/generate_graph.js
 const graphlib = require('graphlib');
 
 // Define zodiac signs, planets, and aspect strengths
