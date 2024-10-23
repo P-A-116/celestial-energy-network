@@ -1,21 +1,18 @@
 // Function to draw the astrological graph using D3.js
 function drawGraph(graphData) {
     try {
-        // Extract the graph, relationship matrix, total score, and planets list
         const { graph, relationshipMatrix, totalScore, planetsList } = graphData;
 
-        // First, display the relationship matrix and total score
+        // Display the relationship matrix and total score
         displayRelationshipMatrix(relationshipMatrix, totalScore, planetsList);
 
-        // Proceed to draw the graph as before
         // Clear existing SVG
         d3.select("#graph-container").select("svg").remove();
 
         const width = 800;
         const height = 600;
 
-        // Define planets array
-        const planets = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"];
+        const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
 
         const svg = d3.select("#graph-container")
             .append("svg")
@@ -37,7 +34,7 @@ function drawGraph(graphData) {
         // Process graph data
         const nodes = graph.nodes.map(node => ({
             id: node.v.toString(),
-            group: planets.includes(node.v) ? 'planet' : 'house'
+            group: planets.includes(node.v) ? 'planet' : 'house',
         }));
 
         const links = graph.edges.map(edge => ({
@@ -48,18 +45,31 @@ function drawGraph(graphData) {
 
         // Simulation
         const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(d => d.id).distance(120))
-            .force("charge", d3.forceManyBody().strength(-300))
-            .force("center", d3.forceCenter(width / 2, height / 2));
+            .force("link", d3.forceLink(links).id(d => d.id).distance(200))
+            .force("charge", d3.forceManyBody().strength(-400))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collision", d3.forceCollide().radius(25));
 
-        // Draw links
+        // Draw links with color coding
         const link = g.append("g")
-            .attr("stroke", "#aaa")
             .attr("stroke-opacity", 0.6)
             .selectAll("line")
             .data(links)
             .join("line")
-            .attr("stroke-width", 2);
+            .attr("stroke-width", 2)
+            .attr("stroke", d => {
+                if (d.relation === 'lords') {
+                    return 'red'; // Color for lordship edges
+                } else if (d.relation === 'aspect') {
+                    return 'blue';
+                } else if (d.relation === 'same_house') {
+                    return 'green';
+                } else if (d.relation === 'occupies') {
+                    return '#aaa';
+                } else {
+                    return '#ccc';
+                }
+            });
 
         // Draw nodes
         const node = g.append("g")
@@ -93,7 +103,7 @@ function drawGraph(graphData) {
                 .attr("cy", d => d.y);
 
             label.attr("x", d => d.x)
-                 .attr("y", d => d.y);
+                .attr("y", d => d.y);
         });
     } catch (error) {
         console.error('Error in drawGraph:', error);

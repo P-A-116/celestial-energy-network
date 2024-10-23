@@ -1,43 +1,37 @@
 const graphlib = require('graphlib');
 
 // Define planets
-const planets = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"];
+const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
 
 // Natural relationships
 const naturalFriends = {
-    'Sun': ['Moon', 'Mars', 'Jupiter'], 
-    'Moon': ['Sun', 'Mercury'], 
-    'Mars': ['Sun', 'Moon', 'Jupiter'], 
-    'Mercury': ['Sun', 'Venus'], 
-    'Jupiter': ['Sun', 'Moon', 'Mars'], 
-    'Venus': ['Mercury', 'Saturn'], 
-    'Saturn': ['Mercury', 'Venus'], 
-    'Rahu': ['Jupiter', 'Venus', 'Saturn'], 
+    'Sun': ['Moon', 'Mars', 'Jupiter'],
+    'Moon': ['Sun', 'Mercury'],
+    'Mars': ['Sun', 'Moon', 'Jupiter'],
+    'Mercury': ['Sun', 'Venus'],
+    'Jupiter': ['Sun', 'Moon', 'Mars'],
+    'Venus': ['Mercury', 'Saturn'],
+    'Saturn': ['Mercury', 'Venus'],
+    'Rahu': ['Jupiter', 'Venus', 'Saturn'],
     'Ketu': ['Mars', 'Venus', 'Saturn']
 };
 
 const naturalEnemies = {
-    'Sun': ['Venus', 'Saturn'], 
-    'Moon': [], 
-    'Mars': ['Mercury'], 
-    'Mercury': ['Moon'], 
-    'Jupiter': ['Mercury', 'Venus'], 
-    'Venus': ['Moon', 'Sun'], 
-    'Saturn': ['Sun', 'Moon', 'Mars'], 
-    'Rahu': ['Sun', 'Moon', 'Mars'], 
+    'Sun': ['Venus', 'Saturn'],
+    'Moon': [],
+    'Mars': ['Mercury'],
+    'Mercury': ['Moon'],
+    'Jupiter': ['Mercury', 'Venus'],
+    'Venus': ['Moon', 'Sun'],
+    'Saturn': ['Sun', 'Moon', 'Mars'],
+    'Rahu': ['Sun', 'Moon', 'Mars'],
     'Ketu': ['Sun', 'Moon']
 };
 
-const naturalNeutrals = {
-    'Sun': ['Mercury'], 
-    'Moon': ['Mars', 'Jupiter', 'Venus', 'Saturn'], 
-    'Mars': ['Venus', 'Saturn'], 
-    'Mercury': ['Mars', 'Jupiter', 'Saturn'], 
-    'Jupiter': ['Saturn'], 
-    'Venus': ['Mars', 'Jupiter'], 
-    'Saturn': ['Jupiter'], 
-    'Rahu': ['Mercury'], 
-    'Ketu': ['Mercury', 'Jupiter']
+// House lords (simplified Vedic astrology)
+const houseLords = {
+    "1": "Mars", "2": "Venus", "3": "Mercury", "4": "Moon", "5": "Sun", "6": "Mercury",
+    "7": "Venus", "8": "Mars", "9": "Jupiter", "10": "Saturn", "11": "Saturn", "12": "Jupiter"
 };
 
 // Aspect strengths (simplified)
@@ -62,7 +56,12 @@ function createAstrologicalGraph(planetHouseAssignment) {
         G.setEdge(planet, house.toString(), { relation: "occupies" });
     }
 
-    // Add edges: Planet-Planet relationships in the same house
+    // Add edges: Planet-House lords
+    for (const [house, lord] of Object.entries(houseLords)) {
+        G.setEdge(lord, house, { relation: "lords" });
+    }
+
+    // Planet-Planet relationships in the same house
     const housePlanets = {};
     for (let i = 1; i <= 12; i++) {
         housePlanets[i.toString()] = [];
