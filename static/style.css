@@ -71,3 +71,25 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
 }
+
+#relationship-container table {
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+#relationship-container th,
+#relationship-container td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+}
+
+#relationship-container th {
+    background-color: #f0f0f0;
+}
+
+#relationship-container p {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}

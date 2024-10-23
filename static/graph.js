@@ -1,4 +1,12 @@
+// Function to draw the astrological graph using D3.js
 function drawGraph(graphData) {
+    // Extract the graph, relationship matrix, total score, and planets list
+    const { graph, relationshipMatrix, totalScore, planetsList } = graphData;
+
+    // First, display the relationship matrix and total score
+    displayRelationshipMatrix(relationshipMatrix, totalScore, planetsList);
+
+    // Proceed to draw the graph as before
     // Clear existing SVG
     d3.select("#graph-container").select("svg").remove();
 
@@ -6,7 +14,7 @@ function drawGraph(graphData) {
     const height = 600;
 
     // Define planets array
-    const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
+    const planets = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"];
 
     const svg = d3.select("#graph-container")
         .append("svg")
@@ -26,12 +34,12 @@ function drawGraph(graphData) {
     svg.call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(0.7));
 
     // Process graph data
-    const nodes = graphData.nodes.map(node => ({
+    const nodes = graph.nodes.map(node => ({
         id: node.v,
         group: planets.includes(node.v) ? 'planet' : 'house'
     }));
 
-    const links = graphData.edges.map(edge => ({
+    const links = graph.edges.map(edge => ({
         source: edge.v,
         target: edge.w,
         relation: edge.value.relation,
@@ -86,6 +94,63 @@ function drawGraph(graphData) {
         label.attr("x", d => d.x)
             .attr("y", d => d.y);
     });
+}
+
+// Function to display the relationship matrix and total score
+function displayRelationshipMatrix(matrix, totalScore, planetsList) {
+    // Clear any existing matrix
+    const existingTable = document.getElementById('relationship-table');
+    if (existingTable) {
+        existingTable.remove();
+    }
+
+    const container = document.getElementById('relationship-container');
+    const table = document.createElement('table');
+    table.id = 'relationship-table';
+    table.style.margin = '0 auto';
+    table.style.borderCollapse = 'collapse';
+
+    // Create table header
+    const headerRow = document.createElement('tr');
+    headerRow.appendChild(document.createElement('th')); // Empty top-left cell
+    planetsList.forEach(planet => {
+        const th = document.createElement('th');
+        th.innerText = planet;
+        th.style.border = '1px solid #ccc';
+        th.style.padding = '5px';
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+
+    // Create table rows
+    for (let i = 0; i < planetsList.length; i++) {
+        const row = document.createElement('tr');
+        const planet1 = planetsList[i];
+
+        const th = document.createElement('th');
+        th.innerText = planet1;
+        th.style.border = '1px solid #ccc';
+        th.style.padding = '5px';
+        row.appendChild(th);
+
+        for (let j = 0; j < planetsList.length; j++) {
+            const td = document.createElement('td');
+            td.innerText = matrix[i][j];
+            td.style.border = '1px solid #ccc';
+            td.style.padding = '5px';
+            td.style.textAlign = 'center';
+            row.appendChild(td);
+        }
+        table.appendChild(row);
+    }
+
+    // Append table and total score
+    container.appendChild(table);
+
+    // Display total score
+    const scoreElement = document.createElement('p');
+    scoreElement.innerText = `Total Friendliness Score: ${totalScore}`;
+    container.appendChild(scoreElement);
 }
 
 // Handle form submission
