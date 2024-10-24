@@ -3,6 +3,27 @@ const graphlib = require('graphlib');
 // Define planets
 const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
 
+// Define zodiac signs and their rulers
+const zodiacSigns = [
+    "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+];
+
+const signLords = {
+    "Aries": "Mars",
+    "Taurus": "Venus",
+    "Gemini": "Mercury",
+    "Cancer": "Moon",
+    "Leo": "Sun",
+    "Virgo": "Mercury",
+    "Libra": "Venus",
+    "Scorpio": "Mars",
+    "Sagittarius": "Jupiter",
+    "Capricorn": "Saturn",
+    "Aquarius": "Saturn",
+    "Pisces": "Jupiter"
+};
+
 // Natural relationships
 const naturalFriends = {
     'Sun': ['Moon', 'Mars', 'Jupiter'],
@@ -28,12 +49,6 @@ const naturalEnemies = {
     'Ketu': ['Sun', 'Moon']
 };
 
-// House lords (simplified Vedic astrology)
-const houseLords = {
-    "1": "Mars", "2": "Venus", "3": "Mercury", "4": "Moon", "5": "Sun", "6": "Mercury",
-    "7": "Venus", "8": "Mars", "9": "Jupiter", "10": "Saturn", "11": "Saturn", "12": "Jupiter"
-};
-
 // Aspect strengths (simplified)
 const aspectStrengths = {
     "Mars": { "4": 0.75, "8": 0.75 },
@@ -41,9 +56,37 @@ const aspectStrengths = {
     "Saturn": { "3": 0.5, "10": 0.5 }
 };
 
+// Function to calculate house signs based on Ascendant
+function calculateHouseSigns(ascendantSign) {
+    const startIndex = zodiacSigns.indexOf(ascendantSign);
+    const houseSigns = {};
+
+    for (let i = 0; i < 12; i++) {
+        const signIndex = (startIndex + i) % 12;
+        houseSigns[(i + 1).toString()] = zodiacSigns[signIndex];
+    }
+
+    return houseSigns;
+}
+
+// Function to assign house lords dynamically
+function assignHouseLords(houseSigns) {
+    const houseLords = {};
+
+    for (const [house, sign] of Object.entries(houseSigns)) {
+        houseLords[house] = signLords[sign];
+    }
+
+    return houseLords;
+}
+
 // Function to create the astrological graph
-function createAstrologicalGraph(planetHouseAssignment) {
+function createAstrologicalGraph(planetHouseAssignment, ascendantSign) {
     const G = new graphlib.Graph();
+
+    // Calculate house signs and lords
+    const houseSigns = calculateHouseSigns(ascendantSign);
+    const houseLords = assignHouseLords(houseSigns);
 
     // Add nodes for planets and houses
     planets.forEach(planet => G.setNode(planet));
@@ -51,7 +94,7 @@ function createAstrologicalGraph(planetHouseAssignment) {
         G.setNode(i.toString()); // House nodes as strings
     }
 
-    // Add edges: Planet-House relationships
+    // Add edges: Planet-House relationships (occupies)
     for (const [planet, house] of Object.entries(planetHouseAssignment)) {
         G.setEdge(planet, house.toString(), { relation: "occupies" });
     }
@@ -169,9 +212,21 @@ function calculateRelationshipMatrix(planetHouseAssignment) {
 exports.handler = async (event) => {
     const data = JSON.parse(event.body);
     const planetHouseAssignment = data.planets;
+    const ascendantSignIndex = parseInt(data.ascendant);
+
+    // Validate ascendant sign index
+    if (isNaN(ascendantSignIndex) || ascendantSignIndex < 1 || ascendantSignIndex > 12) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ error: "Invalid Ascendant. Must be a number between 1 and 12." }),
+        };
+    }
+
+    // Get the Ascendant sign from index
+    const ascendantSign = zodiacSigns[ascendantSignIndex - 1];
 
     // Generate the graph
-    const G = createAstrologicalGraph(planetHouseAssignment);
+    const G = createAstrologicalGraph(planetHouseAssignment, ascendantSign);
 
     // Convert the graph to JSON
     const graphJson = graphlib.json.write(G);

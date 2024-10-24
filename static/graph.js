@@ -216,8 +216,11 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
     })
     .then(response => response.json())
     .then(graphData => {
-        console.log('Graph Data:', graphData);
-        drawGraph(graphData);
+        if (graphData.error) {
+            alert(graphData.error);
+        } else {
+            drawGraph(graphData);
+        }
     })
     .catch(error => {
         console.error('Error:', error);

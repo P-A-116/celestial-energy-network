@@ -39,12 +39,12 @@ form label {
     font-weight: bold;
 }
 
-form input {
+form input, form select {
     margin-bottom: 15px;
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 50px;
+    width: 150px;
     text-align: center;
 }
 
