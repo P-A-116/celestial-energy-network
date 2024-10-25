@@ -105,124 +105,52 @@ function drawGraph(graphData) {
             label.attr("x", d => d.x)
                 .attr("y", d => d.y);
         });
+
+        // Add the legend
+        addLegend(svg, width, height);
+
     } catch (error) {
         console.error('Error in drawGraph:', error);
     }
 }
 
-// Function to display the relationship matrix and total score
-function displayRelationshipMatrix(matrix, totalScore, planetsList) {
-    try {
-        // Clear any existing matrix
-        const existingContainer = document.getElementById('relationship-table-container');
-        if (existingContainer) {
-            existingContainer.remove();
-        }
+// Function to add a legend to the SVG
+function addLegend(svg, width, height) {
+    // Legend data
+    const legendData = [
+        { color: 'red', label: 'Lordship (Planet → House it lords over)' },
+        { color: 'blue', label: 'Aspect (Planet → Planet it aspects)' },
+        { color: 'green', label: 'Same House (Planets in the same house)' },
+        { color: '#aaa', label: 'Occupies (Planet → House it occupies)' }
+    ];
 
-        const container = document.getElementById('relationship-container');
+    // Create a group for the legend
+    const legend = svg.append('g')
+        .attr('class', 'legend')
+        .attr('transform', `translate(${width - 250}, ${20})`); // Adjust position as needed
 
-        // Create a container div for the table and score
-        const tableContainer = document.createElement('div');
-        tableContainer.id = 'relationship-table-container';
+    // Add legend items
+    const legendItem = legend.selectAll('.legend-item')
+        .data(legendData)
+        .enter()
+        .append('g')
+        .attr('class', 'legend-item')
+        .attr('transform', (d, i) => `translate(0, ${i * 25})`);
 
-        const table = document.createElement('table');
-        table.style.margin = '0 auto';
-        table.style.borderCollapse = 'collapse';
+    // Add legend lines
+    legendItem.append('line')
+        .attr('x1', 0)
+        .attr('y1', 10)
+        .attr('x2', 30)
+        .attr('y2', 10)
+        .attr('stroke', d => d.color)
+        .attr('stroke-width', 4);
 
-        // Create table header
-        const headerRow = document.createElement('tr');
-        const emptyHeader = document.createElement('th');
-        emptyHeader.style.border = '1px solid #ccc';
-        emptyHeader.style.padding = '5px';
-        headerRow.appendChild(emptyHeader); // Empty top-left cell
-        planetsList.forEach(planet => {
-            const th = document.createElement('th');
-            th.innerText = planet;
-            th.style.border = '1px solid #ccc';
-            th.style.padding = '5px';
-            headerRow.appendChild(th);
-        });
-        table.appendChild(headerRow);
-
-        // Create table rows
-        for (let i = 0; i < planetsList.length; i++) {
-            const row = document.createElement('tr');
-            const planet1 = planetsList[i];
-
-            const th = document.createElement('th');
-            th.innerText = planet1;
-            th.style.border = '1px solid #ccc';
-            th.style.padding = '5px';
-            row.appendChild(th);
-
-            for (let j = 0; j < planetsList.length; j++) {
-                const td = document.createElement('td');
-                td.innerText = matrix[i][j];
-                td.style.border = '1px solid #ccc';
-                td.style.padding = '5px';
-                td.style.textAlign = 'center';
-                row.appendChild(td);
-            }
-            table.appendChild(row);
-        }
-
-        // Append table and total score
-        tableContainer.appendChild(table);
-
-        // Display total score
-        const scoreElement = document.createElement('p');
-        scoreElement.innerText = `Total Friendliness Score: ${totalScore}`;
-        scoreElement.style.fontWeight = 'bold';
-        scoreElement.style.textAlign = 'center';
-        tableContainer.appendChild(scoreElement);
-
-        // Append the container to the relationship-container div
-        container.appendChild(tableContainer);
-    } catch (error) {
-        console.error('Error in displayRelationshipMatrix:', error);
-    }
+    // Add legend text
+    legendItem.append('text')
+        .attr('x', 40)
+        .attr('y', 15)
+        .text(d => d.label)
+        .attr('font-size', '12px')
+        .attr('fill', '#000');
 }
-
-// Handle form submission
-document.getElementById('horoscope-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    const data = {
-        ascendant: formData.get('ascendant'),
-        planets: {
-            Sun: formData.get('sun'),
-            Moon: formData.get('moon'),
-            Mars: formData.get('mars'),
-            Rahu: formData.get('rahu'),
-            Mercury: formData.get('mercury'),
-            Venus: formData.get('venus'),
-            Jupiter: formData.get('jupiter'),
-            Saturn: formData.get('saturn'),
-            Ketu: formData.get('ketu'),
-        }
-    };
-
-    // Convert house numbers to strings
-    for (let planet in data.planets) {
-        data.planets[planet] = data.planets[planet].toString();
-    }
-
-    fetch('/.netlify/functions/generate_graph', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(graphData => {
-        if (graphData.error) {
-            alert(graphData.error);
-        } else {
-            drawGraph(graphData);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
