@@ -154,3 +154,124 @@ function addLegend(svg, width, height) {
         .attr('font-size', '12px')
         .attr('fill', '#000');
 }
+
+// Updated function to display the relationship matrix and adjusted score
+function displayRelationshipMatrix(matrix, totalScore, planetsList) {
+    try {
+        // Clear any existing matrix
+        const existingContainer = document.getElementById('relationship-table-container');
+        if (existingContainer) {
+            existingContainer.remove();
+        }
+
+        const container = document.getElementById('relationship-container');
+
+        // Create a container div for the table and score
+        const tableContainer = document.createElement('div');
+        tableContainer.id = 'relationship-table-container';
+
+        const table = document.createElement('table');
+        table.style.margin = '0 auto';
+        table.style.borderCollapse = 'collapse';
+
+        // Create table header
+        const headerRow = document.createElement('tr');
+        const emptyHeader = document.createElement('th');
+        emptyHeader.style.border = '1px solid #ccc';
+        emptyHeader.style.padding = '5px';
+        headerRow.appendChild(emptyHeader); // Empty top-left cell
+        planetsList.forEach(planet => {
+            const th = document.createElement('th');
+            th.innerText = planet;
+            th.style.border = '1px solid #ccc';
+            th.style.padding = '5px';
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        // Create table rows
+        for (let i = 0; i < planetsList.length; i++) {
+            const row = document.createElement('tr');
+            const planet1 = planetsList[i];
+
+            const th = document.createElement('th');
+            th.innerText = planet1;
+            th.style.border = '1px solid #ccc';
+            th.style.padding = '5px';
+            row.appendChild(th);
+
+            for (let j = 0; j < planetsList.length; j++) {
+                const td = document.createElement('td');
+                td.innerText = matrix[i][j];
+                td.style.border = '1px solid #ccc';
+                td.style.padding = '5px';
+                td.style.textAlign = 'center';
+                row.appendChild(td);
+            }
+            table.appendChild(row);
+        }
+
+        // Append table
+        tableContainer.appendChild(table);
+
+        // Calculate the adjusted score
+        const adjustedScore = ((totalScore + 65) / 116) * 100;
+        const adjustedScorePercentage = adjustedScore.toFixed(2) + '%';
+
+        // Display total score and adjusted percentage
+        const scoreElement = document.createElement('p');
+        scoreElement.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScorePercentage})`;
+        scoreElement.style.fontWeight = 'bold';
+        scoreElement.style.textAlign = 'center';
+        tableContainer.appendChild(scoreElement);
+
+        // Append the container to the relationship-container div
+        container.appendChild(tableContainer);
+    } catch (error) {
+        console.error('Error in displayRelationshipMatrix:', error);
+    }
+}
+
+// Handle form submission
+document.getElementById('horoscope-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    const data = {
+        ascendant: formData.get('ascendant'),
+        planets: {
+            Sun: formData.get('sun'),
+            Moon: formData.get('moon'),
+            Mars: formData.get('mars'),
+            Rahu: formData.get('rahu'),
+            Mercury: formData.get('mercury'),
+            Venus: formData.get('venus'),
+            Jupiter: formData.get('jupiter'),
+            Saturn: formData.get('saturn'),
+            Ketu: formData.get('ketu'),
+        }
+    };
+
+    // Convert house numbers to strings
+    for (let planet in data.planets) {
+        data.planets[planet] = data.planets[planet].toString();
+    }
+
+    fetch('/.netlify/functions/generate_graph', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(graphData => {
+        if (graphData.error) {
+            alert(graphData.error);
+        } else {
+            drawGraph(graphData);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
