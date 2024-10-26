@@ -138,10 +138,20 @@ function createAstrologicalGraph(planetHouseAssignment, ascendantSign) {
     return G;
 }
 
-// Calculate temporary relationship
+// Updated function to calculate temporary relationship
 function calculateTemporaryRelationship(house1, house2) {
-    const difference = (parseInt(house2) - parseInt(house1) + 12) % 12;
+    const h1 = parseInt(house1);
+    const h2 = parseInt(house2);
+
+    const difference = (h2 - h1 + 12) % 12;
+
     if ([1,2,3,9,10,11].includes(difference)) {
+        return 'Friend';
+    } else if (
+        (h1 === 4 && h2 === 10) || (h1 === 10 && h2 === 4) ||
+        (h1 === 2 && h2 === 12) || (h1 === 12 && h2 === 2) ||
+        (h1 === 3 && h2 === 11) || (h1 === 11 && h2 === 3)
+    ) {
         return 'Friend';
     } else {
         return 'Enemy';
