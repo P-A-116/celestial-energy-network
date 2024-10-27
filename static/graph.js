@@ -6,22 +6,26 @@ function drawGraph(graphData) {
         // Display the relationship matrix and total score
         displayRelationshipMatrix(relationshipMatrix, totalScore, planetsList);
 
-        // Clear existing SVG
+        // Clear any existing SVG
         d3.select("#graph-container").select("svg").remove();
 
-        const width = 800;
-        const height = 600;
+        // Dynamically calculate container dimensions
+        const container = document.getElementById("graph-container");
+        const width = container.clientWidth;
+        const height = container.clientHeight;
 
         const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
 
+        // Create SVG element with dynamic width and height
         const svg = d3.select("#graph-container")
             .append("svg")
             .attr("width", width)
             .attr("height", height);
 
+        // Append a group element for graph positioning
         const g = svg.append("g");
 
-        // Zoom and pan
+        // Set up zoom and pan behavior
         const zoom = d3.zoom()
             .scaleExtent([0.5, 5])
             .on("zoom", (event) => {
@@ -31,7 +35,7 @@ function drawGraph(graphData) {
         svg.call(zoom);
         svg.call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(0.7));
 
-        // Process graph data
+        // Process graph data into nodes and links
         const nodes = graph.nodes.map(node => ({
             id: node.v.toString(),
             group: planets.includes(node.v) ? 'planet' : 'house',
@@ -43,7 +47,7 @@ function drawGraph(graphData) {
             relation: edge.value.relation,
         }));
 
-        // Simulation
+        // Set up force simulation with dynamic center
         const simulation = d3.forceSimulation(nodes)
             .force("link", d3.forceLink(links).id(d => d.id).distance(200))
             .force("charge", d3.forceManyBody().strength(-400))
@@ -59,7 +63,7 @@ function drawGraph(graphData) {
             .attr("stroke-width", 2)
             .attr("stroke", d => {
                 if (d.relation === 'lords') {
-                    return 'red'; // Color for lordship edges
+                    return 'red';
                 } else if (d.relation === 'aspect') {
                     return 'blue';
                 } else if (d.relation === 'same_house') {
@@ -71,7 +75,7 @@ function drawGraph(graphData) {
                 }
             });
 
-        // Draw nodes
+        // Draw nodes with color coding based on group
         const node = g.append("g")
             .attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
@@ -81,7 +85,7 @@ function drawGraph(graphData) {
             .attr("r", 15)
             .attr("fill", d => d.group === 'planet' ? "lightblue" : "lightgreen");
 
-        // Add labels
+        // Add labels for nodes
         const label = g.append("g")
             .selectAll("text")
             .data(nodes)
@@ -92,7 +96,7 @@ function drawGraph(graphData) {
             .attr("dy", ".35em")
             .text(d => d.id);
 
-        // Simulation tick
+        // Simulation tick for continuous positioning updates
         simulation.on("tick", () => {
             link.attr("x1", d => d.source.x)
                 .attr("y1", d => d.source.y)
@@ -113,165 +117,3 @@ function drawGraph(graphData) {
         console.error('Error in drawGraph:', error);
     }
 }
-
-// Function to add a legend to the SVG
-function addLegend(svg, width, height) {
-    // Legend data
-    const legendData = [
-        { color: 'red', label: 'Lordship (Planet → House it lords over)' },
-        { color: 'blue', label: 'Aspect (Planet → Planet it aspects)' },
-        { color: 'green', label: 'Same House (Planets in the same house)' },
-        { color: '#aaa', label: 'Occupies (Planet → House it occupies)' }
-    ];
-
-    // Create a group for the legend
-    const legend = svg.append('g')
-        .attr('class', 'legend')
-        .attr('transform', `translate(${width - 250}, ${20})`); // Adjust position as needed
-
-    // Add legend items
-    const legendItem = legend.selectAll('.legend-item')
-        .data(legendData)
-        .enter()
-        .append('g')
-        .attr('class', 'legend-item')
-        .attr('transform', (d, i) => `translate(0, ${i * 25})`);
-
-    // Add legend lines
-    legendItem.append('line')
-        .attr('x1', 0)
-        .attr('y1', 10)
-        .attr('x2', 30)
-        .attr('y2', 10)
-        .attr('stroke', d => d.color)
-        .attr('stroke-width', 4);
-
-    // Add legend text
-    legendItem.append('text')
-        .attr('x', 40)
-        .attr('y', 15)
-        .text(d => d.label)
-        .attr('font-size', '12px')
-        .attr('fill', '#000');
-}
-
-// Updated function to display the relationship matrix and adjusted score
-function displayRelationshipMatrix(matrix, totalScore, planetsList) {
-    try {
-        // Clear any existing matrix
-        const existingContainer = document.getElementById('relationship-table-container');
-        if (existingContainer) {
-            existingContainer.remove();
-        }
-
-        const container = document.getElementById('relationship-container');
-
-        // Create a container div for the table and score
-        const tableContainer = document.createElement('div');
-        tableContainer.id = 'relationship-table-container';
-
-        const table = document.createElement('table');
-        table.style.margin = '0 auto';
-        table.style.borderCollapse = 'collapse';
-
-        // Create table header
-        const headerRow = document.createElement('tr');
-        const emptyHeader = document.createElement('th');
-        emptyHeader.style.border = '1px solid #ccc';
-        emptyHeader.style.padding = '5px';
-        headerRow.appendChild(emptyHeader); // Empty top-left cell
-        planetsList.forEach(planet => {
-            const th = document.createElement('th');
-            th.innerText = planet;
-            th.style.border = '1px solid #ccc';
-            th.style.padding = '5px';
-            headerRow.appendChild(th);
-        });
-        table.appendChild(headerRow);
-
-        // Create table rows
-        for (let i = 0; i < planetsList.length; i++) {
-            const row = document.createElement('tr');
-            const planet1 = planetsList[i];
-
-            const th = document.createElement('th');
-            th.innerText = planet1;
-            th.style.border = '1px solid #ccc';
-            th.style.padding = '5px';
-            row.appendChild(th);
-
-            for (let j = 0; j < planetsList.length; j++) {
-                const td = document.createElement('td');
-                td.innerText = matrix[i][j];
-                td.style.border = '1px solid #ccc';
-                td.style.padding = '5px';
-                td.style.textAlign = 'center';
-                row.appendChild(td);
-            }
-            table.appendChild(row);
-        }
-
-        // Append table
-        tableContainer.appendChild(table);
-
-        // Calculate the adjusted score
-        const adjustedScore = ((totalScore + 65) / 116) * 100;
-        const adjustedScorePercentage = adjustedScore.toFixed(2) + '%';
-
-        // Display total score and adjusted percentage
-        const scoreElement = document.createElement('p');
-        scoreElement.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScorePercentage})`;
-        scoreElement.style.fontWeight = 'bold';
-        scoreElement.style.textAlign = 'center';
-        tableContainer.appendChild(scoreElement);
-
-        // Append the container to the relationship-container div
-        container.appendChild(tableContainer);
-    } catch (error) {
-        console.error('Error in displayRelationshipMatrix:', error);
-    }
-}
-
-// Handle form submission
-document.getElementById('horoscope-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    const data = {
-        ascendant: formData.get('ascendant'),
-        planets: {
-            Sun: formData.get('sun'),
-            Moon: formData.get('moon'),
-            Mars: formData.get('mars'),
-            Rahu: formData.get('rahu'),
-            Mercury: formData.get('mercury'),
-            Venus: formData.get('venus'),
-            Jupiter: formData.get('jupiter'),
-            Saturn: formData.get('saturn'),
-            Ketu: formData.get('ketu'),
-        }
-    };
-
-    // Convert house numbers to strings
-    for (let planet in data.planets) {
-        data.planets[planet] = data.planets[planet].toString();
-    }
-
-    fetch('/.netlify/functions/generate_graph', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(graphData => {
-        if (graphData.error) {
-            alert(graphData.error);
-        } else {
-            drawGraph(graphData);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
