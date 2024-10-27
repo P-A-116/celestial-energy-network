@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Celestial Energy Network</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-	<link rel="icon" href="icon.png">
+    <link rel="icon" href="icon.png">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
@@ -14,12 +14,11 @@
     <div class="relative flex h-16 items-center justify-between">
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="icon.png" alt="icn">
+          <img class="h-8 w-auto" src="icon.png" alt="icon">
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-			<a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+            <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
             <a href="about.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">About</a>
           </div>
         </div>
@@ -28,51 +27,158 @@
   </div>
 </nav>
 
+<div class="container mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">About</h1>
 
-    <div class="container mx-auto py-10 px-4">
-        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">About</h1>
+    <div class="content max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <p class="mb-4">
+            This application allows users to generate an astrological graph based on Vedic astrology principles. It visualizes the relationships between planets and houses, aspects, and calculates a total friendliness score among the planets.
+            It is a work in progress, and many more features will be added in due time.
+        </p>
 
-        <div class="content max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-            <p class="mb-4">
-                This application allows users to generate an astrological graph based on Vedic astrology principles. It visualizes the relationships between planets and houses, aspects, and calculates a total friendliness score among the planets.
-				It is a work in progress and many more features will be added in due time.
-            </p>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">How It Works</h2>
+        <ul class="list-disc list-inside mb-4">
+            <li>Calculates house lords based on the Ascendant sign.</li>
+            <li>Determines natural and temporary relationships between planets.</li>
+            <li>Calculates a compound relationship and a total friendliness score.</li>
+        </ul>
 
-            <h2 class="text-2xl font-semibold text-gray-700 mt-6">How It Works</h2>
-            <ul class="list-disc list-inside mb-4">
-                <li>Calculates house lords based on the Ascendant sign.</li>
-                <li>Determines natural and temporary relationships between planets.</li>
-                <li>Calculates a compound relationship and a total friendliness score.</li>
-            </ul>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Understanding the Graph</h2>
+        <p class="mb-4">
+            The graph displays nodes representing planets and houses. Edge colors indicate relationship types (Graha Sambandhas):
+        </p>
+        <ul class="list-disc list-inside space-y-2">
+            <li><span class="inline-block w-4 h-4 bg-red-500 mr-2"></span> <strong>Red:</strong> Lordship relationships</li>
+            <li><span class="inline-block w-4 h-4 bg-blue-500 mr-2"></span> <strong>Blue:</strong> Aspect relationships</li>
+            <li><span class="inline-block w-4 h-4 bg-green-500 mr-2"></span> <strong>Green:</strong> Same house relationships</li>
+            <li><span class="inline-block w-4 h-4 bg-gray-400 mr-2"></span> <strong>Gray:</strong> Occupies relationships</li>
+        </ul>
+		
+		<h2 class="text-2xl font-semibold text-gray-700 mt-6">Natural Relationships</h2
+		<p class="mb-4">
+		In Vedic astrology, each planet has inherent natural relationships with other planets, indicating friendship, enmity, or neutrality.
+		</p>
 
-            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Understanding the Graph</h2>
-            <p class="mb-4">
-                The graph displays nodes representing planets and houses. Edge colors indicate relationship types (Graha Sambandhas):
-            </p>
-            <ul class="list-disc list-inside space-y-2">
-                <li><span class="inline-block w-4 h-4 bg-red-500 mr-2"></span> <strong>Red:</strong> Lordship relationships</li>
-                <li><span class="inline-block w-4 h-4 bg-blue-500 mr-2"></span> <strong>Blue:</strong> Aspect relationships</li>
-                <li><span class="inline-block w-4 h-4 bg-green-500 mr-2"></span> <strong>Green:</strong> Same house relationships</li>
-                <li><span class="inline-block w-4 h-4 bg-gray-400 mr-2"></span> <strong>Gray:</strong> Occupies relationships</li>
-            </ul>
+<table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6">
+    <thead>
+        <tr>
+            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet</th>
+            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Friends</th>
+            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Enemies</th>
+            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Neutrals</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="py-2 px-4 border-b">Sun</td>
+            <td class="py-2 px-4 border-b">Moon, Mars, Jupiter</td>
+            <td class="py-2 px-4 border-b">Venus, Saturn</td>
+            <td class="py-2 px-4 border-b">Mercury</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Moon</td>
+            <td class="py-2 px-4 border-b">Sun, Mercury</td>
+            <td class="py-2 px-4 border-b">None</td>
+            <td class="py-2 px-4 border-b">Mars, Jupiter, Venus, Saturn</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Mars</td>
+            <td class="py-2 px-4 border-b">Sun, Moon, Jupiter</td>
+            <td class="py-2 px-4 border-b">Mercury</td>
+            <td class="py-2 px-4 border-b">Venus, Saturn</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Mercury</td>
+            <td class="py-2 px-4 border-b">Sun, Venus</td>
+            <td class="py-2 px-4 border-b">Moon</td>
+            <td class="py-2 px-4 border-b">Mars, Jupiter, Saturn</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Jupiter</td>
+            <td class="py-2 px-4 border-b">Sun, Moon, Mars</td>
+            <td class="py-2 px-4 border-b">Mercury, Venus</td>
+            <td class="py-2 px-4 border-b">Saturn</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Venus</td>
+            <td class="py-2 px-4 border-b">Mercury, Saturn</td>
+            <td class="py-2 px-4 border-b">Sun, Moon</td>
+            <td class="py-2 px-4 border-b">Mars, Jupiter</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Saturn</td>
+            <td class="py-2 px-4 border-b">Mercury, Venus</td>
+            <td class="py-2 px-4 border-b">Sun, Moon, Mars</td>
+            <td class="py-2 px-4 border-b">Jupiter</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4 border-b">Rahu</td>
+            <td class="py-2 px-4 border-b">Jupiter, Venus, Saturn</td>
+            <td class="py-2 px-4 border-b">Sun, Moon, Mars</td>
+            <td class="py-2 px-4 border-b">Mercury</td>
+        </tr>
+        <tr>
+            <td class="py-2 px-4">Ketu</td>
+            <td class="py-2 px-4">Mars, Venus, Saturn</td>
+            <td class="py-2 px-4">Sun, Moon</td>
+            <td class="py-2 px-4">Mercury, Jupiter</td>
+        </tr>
+    </tbody>
+</table>
 
-            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Friendliness Score Calculation</h2>
-            <p class="mb-4">The friendliness score is calculated based on both natural and temporary relationships (See BPHS Ch.3 P.40-41):</p>
-            <p class="mb-4 bg-gray-100 p-4 rounded">Adjusted Score = ((Total Score + 65) / 116) × 100%</p>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Temporary Relationships</h2>
+        <p class="mb-4">
+            Temporary relationships are determined by the placement of planets relative to one another within the twelve houses:
+        </p>
+        <ul class="list-disc list-inside mb-4">
+            <li>If two planets are 2, 3, 4, 10, 11, or 12 houses apart, they are considered temporarily friendly.(One being in the 1st the other in the 2nd, is considered 2 houses apart)</li>
+            <li>If two planets are placed in certain complementary positions, they are also temporarily friendly:
+                <ul class="list-disc list-inside ml-6">
+                    <li>One in the 4th house, the other in the 10th</li>
+                    <li>One in the 2nd house, the other in the 12th</li>
+                    <li>One in the 3rd house, the other in the 11th</li>
+                </ul>
+            </li>
+            <li>Otherwise, planets are considered temporarily antagonistic.</li>
+        </ul>
 
-            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Using the Application</h2>
-            <p class="mb-4">To use the application:</p>
-            <ol class="list-decimal list-inside space-y-2">
-                <li>Select your Ascendant sign.</li>
-                <li>Enter the house positions for each planet.</li>
-                <li>Click "Generate Graph" to view results.</li>
-            </ol>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Compound Relationships</h2>
+        <p class="mb-4">
+            The compound relationship between two planets combines their natural and temporary relationships:
+        </p>
+        <ul class="list-disc list-inside mb-4">
+            <li>If both natural and temporary relationships are friendly, the planets are considered <strong>Extreme Friends</strong>.</li>
+            <li>If one relationship is friendly and the other neutral, the result is <strong>Friend</strong>.</li>
+            <li>If both relationships are antagonistic, the planets are considered <strong>Extreme Enemies</strong>.</li>
+            <li>If one relationship is antagonistic and the other neutral, the result is <strong>Enemy</strong>.</li>
+            <li>If one relationship is friendly and the other antagonistic, they are <strong>Neutral</strong>.</li>
+        </ul>
 
-            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Contact and Feedback</h2>
-            <p>
-                For questions, feedback, or suggestions, please contact <a href="mailto:rotateme314@gmail.com" class="text-blue-500 underline">rotateme314@gmail.com</a>.
-            </p>
-        </div>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Friendliness Score Calculation</h2>
+        <p class="mb-4">The friendliness score is calculated based on each compound relationship:</p>
+        <ul class="list-disc list-inside mb-4">
+            <li><strong>Extreme Friend</strong>: +2</li>
+            <li><strong>Friend</strong>: +1</li>
+            <li><strong>Neutral</strong>: 0</li>
+            <li><strong>Enemy</strong>: -1</li>
+            <li><strong>Extreme Enemy</strong>: -2</li>
+        </ul>
+		<p class="mb-4">The minimum score is -65, while the maximum is 51. So we normalize it to a 0 to 1 range. (The actual distribution is coming soon, to get a percentile.)</p>
+        <p class="mb-4 bg-gray-100 p-4 rounded">Final Score = ((Total Score + 65) / 116) × 100%</p>
+
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Using the Application</h2>
+        <p class="mb-4">To use the application:</p>
+        <ol class="list-decimal list-inside space-y-2">
+            <li>Select your Ascendant sign.</li>
+            <li>Enter the house positions for each planet.</li>
+            <li>Click "Generate Graph" to view results.</li>
+        </ol>
+
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Contact and Feedback</h2>
+        <p>
+            For questions, feedback, or suggestions, please contact <a href="mailto:rotateme314@gmail.com" class="text-blue-500 underline">rotateme314@gmail.com</a>.
+        </p>
     </div>
+</div>
 </body>
 </html>
