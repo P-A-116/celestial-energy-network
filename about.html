@@ -2,103 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About - Astrological Graph Application</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>About</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans">
     <!-- Navigation Bar -->
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about.html" class="active">About</a>
+    <nav class="bg-gray-800 text-white py-4 shadow-lg">
+        <div class="container mx-auto flex justify-center space-x-8">
+            <a href="/" class="text-lg font-semibold hover:text-blue-400">Home</a>
+            <a href="/about.html" class="text-lg font-semibold hover:text-blue-400">About</a>
+        </div>
     </nav>
 
-    <h1>About the Astrological Graph Application</h1>
+    <div class="container mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">About</h1>
 
-    <div class="content">
-        <p>
-            This application allows users to generate an astrological graph based on Vedic astrology principles. It visualizes the relationships between planets and houses, aspects, and calculates a total friendliness score among the planets.
-        </p>
+        <div class="content max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <p class="mb-4">
+                This application allows users to generate an astrological graph based on Vedic astrology principles. It visualizes the relationships between planets and houses, aspects, and calculates a total friendliness score among the planets.
+				It is a work in progress and many more features will be added in due time.
+            </p>
 
-        <h2>How It Works</h2>
-        <p>
-            Users input the positions of the planets in the twelve houses of the zodiac, along with the Ascendant sign. The application then:
-        </p>
-        <ul>
-            <li>Calculates the dynamic house lords based on the Ascendant sign.</li>
-            <li>Determines the natural and temporary relationships between the planets.</li>
-            <li>Calculates a compound relationship and a total friendliness score.</li>
-            <li>Generates a visual graph displaying the planets, houses, and their interconnections.</li>
-        </ul>
+            <h2 class="text-2xl font-semibold text-gray-700 mt-6">How It Works</h2>
+            <ul class="list-disc list-inside mb-4">
+                <li>Calculates house lords based on the Ascendant sign.</li>
+                <li>Determines natural and temporary relationships between planets.</li>
+                <li>Calculates a compound relationship and a total friendliness score.</li>
+            </ul>
 
-        <h2>Understanding the Graph</h2>
-        <p>
-            The graph displays nodes representing planets and houses. Edges (lines) between the nodes represent different types of relationships, each indicated by a specific color:
-        </p>
-        <ul>
-            <li><span class="legend-color" style="background-color: red;"></span> <strong>Red Edges</strong>: Lordship relationships (Planet → House it lords over)</li>
-            <li><span class="legend-color" style="background-color: blue;"></span> <strong>Blue Edges</strong>: Aspect relationships (Planet → Planet it aspects)</li>
-            <li><span class="legend-color" style="background-color: green;"></span> <strong>Green Edges</strong>: Same house relationships (Planets in the same house)</li>
-            <li><span class="legend-color" style="background-color: #aaa;"></span> <strong>Gray Edges</strong>: Occupies relationships (Planet → House it occupies)</li>
-        </ul>
+            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Understanding the Graph</h2>
+            <p class="mb-4">
+                The graph displays nodes representing planets and houses. Edge colors indicate relationship types (Graha Sambandhas):
+            </p>
+            <ul class="list-disc list-inside space-y-2">
+                <li><span class="inline-block w-4 h-4 bg-red-500 mr-2"></span> <strong>Red:</strong> Lordship relationships</li>
+                <li><span class="inline-block w-4 h-4 bg-blue-500 mr-2"></span> <strong>Blue:</strong> Aspect relationships</li>
+                <li><span class="inline-block w-4 h-4 bg-green-500 mr-2"></span> <strong>Green:</strong> Same house relationships</li>
+                <li><span class="inline-block w-4 h-4 bg-gray-400 mr-2"></span> <strong>Gray:</strong> Occupies relationships</li>
+            </ul>
 
-        <h2>Friendliness Score Calculation</h2>
-        <p>
-            The total friendliness score is calculated based on the natural and temporary relationships between planets:
-        </p>
-        <ul>
-            <li><strong>Natural Relationships</strong>: Based on traditional Vedic astrology friendships and enmities among planets.</li>
-            <li><strong>Temporary Relationships</strong>: Determined by the positions of planets in the houses relative to each other.</li>
-            <li><strong>Compound Relationships</strong>: Combining natural and temporary relationships to determine the overall relationship between two planets.</li>
-        </ul>
-        <p>
-            The score is adjusted using the formula:
-        </p>
-        <p class="formula">
-            Adjusted Score = ((Total Score + 65) / 116) × 100%
-        </p>
-        <p>
-            This adjusted score is displayed as a percentage next to the total score.
-        </p>
+            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Friendliness Score Calculation</h2>
+            <p class="mb-4">The friendliness score is calculated based on both natural and temporary relationships (See BPHS Ch.3 P.40-41):</p>
+            <p class="mb-4 bg-gray-100 p-4 rounded">Adjusted Score = ((Total Score + 65) / 116) × 100%</p>
 
-        <h2>Special Conditions in Temporary Relationships</h2>
-        <p>
-            Additional conditions are considered in temporary relationships:
-        </p>
-        <ul>
-            <li>If one planet is in the 4th house and another in the 10th house, they are temporarily friendly.</li>
-            <li>If one planet is in the 2nd house and another in the 12th house, they are temporarily friendly.</li>
-            <li>If one planet is in the 3rd house and another in the 11th house, they are temporarily friendly.</li>
-        </ul>
+            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Using the Application</h2>
+            <p class="mb-4">To use the application:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>Select your Ascendant sign.</li>
+                <li>Enter the house positions for each planet.</li>
+                <li>Click "Generate Graph" to view results.</li>
+            </ol>
 
-        <h2>Using the Application</h2>
-        <p>
-            To use the application:
-        </p>
-        <ol>
-            <li>Select your Ascendant sign from the dropdown menu.</li>
-            <li>Enter the house positions for each planet (1-12).</li>
-            <li>Click "Generate Graph" to view the astrological graph and relationships.</li>
-        </ol>
-
-        <h2>Interpreting the Results</h2>
-        <p>
-            The graph and relationship matrix provide insights into the interactions among planets in your chart. The total friendliness score gives an overall indication of planetary harmony.
-        </p>
-
-        <h2>Technical Details</h2>
-        <p>
-            This application is built using:
-        </p>
-        <ul>
-            <li><strong>D3.js</strong>: For interactive graph visualization.</li>
-            <li><strong>Netlify Functions</strong>: For serverless backend calculations.</li>
-            <li><strong>Graphlib</strong>: For graph data structure management.</li>
-        </ul>
-
-        <h2>Contact and Feedback</h2>
-        <p>
-            For any questions, feedback, or suggestions, please feel free to contact us at <a href="mailto:support@example.com">support@example.com</a>.
-        </p>
+            <h2 class="text-2xl font-semibold text-gray-700 mt-6">Contact and Feedback</h2>
+            <p>
+                For questions, feedback, or suggestions, please contact <a href="mailto:rotateme314@gmail.com" class="text-blue-500 underline">support@example.com</a>.
+            </p>
+        </div>
     </div>
 </body>
 </html>
