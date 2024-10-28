@@ -9,7 +9,7 @@ function drawGraph(graphData) {
         // Clear existing SVG
         d3.select("#graph-container").select("svg").remove();
 
-        const width = 1200;
+        const width = 1500;
         const height = 600;
 
         const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu"];
