@@ -101,5 +101,88 @@
     <!-- Load D3.js -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="/static/graph.js"></script>
+
+<script>
+// Percentile mapping for each possible total friendliness score
+const percentileMapping = {
+    "-65": 0.000502,
+    "-61": 0.000979,
+    "-57": 0.00339,
+    "-53": 0.00803,
+    "-49": 0.0136,
+    "-45": 0.02753,
+    "-41": 0.04082,
+    "-37": 0.11306,
+    "-33": 0.2297,
+    "-29": 0.4299,
+    "-25": 0.7619,
+    "-21": 1.5336,
+    "-17": 2.358,
+    "-13": 4.449,
+    "-9": 7.015,
+    "-5": 11.219,
+    "-1": 16.953,
+    "3": 25.811,
+    "7": 35.941,
+    "11": 49.5,
+    "15": 62.511,
+    "19": 75.475,
+    "23": 84.877,
+    "27": 91.713,
+    "31": 95.8,
+    "35": 98.166,
+    "39": 99.315,
+    "43": 99.757,
+    "47": 99.974,
+    "51": 100
+};
+
+// Function to get percentile for a given adjusted score
+function getPercentile(adjustedScore) {
+    return percentileMapping[adjustedScore.toString()] || "N/A"; // Return percentile if found, otherwise "N/A"
+}
+
+// Function to display score and percentile
+function displayScore(adjustedScore) {
+    const percentile = getPercentile(adjustedScore);
+    document.getElementById('friendliness-score').textContent = adjustedScore;
+    document.getElementById('percentile-score').textContent = `${percentile}%`;
+}
+
+// Handle form submission and calculate score
+document.getElementById('horoscope-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const planetPositions = {
+        Sun: parseInt(document.getElementById('sun').value),
+        Moon: parseInt(document.getElementById('moon').value),
+        Mars: parseInt(document.getElementById('mars').value),
+        Mercury: parseInt(document.getElementById('mercury').value),
+        Venus: parseInt(document.getElementById('venus').value),
+        Jupiter: parseInt(document.getElementById('jupiter').value),
+        Saturn: parseInt(document.getElementById('saturn').value),
+        Rahu: parseInt(document.getElementById('rahu').value),
+        Ketu: parseInt(document.getElementById('ketu').value),
+        Ascendant: parseInt(document.getElementById('ascendant').value)
+    };
+
+    // Calculate the adjusted friendliness score
+    const adjustedScore = calculateFriendlinessScore(planetPositions);
+    displayScore(adjustedScore);
+});
+
+// Example calculateFriendlinessScore function (replace with your actual calculation logic)
+function calculateFriendlinessScore(planetPositions) {
+    // Placeholder logic: replace this with actual calculation
+    let score = (planetPositions.Sun + planetPositions.Moon + planetPositions.Mars +
+                 planetPositions.Mercury + planetPositions.Venus + planetPositions.Jupiter +
+                 planetPositions.Saturn + planetPositions.Rahu + planetPositions.Ketu + 
+                 planetPositions.Ascendant) % 52 - 65;
+
+    return score;
+}
+</script>
+
+	
 </body>
 </html>
