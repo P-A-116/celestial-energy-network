@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Celestial Energy Network</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-	<link rel="icon" href="icon.png">
+    <link rel="icon" href="icon.png">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
@@ -14,11 +14,10 @@
     <div class="relative flex h-16 items-center justify-between">
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="icon.png" alt="icn">
+          <img class="h-8 w-auto" src="icon.png" alt="icon">
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="index.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
             <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
           </div>
@@ -28,80 +27,86 @@
   </div>
 </nav>
 
+<div class="container mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Celestial Energy Network</h1>
 
-    <div class="container mx-auto py-10 px-4">
-        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Celestial Energy Network</h1>
+    <!-- Horoscope Input Form -->
+    <form id="horoscope-form" class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto space-y-6">
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Left Column -->
+            <div class="space-y-4">
+                <label for="ascendant" class="block text-lg font-medium">Ascendant:</label>
+                <select id="ascendant" name="ascendant" required class="w-full p-2 border rounded">
+                    <option value="">Select Ascendant Sign</option>
+                    <option value="1">Aries</option>
+                    <option value="2">Taurus</option>
+                    <option value="3">Gemini</option>
+                    <option value="4">Cancer</option>
+                    <option value="5">Leo</option>
+                    <option value="6">Virgo</option>
+                    <option value="7">Libra</option>
+                    <option value="8">Scorpio</option>
+                    <option value="9">Sagittarius</option>
+                    <option value="10">Capricorn</option>
+                    <option value="11">Aquarius</option>
+                    <option value="12">Pisces</option>
+                </select>
 
-        <!-- Horoscope Input Form -->
-        <form id="horoscope-form" class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto space-y-6">
-            <div class="grid grid-cols-2 gap-4">
-                <!-- Left Column -->
-                <div class="space-y-4">
-                    <label for="ascendant" class="block text-lg font-medium">Ascendant:</label>
-                    <select id="ascendant" name="ascendant" required class="w-full p-2 border rounded">
-                        <option value="">Select Ascendant Sign</option>
-                        <option value="1">Aries</option>
-                        <option value="2">Taurus</option>
-                        <option value="3">Gemini</option>
-                        <option value="4">Cancer</option>
-                        <option value="5">Leo</option>
-                        <option value="6">Virgo</option>
-                        <option value="7">Libra</option>
-                        <option value="8">Scorpio</option>
-                        <option value="9">Sagittarius</option>
-                        <option value="10">Capricorn</option>
-                        <option value="11">Aquarius</option>
-                        <option value="12">Pisces</option>
-                    </select>
+                <label for="sun" class="block text-lg font-medium">Sun:</label>
+                <input type="number" id="sun" name="sun" min="1" max="12" required class="w-full p-2 border rounded">
 
-                    <label for="sun" class="block text-lg font-medium">Sun:</label>
-                    <input type="number" id="sun" name="sun" min="1" max="12" required class="w-full p-2 border rounded">
+                <label for="moon" class="block text-lg font-medium">Moon:</label>
+                <input type="number" id="moon" name="moon" min="1" max="12" required class="w-full p-2 border rounded">
 
-                    <label for="moon" class="block text-lg font-medium">Moon:</label>
-                    <input type="number" id="moon" name="moon" min="1" max="12" required class="w-full p-2 border rounded">
+                <label for="mars" class="block text-lg font-medium">Mars:</label>
+                <input type="number" id="mars" name="mars" min="1" max="12" required class="w-full p-2 border rounded">
 
-                    <label for="mars" class="block text-lg font-medium">Mars:</label>
-                    <input type="number" id="mars" name="mars" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="rahu" class="block text-lg font-medium">Rahu:</label>
-                    <input type="number" id="rahu" name="rahu" min="1" max="12" required class="w-full p-2 border rounded">
-                </div>
-
-                <!-- Right Column -->
-                <div class="space-y-4">
-                    <label for="mercury" class="block text-lg font-medium">Mercury:</label>
-                    <input type="number" id="mercury" name="mercury" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="venus" class="block text-lg font-medium">Venus:</label>
-                    <input type="number" id="venus" name="venus" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="jupiter" class="block text-lg font-medium">Jupiter:</label>
-                    <input type="number" id="jupiter" name="jupiter" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="saturn" class="block text-lg font-medium">Saturn:</label>
-                    <input type="number" id="saturn" name="saturn" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="ketu" class="block text-lg font-medium">Ketu:</label>
-                    <input type="number" id="ketu" name="ketu" min="1" max="12" required class="w-full p-2 border rounded">
-                </div>
+                <label for="rahu" class="block text-lg font-medium">Rahu:</label>
+                <input type="number" id="rahu" name="rahu" min="1" max="12" required class="w-full p-2 border rounded">
             </div>
 
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">
-                Generate Graph
-            </button>
-        </form>
+            <!-- Right Column -->
+            <div class="space-y-4">
+                <label for="mercury" class="block text-lg font-medium">Mercury:</label>
+                <input type="number" id="mercury" name="mercury" min="1" max="12" required class="w-full p-2 border rounded">
 
-        <!-- Relationship Matrix Container -->
-        <div id="relationship-container" class="mt-8 max-w-4xl mx-auto"></div>
+                <label for="venus" class="block text-lg font-medium">Venus:</label>
+                <input type="number" id="venus" name="venus" min="1" max="12" required class="w-full p-2 border rounded">
 
-        <!-- Graph Container -->
-        <div id="graph-container" class="mt-10 bg-white shadow-md rounded-lg p-4 border border-gray-200 overflow-hidden"></div>
+                <label for="jupiter" class="block text-lg font-medium">Jupiter:</label>
+                <input type="number" id="jupiter" name="jupiter" min="1" max="12" required class="w-full p-2 border rounded">
+
+                <label for="saturn" class="block text-lg font-medium">Saturn:</label>
+                <input type="number" id="saturn" name="saturn" min="1" max="12" required class="w-full p-2 border rounded">
+
+                <label for="ketu" class="block text-lg font-medium">Ketu:</label>
+                <input type="number" id="ketu" name="ketu" min="1" max="12" required class="w-full p-2 border rounded">
+            </div>
+        </div>
+
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">
+            Generate Graph
+        </button>
+    </form>
+
+    <!-- Display Score and Percentile -->
+    <div id="score-container" class="mt-6 text-center">
+        <p class="text-2xl font-bold">Friendliness Score: <span id="friendliness-score"></span></p>
+        <p class="text-lg text-gray-600">Percentile: <span id="percentile-score"></span>%</p>
     </div>
 
-    <!-- Load D3.js -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="/static/graph.js"></script>
+    <!-- Relationship Matrix Container -->
+    <div id="relationship-container" class="mt-8 max-w-4xl mx-auto"></div>
 
+    <!-- Graph Container -->
+    <div id="graph-container" class="mt-10 bg-white shadow-md rounded-lg p-4 border border-gray-200 overflow-hidden"></div>
+</div>
+
+<!-- Load D3.js -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/static/graph.js"></script>
+
+<!-- Custom Script for Score Calculation -->
 <script>
 // Percentile mapping for each possible total friendliness score
 const percentileMapping = {
@@ -182,7 +187,5 @@ function calculateFriendlinessScore(planetPositions) {
     return score;
 }
 </script>
-
-	
 </body>
 </html>
