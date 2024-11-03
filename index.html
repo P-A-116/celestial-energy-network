@@ -93,8 +93,6 @@
 
         <!-- Relationship Matrix Container -->
         <div id="relationship-container" class="mt-8 max-w-4xl mx-auto"></div>
-		<div id="percentile-display" class="text-center mt-4 text-xl font-bold"></div>
-
 
         <!-- Graph Container -->
         <div id="graph-container" class="mt-10 bg-white shadow-md rounded-lg p-4 border border-gray-200 overflow-hidden"></div>
@@ -103,53 +101,6 @@
     <!-- Load D3.js -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="/static/graph.js"></script>
-
-<script>
-// Percentile mapping for each possible total friendliness score
-const percentileMapping = {
-    "-65": 0.000502,
-    "-61": 0.000979,
-    "-57": 0.00339,
-    "-53": 0.00803,
-    "-49": 0.0136,
-    "-45": 0.02753,
-    "-41": 0.04082,
-    "-37": 0.11306,
-    "-33": 0.2297,
-    "-29": 0.4299,
-    "-25": 0.7619,
-    "-21": 1.5336,
-    "-17": 2.358,
-    "-13": 4.449,
-    "-9": 7.015,
-    "-5": 11.219,
-    "-1": 16.953,
-    "3": 25.811,
-    "7": 35.941,
-    "11": 49.5,
-    "15": 62.511,
-    "19": 75.475,
-    "23": 84.877,
-    "27": 91.713,
-    "31": 95.8,
-    "35": 98.166,
-    "39": 99.315,
-    "43": 99.757,
-    "47": 99.974,
-    "51": 100
-};
-
-// Function to fetch and display the percentile for the existing calculated score
-function displayPercentile() {
-    // Assume adjustedScore is defined elsewhere in your code
-    const percentile = percentileMapping[adjustedScore.toString()] || "N/A";
-    document.getElementById('percentile-display').textContent = `Percentile: ${percentile}%`;
-}
-
-// Call this function where you already have adjustedScore calculated
-displayPercentile();
-</script>
-
 	
 </body>
 </html>

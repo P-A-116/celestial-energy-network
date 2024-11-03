@@ -1,3 +1,37 @@
+// Percentile mapping for each possible total friendliness score
+const percentileMapping = {
+    "-65": 0.000502,
+    "-61": 0.000979,
+    "-57": 0.00339,
+    "-53": 0.00803,
+    "-49": 0.0136,
+    "-45": 0.02753,
+    "-41": 0.04082,
+    "-37": 0.11306,
+    "-33": 0.2297,
+    "-29": 0.4299,
+    "-25": 0.7619,
+    "-21": 1.5336,
+    "-17": 2.358,
+    "-13": 4.449,
+    "-9": 7.015,
+    "-5": 11.219,
+    "-1": 16.953,
+    "3": 25.811,
+    "7": 35.941,
+    "11": 49.5,
+    "15": 62.511,
+    "19": 75.475,
+    "23": 84.877,
+    "27": 91.713,
+    "31": 95.8,
+    "35": 98.166,
+    "39": 99.315,
+    "43": 99.757,
+    "47": 99.974,
+    "51": 100
+};
+
 // Function to draw the astrological graph using D3.js
 function drawGraph(graphData) {
     try {
@@ -116,7 +150,6 @@ function drawGraph(graphData) {
 
 // Function to add a legend to the SVG
 function addLegend(svg, width, height) {
-    // Legend data
     const legendData = [
         { color: 'red', label: 'Lordship (Planet → House it lords over)' },
         { color: 'blue', label: 'Aspect (Planet → Planet it aspects)' },
@@ -124,12 +157,10 @@ function addLegend(svg, width, height) {
         { color: '#aaa', label: 'Occupies (Planet → House it occupies)' }
     ];
 
-    // Create a group for the legend
     const legend = svg.append('g')
         .attr('class', 'legend')
-        .attr('transform', `translate(${width - 250}, ${20})`); // Adjust position as needed
+        .attr('transform', `translate(${width - 250}, ${20})`);
 
-    // Add legend items
     const legendItem = legend.selectAll('.legend-item')
         .data(legendData)
         .enter()
@@ -137,7 +168,6 @@ function addLegend(svg, width, height) {
         .attr('class', 'legend-item')
         .attr('transform', (d, i) => `translate(0, ${i * 25})`);
 
-    // Add legend lines
     legendItem.append('line')
         .attr('x1', 0)
         .attr('y1', 10)
@@ -146,7 +176,6 @@ function addLegend(svg, width, height) {
         .attr('stroke', d => d.color)
         .attr('stroke-width', 4);
 
-    // Add legend text
     legendItem.append('text')
         .attr('x', 40)
         .attr('y', 15)
@@ -155,18 +184,15 @@ function addLegend(svg, width, height) {
         .attr('fill', '#000');
 }
 
-// Updated function to display the relationship matrix and adjusted score
+// Updated function to display the relationship matrix and adjusted score with percentile
 function displayRelationshipMatrix(matrix, totalScore, planetsList) {
     try {
-        // Clear any existing matrix
         const existingContainer = document.getElementById('relationship-table-container');
         if (existingContainer) {
             existingContainer.remove();
         }
 
         const container = document.getElementById('relationship-container');
-
-        // Create a container div for the table and score
         const tableContainer = document.createElement('div');
         tableContainer.id = 'relationship-table-container';
 
@@ -174,12 +200,12 @@ function displayRelationshipMatrix(matrix, totalScore, planetsList) {
         table.style.margin = '0 auto';
         table.style.borderCollapse = 'collapse';
 
-        // Create table header
+        // Table header
         const headerRow = document.createElement('tr');
         const emptyHeader = document.createElement('th');
         emptyHeader.style.border = '1px solid #ccc';
         emptyHeader.style.padding = '5px';
-        headerRow.appendChild(emptyHeader); // Empty top-left cell
+        headerRow.appendChild(emptyHeader);
         planetsList.forEach(planet => {
             const th = document.createElement('th');
             th.innerText = planet;
@@ -189,7 +215,7 @@ function displayRelationshipMatrix(matrix, totalScore, planetsList) {
         });
         table.appendChild(headerRow);
 
-        // Create table rows
+        // Table rows
         for (let i = 0; i < planetsList.length; i++) {
             const row = document.createElement('tr');
             const planet1 = planetsList[i];
@@ -211,21 +237,19 @@ function displayRelationshipMatrix(matrix, totalScore, planetsList) {
             table.appendChild(row);
         }
 
-        // Append table
         tableContainer.appendChild(table);
 
-        // Calculate the adjusted score
+        // Calculate adjusted score and fetch percentile
         const adjustedScore = ((totalScore + 65) / 116) * 100;
-        const adjustedScorePercentage = adjustedScore.toFixed(2) + '%';
+        const percentile = percentileMapping[totalScore.toString()] || "N/A";
 
-        // Display total score and adjusted percentage
+        // Display total score, adjusted score, and percentile
         const scoreElement = document.createElement('p');
-        scoreElement.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScorePercentage})`;
+        scoreElement.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScore.toFixed(2)}%)\nPercentile: ${percentile}%`;
         scoreElement.style.fontWeight = 'bold';
         scoreElement.style.textAlign = 'center';
         tableContainer.appendChild(scoreElement);
 
-        // Append the container to the relationship-container div
         container.appendChild(tableContainer);
     } catch (error) {
         console.error('Error in displayRelationshipMatrix:', error);
@@ -253,7 +277,6 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
         }
     };
 
-    // Convert house numbers to strings
     for (let planet in data.planets) {
         data.planets[planet] = data.planets[planet].toString();
     }
