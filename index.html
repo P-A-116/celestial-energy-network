@@ -139,15 +139,15 @@ const percentileMapping = {
     "51": 100
 };
 
-// Function to fetch and display the percentile for an already calculated score
-function displayPercentileForScore(adjustedScore) {
+// Function to fetch and display the percentile for the existing calculated score
+function displayPercentile() {
+    // Assume adjustedScore is defined elsewhere in your code
     const percentile = percentileMapping[adjustedScore.toString()] || "N/A";
     document.getElementById('percentile-display').textContent = `Percentile: ${percentile}%`;
 }
 
-// Example: Display percentile for the existing calculated score
-const adjustedScore = /* Use your existing calculated score here */;
-displayPercentileForScore(adjustedScore);
+// Call this function where you already have adjustedScore calculated
+displayPercentile();
 </script>
 
 	
