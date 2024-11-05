@@ -184,77 +184,67 @@ function addLegend(svg, width, height) {
         .attr('fill', '#000');
 }
 
-// Updated function to display the relationship matrix and adjusted score with percentile
+// Updated function to display the relationship matrix, adjusted score, and percentile using the table in index.html
 function displayRelationshipMatrix(matrix, totalScore, planetsList) {
     try {
-        const existingContainer = document.getElementById('relationship-table-container');
-        if (existingContainer) {
-            existingContainer.remove();
-        }
+        const table = document.getElementById('relationship-table');
 
-        const container = document.getElementById('relationship-container');
-        const tableContainer = document.createElement('div');
-        tableContainer.id = 'relationship-table-container';
+        // Clear existing table content
+        table.innerHTML = "";
 
-        const table = document.createElement('table');
-        table.style.margin = '0 auto';
-        table.style.borderCollapse = 'collapse';
-
-        // Table header
+        // Create table header row
         const headerRow = document.createElement('tr');
         const emptyHeader = document.createElement('th');
-        emptyHeader.style.border = '1px solid #ccc';
-        emptyHeader.style.padding = '5px';
-        headerRow.appendChild(emptyHeader);
+        emptyHeader.className = "border border-gray-400 p-2";
+        headerRow.appendChild(emptyHeader); // Empty top-left cell for alignment
+
         planetsList.forEach(planet => {
             const th = document.createElement('th');
             th.innerText = planet;
-            th.style.border = '1px solid #ccc';
-            th.style.padding = '5px';
+            th.className = "border border-gray-400 p-2";
             headerRow.appendChild(th);
         });
         table.appendChild(headerRow);
 
-        // Table rows
-        for (let i = 0; i < planetsList.length; i++) {
+        // Create table rows for each planet
+        planetsList.forEach((planet1, i) => {
             const row = document.createElement('tr');
-            const planet1 = planetsList[i];
-
+            
+            // Planet name in the first cell
             const th = document.createElement('th');
             th.innerText = planet1;
-            th.style.border = '1px solid #ccc';
-            th.style.padding = '5px';
+            th.className = "border border-gray-400 p-2";
             row.appendChild(th);
 
-            for (let j = 0; j < planetsList.length; j++) {
+            // Add data cells for each relationship in the matrix
+            matrix[i].forEach((value) => {
                 const td = document.createElement('td');
-                td.innerText = matrix[i][j];
-                td.style.border = '1px solid #ccc';
-                td.style.padding = '5px';
-                td.style.textAlign = 'center';
+                td.innerText = value;
+                td.className = "border border-gray-400 p-2";
                 row.appendChild(td);
-            }
-            table.appendChild(row);
-        }
+            });
 
-        tableContainer.appendChild(table);
+            table.appendChild(row);
+        });
 
         // Calculate adjusted score and fetch percentile
         const adjustedScore = ((totalScore + 65) / 116) * 100;
         const percentile = percentileMapping[totalScore.toString()] || "N/A";
 
         // Display total score, adjusted score, and percentile
-        const scoreElement = document.createElement('p');
-        scoreElement.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScore.toFixed(2)}%)\nPercentile: ${percentile}%`;
-        scoreElement.style.fontWeight = 'bold';
-        scoreElement.style.textAlign = 'center';
-        tableContainer.appendChild(scoreElement);
+        const scoreDisplay = document.createElement('p');
+        scoreDisplay.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScore.toFixed(2)}%)\nPercentile: ${percentile}%`;
+        scoreDisplay.className = "text-center font-bold mt-4";
 
-        container.appendChild(tableContainer);
+        // Add score display to the relationship container
+        const container = document.getElementById('relationship-container');
+        container.appendChild(scoreDisplay);
+        
     } catch (error) {
         console.error('Error in displayRelationshipMatrix:', error);
     }
 }
+
 
 // Handle form submission
 document.getElementById('horoscope-form').addEventListener('submit', function(event) {
