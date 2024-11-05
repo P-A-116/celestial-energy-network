@@ -233,7 +233,7 @@ function displayRelationshipMatrix(matrix, totalScore, planetsList) {
 
         // Display total score, adjusted score, and percentile
         const scoreDisplay = document.createElement('p');
-        scoreDisplay.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScore.toFixed(2)}%)\nPercentile: ${percentile}%`;
+        scoreDisplay.innerText = `Total Friendliness Score: ${totalScore} \nAdjusted Score: ${adjustedScore.toFixed(2)}\nPercentile: ${percentile}%`;
         scoreDisplay.className = "text-center font-bold mt-4";
 
         // Add score display to the relationship container
