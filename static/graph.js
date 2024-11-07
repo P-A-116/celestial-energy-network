@@ -84,11 +84,18 @@ function displayRelationshipMatrix(matrix, totalScore, planetsList) {
         table.appendChild(row);
     });
 
+<<<<<<< HEAD
     const adjustedScore = ((totalScore + 65) / 116) * 100;
     const percentile = percentileMapping[totalScore.toString()] || "N/A";
     document.getElementById('percentile-display').innerText = 
         `Total Friendliness Score: ${totalScore} \n(: ${adjustedScore.toFixed(2)}%) \nPercentile: ${percentile}%`;
 }
+=======
+        // Display total score, adjusted score, and percentile
+        const scoreDisplay = document.createElement('p');
+        scoreDisplay.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScore.toFixed(2)}%)\nPercentile: ${percentile}%`;
+        scoreDisplay.className = "text-center font-bold mt-4";
+>>>>>>> parent of 7a303b2 (Minor Changes)
 
 // Function to render graph with D3.js
 function drawGraph(graphData) {
