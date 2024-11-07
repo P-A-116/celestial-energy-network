@@ -82,7 +82,7 @@ function assignHouseLords(houseSigns) {
 
 // Function to create the astrological graph
 function createAstrologicalGraph(planetHouseAssignment, ascendantSign) {
-    const G = new graphlib.Graph();
+    const G = new graphlib.Graph({ directed: true });
 
     // Calculate house signs and lords
     const houseSigns = calculateHouseSigns(ascendantSign);
@@ -129,7 +129,7 @@ function createAstrologicalGraph(planetHouseAssignment, ascendantSign) {
                 const aspectedHouse = ((parseInt(house) + parseInt(aspectOffset) - 1) % 12 + 1).toString();
                 const occupants = housePlanets[aspectedHouse];
                 occupants.forEach(occupant => {
-                    G.setEdge(planet, occupant, { relation: "aspect" });
+                    G.setEdge(planet, occupant, { relation: "aspect", directed: true });
                 });
             }
         }
