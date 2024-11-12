@@ -132,7 +132,7 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
 
     // Display total score, adjusted score, and percentile
     const percentileDisplay = document.getElementById('percentile-display');
-    percentileDisplay.innerText = `Total Friendliness Score: ${totalScore} (Adjusted Score: ${adjustedScore.toFixed(2)}%)\nPercentile: ${percentile}%`;
+    percentileDisplay.innerText = `Total Friendliness Score: ${totalScore} \nAdjusted Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
 }
 
 
