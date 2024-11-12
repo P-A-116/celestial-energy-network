@@ -133,7 +133,93 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     // Display total score, adjusted score, and percentile
     const percentileDisplay = document.getElementById('percentile-display');
     percentileDisplay.innerText = `Total Friendliness Score: ${totalScore} \nAdjusted Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
+	
+	renderDistributionChart(percentileMapping, totalScore);
 }
+
+// Function to render the distribution chart
+function renderDistributionChart(percentileMapping, totalScore) {
+    const distributionData = Object.entries(percentileMapping).map(([score, percentile]) => ({
+        score: parseInt(score, 10),
+        percentile
+    }));
+
+    // Set up dimensions and margins
+    const margin = { top: 20, right: 30, bottom: 50, left: 40 };
+    const width = 800 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    // Create SVG element
+    const svg = d3.select("#distribution-chart")
+        .html("")  // Clear existing content
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Define scales
+    const xScale = d3.scaleLinear()
+        .domain([d3.min(distributionData, d => d.score), d3.max(distributionData, d => d.score)])
+        .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(distributionData, d => d.percentile)])
+        .range([height, 0]);
+
+    // Add X axis
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale))
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("text-anchor", "middle")
+        .text("Friendliness Score");
+
+    // Add Y axis
+    svg.append("g")
+        .call(d3.axisLeft(yScale))
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -height / 2)
+        .attr("y", -35)
+        .attr("fill", "black")
+        .style("text-anchor", "middle")
+        .text("Percentile (%)");
+
+    // Add line for percentile distribution
+    svg.append("path")
+        .datum(distributionData)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+            .x(d => xScale(d.score))
+            .y(d => yScale(d.percentile))
+        );
+
+    // Mark calculated score
+    svg.append("line")
+        .attr("x1", xScale(totalScore))
+        .attr("x2", xScale(totalScore))
+        .attr("y1", 0)
+        .attr("y2", height)
+        .attr("stroke", "red")
+        .attr("stroke-width", 2)
+        .attr("stroke-dasharray", "4");
+
+    svg.append("text")
+        .attr("x", xScale(totalScore))
+        .attr("y", -10)
+        .attr("fill", "red")
+        .style("text-anchor", "middle")
+        .text(`Your Score: ${totalScore}`);
+}
+
 
 
 // Form submission handler

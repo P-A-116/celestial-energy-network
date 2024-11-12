@@ -5,6 +5,7 @@
     <title>Celestial Energy Network</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 	<link rel="icon" href="icon.png">
+	<script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
@@ -93,11 +94,16 @@
 
         <!-- Relationship Matrix Container -->
         <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
-		<table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">        <!-- Table headers and rows will be dynamically populated -->
-		</table>
+		<table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
 		<div id="percentile-display" class="text-center mt-4 text-xl font-bold"></div>
-		
+        <!-- Table headers and rows will be dynamically populated -->
+		</table>
 		</div>
+		<div id="score-distribution" class="mt-8 max-w-4xl mx-auto">
+		<h2 class="text-center text-2xl font-semibold mb-4">Friendliness Score Distribution</h2>
+		<div id="distribution-chart"></div>
+		</div>
+
 
     </div>
 
