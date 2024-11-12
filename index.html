@@ -30,7 +30,7 @@
 
 
     <div class="container mx-auto py-10 px-4">
-        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Celestial Energy Network</h1>
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Horoscope</h1>
 
         <!-- Horoscope Input Form -->
         <form id="horoscope-form" class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto space-y-6">
@@ -87,24 +87,20 @@
             </div>
 
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">
-                Generate Graph
+                Analyze
             </button>
         </form>
 
         <!-- Relationship Matrix Container -->
         <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
 		<table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
+		<div id="percentile-display" class="text-center mt-4 text-xl font-bold"></div>
         <!-- Table headers and rows will be dynamically populated -->
 		</table>
 		</div>
 
-
-        <!-- Graph Container -->
-        <div id="graph-container" class="mt-10 bg-white shadow-md rounded-lg p-4 border border-gray-200 overflow-hidden"></div>
     </div>
 
-    <!-- Load D3.js -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="/static/graph.js"></script>
 	
 </body>
