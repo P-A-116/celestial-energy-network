@@ -64,6 +64,29 @@ function calculateCompoundRelationship(natural, temporary) {
     return { type: 'Neutral', score: 0 };
 }
 
+// Convert cumulative percentiles to non-cumulative frequencies
+function convertToNonCumulative(percentileMapping) {
+    const scores = Object.keys(percentileMapping).map(score => parseInt(score, 10)).sort((a, b) => a - b);
+    const nonCumulativeData = [];
+
+    for (let i = 0; i < scores.length; i++) {
+        const score = scores[i];
+        const percentile = percentileMapping[score.toString()];
+        let frequency;
+
+        if (i === 0) {
+            frequency = percentile; // First item has no previous to subtract from
+        } else {
+            const previousPercentile = percentileMapping[scores[i - 1].toString()];
+            frequency = percentile - previousPercentile;
+        }
+
+        nonCumulativeData.push({ score, frequency });
+    }
+
+    return nonCumulativeData;
+}
+
 // Calculate matrix and total score
 function calculateFriendlinessScore(planetPositions) {
     const planets = Object.keys(planetPositions);
@@ -133,17 +156,12 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     // Display total score, adjusted score, and percentile
     const percentileDisplay = document.getElementById('percentile-display');
     percentileDisplay.innerText = `Total Friendliness Score: ${totalScore} \nAdjusted Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
+	const nonCumulativeData = convertToNonCumulative(percentileMapping);
 	
-	renderDistributionChart(percentileMapping, totalScore);
+	renderDistributionHistogram(nonCumulativeData, totalScore);
 }
 
-// Function to render the distribution chart
-function renderDistributionChart(percentileMapping, totalScore) {
-    const distributionData = Object.entries(percentileMapping).map(([score, percentile]) => ({
-        score: parseInt(score, 10),
-        percentile
-    }));
-
+function renderDistributionHistogram(nonCumulativeData, totalScore) {
     // Set up dimensions and margins
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
     const width = 800 - margin.left - margin.right;
@@ -159,18 +177,19 @@ function renderDistributionChart(percentileMapping, totalScore) {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Define scales
-    const xScale = d3.scaleLinear()
-        .domain([d3.min(distributionData, d => d.score), d3.max(distributionData, d => d.score)])
-        .range([0, width]);
+    const xScale = d3.scaleBand()
+        .domain(nonCumulativeData.map(d => d.score))
+        .range([0, width])
+        .padding(0.1);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(distributionData, d => d.percentile)])
+        .domain([0, d3.max(nonCumulativeData, d => d.frequency)])
         .range([height, 0]);
 
     // Add X axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale))
+        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
         .append("text")
         .attr("class", "axis-label")
         .attr("x", width / 2)
@@ -189,32 +208,25 @@ function renderDistributionChart(percentileMapping, totalScore) {
         .attr("y", -35)
         .attr("fill", "black")
         .style("text-anchor", "middle")
-        .text("Percentile (%)");
+        .text("Frequency (%)");
 
-    // Add line for percentile distribution
-    svg.append("path")
-        .datum(distributionData)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 2)
-        .attr("d", d3.line()
-            .x(d => xScale(d.score))
-            .y(d => yScale(d.percentile))
-        );
+    // Add bars for histogram
+    svg.selectAll(".bar")
+        .data(nonCumulativeData)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", d => xScale(d.score))
+        .attr("width", xScale.bandwidth())
+        .attr("y", d => yScale(d.frequency))
+        .attr("height", d => height - yScale(d.frequency))
+        .attr("fill", d => d.score === totalScore ? "red" : "steelblue");
 
-    // Mark calculated score
-    svg.append("line")
-        .attr("x1", xScale(totalScore))
-        .attr("x2", xScale(totalScore))
-        .attr("y1", 0)
-        .attr("y2", height)
-        .attr("stroke", "red")
-        .attr("stroke-width", 2)
-        .attr("stroke-dasharray", "4");
-
+    // Add label for the user's score
     svg.append("text")
-        .attr("x", xScale(totalScore))
-        .attr("y", -10)
+        .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
+        .attr("y", yScale(nonCumulativeData.find(d => d.score === totalScore)?.frequency || 0))
+        .attr("dy", -5)
         .attr("fill", "red")
         .style("text-anchor", "middle")
         .text(`Your Score: ${totalScore}`);
@@ -239,7 +251,7 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
         Ketu: parseInt(document.getElementById('ketu').value)
     };
 
-    // Calculate and display matrix and score
+    // Retrieve planet positions and calculate score as before
     const { matrix, totalScore, planets } = calculateFriendlinessScore(planetPositions);
     displayRelationshipMatrix(matrix, totalScore, planets);
 });
