@@ -34,6 +34,19 @@ form {
     width: 48%;
 }
 
+/* Instructional Text Styling */
+.instructions {
+    color: #555;
+    font-size: 0.9rem; /* Slightly smaller font size */
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-left: 4px solid #4A90E2; /* Accent border for emphasis */
+    background-color: #f1f8ff; /* Light blue background for readability */
+    border-radius: 4px;
+    line-height: 1.4;
+}
+
+
 form label {
     margin-top: 10px;
     font-weight: bold;
@@ -97,6 +110,16 @@ button:hover {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
+}
+
+/* Smaller Font for Score Display */
+#percentile-display {
+    font-size: 0.8rem; /* Smaller font size */
+    color: #555; /* Slightly muted color */
+    font-weight: normal; /* Normal font weight */
+    line-height: 1.4;
+    text-align: left;
+    padding-top: 0.5rem;
 }
 
 .legend text {
