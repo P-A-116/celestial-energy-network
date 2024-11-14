@@ -122,6 +122,8 @@ button:hover {
     padding-top: 0.5rem;
 }
 
+
+
 .legend text {
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -200,3 +202,52 @@ nav a.active {
 .content ul li {
     margin-bottom: 10px;
 }
+
+/* Sidebar Styling */
+aside {
+    background-color: #f8fafc; /* Light gray background for the sidebar */
+    border: 1px solid #e5e7eb; /* Subtle border around the sidebar */
+    border-radius: 8px; /* Rounded corners */
+    padding: 1.5rem; /* Increased padding for spacing */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+/* Sidebar Links Styling */
+aside ul li a {
+    display: block;
+    padding: 0.5rem 1rem; /* Adds padding for a larger clickable area */
+    color: #2563eb; /* Primary blue color */
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out; /* Smooth animation for hover effects */
+    position: relative;
+}
+
+/* Sidebar Link Hover Effects */
+aside ul li a:hover {
+    background-color: #e0f2fe; /* Light blue background on hover */
+    color: #1d4ed8; /* Darker blue text color on hover */
+    transform: translateX(5px); /* Subtle right slide effect */
+}
+
+/* Active Link Style */
+aside ul li a.active, aside ul li a:focus {
+    background-color: #bfdbfe; /* Slightly darker blue background for active link */
+    color: #1e3a8a; /* Dark blue for active text */
+    font-weight: 600;
+}
+
+/* Link Icon Before */
+aside ul li a::before {
+    content: '→'; /* Arrow icon before each link */
+    color: transparent;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: absolute;
+    left: -1.5rem; /* Positions the icon slightly to the left of the link */
+}
+
+/* Icon Hover Effect */
+aside ul li a:hover::before {
+    color: #1d4ed8; /* Makes the arrow visible on hover */
+    transform: translateX(3px); /* Slides the arrow slightly on hover */
+}
+

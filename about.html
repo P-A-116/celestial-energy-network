@@ -27,12 +27,22 @@
   </div>
 </nav>
 
-<div class="container mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">About</h1>
+<div class="container mx-auto py-10 px-4 flex">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
+        <h2 class="text-xl font-semibold mb-4">Pages</h2>
+        <ul class="space-y-2">
+            <li><a href="about.html" class="text-blue-500 hover:text-blue-700">General</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </aside>
 
-    <div class="content max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <!-- Main Content -->
+    <div class="w-3/4 max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">About</h1>
+
         <p class="mb-4">
-            This application accepts as input the Ascendant sign and the House of each of the 9 Planets in one's chart, it then determines the relationship between each planet and displays them on a table.It then scores the table in ways described below.
+            This application accepts as input the Ascendant sign and the House of each of the 9 Planets in one's chart, it then determines the relationship between each planet and displays them on a table. It then scores the table in ways described below.
         </p>
 
         <h2 class="text-2xl font-semibold text-gray-700 mt-6">How It Works</h2>
@@ -40,39 +50,38 @@
             <li>Calculates house lords based on the Ascendant sign.</li>
             <li>Determines natural and temporary relationships between planets.</li>
             <li>Calculates a compound relationship and a total friendliness score.</li>
-			<li>SOON:.</li>
-			<li>Calculates a benefic friendliness score, which depends on the ascendant.</li>
-			<li>Calculates a malefic friendliness score and a balanced score.</li>
-			<li>Displays the distributions of each score and compares the chart.</li>
+            <li>SOON: Calculates a benefic friendliness score, which depends on the ascendant.</li>
+            <li>Calculates a malefic friendliness score and a balanced score.</li>
+            <li>Displays the distributions of each score and compares the chart.</li>
         </ul>
-		
-		<h2 class="text-2xl font-semibold text-gray-700 mt-6">Natural Relationships</h2
-		<p class="mb-4">
-		In Vedic astrology, each planet has inherent natural relationships with other planets, indicating friendship, enmity, or neutrality.
-		</p>
 
-<table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6">
-    <thead>
-        <tr>
-            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet</th>
-            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Friends</th>
-            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Enemies</th>
-            <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Neutrals</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="py-2 px-4 border-b">Sun</td>
-            <td class="py-2 px-4 border-b">Moon, Mars, Jupiter</td>
-            <td class="py-2 px-4 border-b">Venus, Saturn</td>
-            <td class="py-2 px-4 border-b">Mercury</td>
-        </tr>
-        <tr>
-            <td class="py-2 px-4 border-b">Moon</td>
-            <td class="py-2 px-4 border-b">Sun, Mercury</td>
-            <td class="py-2 px-4 border-b">None</td>
-            <td class="py-2 px-4 border-b">Mars, Jupiter, Venus, Saturn</td>
-        </tr>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-6">Natural Relationships</h2>
+        <p class="mb-4">
+            In Vedic astrology, each planet has inherent natural relationships with other planets, indicating friendship, enmity, or neutrality.
+        </p>
+
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet</th>
+                    <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Friends</th>
+                    <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Enemies</th>
+                    <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Neutrals</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="py-2 px-4 border-b">Sun</td>
+                    <td class="py-2 px-4 border-b">Moon, Mars, Jupiter</td>
+                    <td class="py-2 px-4 border-b">Venus, Saturn</td>
+                    <td class="py-2 px-4 border-b">Mercury</td>
+                </tr>
+                <tr>
+                    <td class="py-2 px-4 border-b">Moon</td>
+                    <td class="py-2 px-4 border-b">Sun, Mercury</td>
+                    <td class="py-2 px-4 border-b">None</td>
+                    <td class="py-2 px-4 border-b">Mars, Jupiter, Venus, Saturn</td>
+                </tr>
         <tr>
             <td class="py-2 px-4 border-b">Mars</td>
             <td class="py-2 px-4 border-b">Sun, Moon, Jupiter</td>
@@ -123,7 +132,7 @@
             Temporary relationships are determined by the placement of planets relative to one another within the twelve houses:
         </p>
         <ul class="list-disc list-inside mb-4">
-            <li>If two planets are 2, 3, 4, 10, 11, or 12 houses apart, they are considered temporarily friendly.(One being in the 1st the other in the 2nd, is considered 2 houses apart)</li>
+            <li>If two planets are 2, 3, 4, 10, 11, or 12 houses apart, they are considered temporarily friendly.</li>
             <li>If two planets are placed in certain complementary positions, they are also temporarily friendly:
                 <ul class="list-disc list-inside ml-6">
                     <li>One in the 4th house, the other in the 10th</li>
@@ -156,7 +165,7 @@
             <li><strong>Extreme Enemy</strong>: -2</li>
         </ul>
 		<p class="mb-4">The minimum score is -65, while the maximum is 51. So we normalize it to a 0 to 1 range.</p>
-        <p class="mb-4 bg-gray-100 p-4 rounded">Final Score = ((Total Score + 65) / 116) × 100%</p>
+        <p class="mb-4 bg-gray-100 p-4 rounded">Normalized Score = ((Total Score + 65) / 116) × 100%</p>
 
         <h2 class="text-2xl font-semibold text-gray-700 mt-6">Using the Application</h2>
         <p class="mb-4">To use the application:</p>
