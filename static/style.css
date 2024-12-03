@@ -125,6 +125,8 @@ button:hover {
 .container {
     padding: 10px 20px; /* Add some padding to the sides */
     box-sizing: border-box; /* Ensure padding doesn't break layout */
+	display: flex;
+    justify-content: center;
 }
 
 .container.mx-auto {
@@ -261,3 +263,6 @@ aside ul li a:hover::before {
     transform: translateX(3px); /* Slides the arrow slightly on hover */
 }
 
+table {
+    max-width: 100%;
+}
