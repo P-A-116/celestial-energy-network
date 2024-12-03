@@ -15,15 +15,28 @@
             <div class="flex space-x-4">
                 <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
                 <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+                <a href="dictionaries.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">Dictionaries</a>
             </div>
         </div>
     </div>
 </nav>
 
-<div class="container mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold text-center mb-6">Relationship Dictionaries</h1>
+<div class="container mx-auto py-10 px-4 flex">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
+        <h2 class="text-xl font-semibold mb-4">Pages</h2>
+        <ul class="space-y-2">
+            <li><a href="index.html" class="text-blue-500 hover:text-blue-700">Home</a></li>
+            <li><a href="about.html" class="text-blue-500 hover:text-blue-700">About</a></li>
+            <li><a href="dictionaries.html" class="text-blue-500 hover:text-blue-700">Relationship Dictionaries</a></li>
+        </ul>
+    </aside>
 
-    <div id="relationship-dictionaries" class="space-y-10"></div>
+    <!-- Main Content -->
+    <div class="w-3/4">
+        <h1 class="text-3xl font-bold text-center mb-6">Relationship Dictionaries</h1>
+        <div id="relationship-dictionaries" class="space-y-6"></div>
+    </div>
 </div>
 
 <script>
@@ -43,25 +56,25 @@ async function loadDictionaries() {
 
             // Create a section for each Ascendant
             const sectionElement = document.createElement("div");
-            sectionElement.className = "mb-8";
+            sectionElement.className = "mb-6";
 
             // Add title
             const titleElement = document.createElement("h2");
-            titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
+            titleElement.className = "text-xl font-semibold text-gray-800 mb-4";
             titleElement.textContent = `${ascendant} Ascendant`;
             sectionElement.appendChild(titleElement);
 
-            // Create table
+            // Create compact table
             const table = document.createElement("table");
-            table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md";
+            table.className = "w-full text-sm text-left border-collapse border border-gray-300";
 
             // Table header
             const thead = document.createElement("thead");
             thead.innerHTML = `
-                <tr>
-                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 1</th>
-                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 2</th>
-                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Relationship</th>
+                <tr class="bg-gray-100">
+                    <th class="py-1 px-2 border border-gray-300 font-medium">Planet 1</th>
+                    <th class="py-1 px-2 border border-gray-300 font-medium">Planet 2</th>
+                    <th class="py-1 px-2 border border-gray-300 font-medium">Relationship</th>
                 </tr>`;
             table.appendChild(thead);
 
@@ -73,9 +86,9 @@ async function loadDictionaries() {
                     const relationship = relatedPlanets[planet2];
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-                        <td class="py-2 px-4 border-b">${planet1}</td>
-                        <td class="py-2 px-4 border-b">${planet2}</td>
-                        <td class="py-2 px-4 border-b">${relationship}</td>`;
+                        <td class="py-1 px-2 border border-gray-300">${planet1}</td>
+                        <td class="py-1 px-2 border border-gray-300">${planet2}</td>
+                        <td class="py-1 px-2 border border-gray-300">${relationship}</td>`;
                     tbody.appendChild(tr);
                 });
             });
