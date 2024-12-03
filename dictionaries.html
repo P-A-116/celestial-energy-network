@@ -153,17 +153,14 @@ Object.keys(dictionaries).forEach(ascendant => {
     sectionElement.className = "mb-6";
 
     const titleElement = document.createElement("h2");
-    titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center"; // Center title
+    titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center";
     titleElement.textContent = `${ascendant} Ascendant`;
     sectionElement.appendChild(titleElement);
 
     const table = document.createElement("table");
-    table.className = "mx-auto w-[95%] bg-white border border-gray-300 rounded-lg shadow-md";
-	
-	table.className = "mx-auto w-full max-w-[80%] border border-gray-300 rounded-lg shadow-md";
-
-
-
+    table.className = "w-full max-w-[80%] border border-gray-300 rounded-lg shadow-md";
+    table.style.marginLeft = "auto"; // Equal left margin
+    table.style.marginRight = "auto"; // Equal right margin
 
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
@@ -191,7 +188,7 @@ Object.keys(dictionaries).forEach(ascendant => {
 
     const groups = beneficsMaleficsData[ascendant];
     const groupsElement = document.createElement("div");
-    groupsElement.className = "text-sm text-gray-700 text-center mt-4"; // Add text-center class here
+    groupsElement.className = "text-sm text-gray-700 text-center mt-4";
     groupsElement.innerHTML = `
         <p><strong>Benefics:</strong> ${groups.benefics.join(', ')}</p>
         <p><strong>Malefics:</strong> ${groups.malefics.join(', ')}</p>
@@ -201,6 +198,7 @@ Object.keys(dictionaries).forEach(ascendant => {
 
     container.appendChild(sectionElement);
 });
+
 
 
     } catch (error) {
