@@ -68,8 +68,14 @@
             <p>This system ensures that benefics cooperate, malefics are isolated, and neutrals act as stabilizers for optimal planetary harmony.</p>
         </section>
 
-        <!-- Relationship Dictionaries Section -->
-        <div id="relationship-dictionaries"></div>
+        <!-- Compact Relationship Dictionaries Section -->
+        <section id="relationship-dictionaries"></section>
+
+        <!-- Full Relationship Dictionaries Section -->
+        <section id="full-relationship-dictionaries">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Full Relationship Dictionaries</h2>
+            <div id="full-dictionaries-content"></div>
+        </section>
     </div>
 </div>
 
@@ -87,7 +93,8 @@
                 return;
             }
             const data = await response.json();
-            const container = document.querySelector("#relationship-dictionaries");
+            const compactContainer = document.querySelector("#relationship-dictionaries");
+            const fullContainer = document.querySelector("#full-dictionaries-content");
 
             Object.keys(data).forEach(ascendant => {
                 const dictionary = data[ascendant];
@@ -95,32 +102,32 @@
                 const malefics = dictionary.malefics;
                 const neutrals = dictionary.neutrals;
 
-                // Create section for each Ascendant
-                const sectionElement = document.createElement("div");
-                sectionElement.className = "mb-8";
+                // Compact Tables
+                const compactSection = document.createElement("div");
+                compactSection.className = "mb-8";
 
-                // Add title
-                const titleElement = document.createElement("h2");
-                titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
-                titleElement.textContent = `${ascendant} Ascendant`;
-                sectionElement.appendChild(titleElement);
+                // Compact Title
+                const compactTitle = document.createElement("h2");
+                compactTitle.className = "text-2xl font-semibold text-gray-800 mb-4";
+                compactTitle.textContent = `${ascendant} Ascendant`;
+                compactSection.appendChild(compactTitle);
 
-                // Create table
-                const table = document.createElement("table");
-                table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-4";
+                // Compact Table
+                const compactTable = document.createElement("table");
+                compactTable.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-4";
 
-                // Table header
+                // Compact Table Header
                 const planets = Object.keys(dictionary.matrix);
-                const thead = document.createElement("thead");
-                thead.innerHTML = `
+                const compactThead = document.createElement("thead");
+                compactThead.innerHTML = `
                     <tr>
                         <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet</th>
                         ${planets.map(planet => `<th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">${planet}</th>`).join('')}
                     </tr>`;
-                table.appendChild(thead);
+                compactTable.appendChild(compactThead);
 
-                // Table body
-                const tbody = document.createElement("tbody");
+                // Compact Table Body
+                const compactTbody = document.createElement("tbody");
                 planets.forEach(planet1 => {
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
@@ -134,22 +141,36 @@
                             return `<td class="py-2 px-4 border-b ${cellClass}">${relationship}</td>`;
                         }).join('')}
                     `;
-                    tbody.appendChild(tr);
+                    compactTbody.appendChild(tr);
                 });
-                table.appendChild(tbody);
+                compactTable.appendChild(compactTbody);
+                compactSection.appendChild(compactTable);
 
-                sectionElement.appendChild(table);
-
-                // Add benefics, malefics, and neutrals
+                // Benefics, Malefics, and Neutrals
                 const groupInfo = document.createElement("div");
                 groupInfo.innerHTML = `
                     <p><strong>Benefics:</strong> ${benefics.join(', ')}</p>
                     <p><strong>Malefics:</strong> ${malefics.join(', ')}</p>
                     <p><strong>Neutrals:</strong> ${neutrals.join(', ')}</p>
                 `;
-                sectionElement.appendChild(groupInfo);
+                compactSection.appendChild(groupInfo);
+                compactContainer.appendChild(compactSection);
 
-                container.appendChild(sectionElement);
+                // Full Dictionaries
+                const fullSection = document.createElement("div");
+                fullSection.className = "mb-8";
+
+                const fullTitle = document.createElement("h3");
+                fullTitle.className = "text-xl font-semibold text-gray-800 mb-2";
+                fullTitle.textContent = `${ascendant} Ascendant - Full Dictionary`;
+                fullSection.appendChild(fullTitle);
+
+                const fullContent = document.createElement("pre");
+                fullContent.className = "bg-gray-100 p-4 rounded shadow overflow-x-auto";
+                fullContent.textContent = JSON.stringify(dictionary.matrix, null, 2);
+                fullSection.appendChild(fullContent);
+
+                fullContainer.appendChild(fullSection);
             });
         } catch (error) {
             console.error("Error loading dictionaries:", error);
