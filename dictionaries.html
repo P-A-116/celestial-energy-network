@@ -5,21 +5,7 @@
     <title>Relationship Dictionaries</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="icon.png">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        footer {
-            margin-top: auto;
-        }
-    </style>
+    <script defer src="dictionaries.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
@@ -30,7 +16,6 @@
             <div class="flex items-center space-x-4">
                 <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
                 <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-                <a href="dictionaries.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 bg-gray-700 text-white" aria-current="page">Dictionaries</a>
             </div>
         </div>
     </div>
@@ -38,7 +23,7 @@
 
 <div class="container mx-auto py-10 px-4 flex">
     <!-- Sidebar -->
-    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6 h-fit">
+    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
         <h2 class="text-xl font-semibold mb-4">Pages</h2>
         <ul class="space-y-2">
             <li><a href="about.html" class="text-blue-500 hover:text-blue-700">General</a></li>
@@ -49,136 +34,76 @@
     <!-- Main Content -->
     <div class="w-3/4 max-w-3xl bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Relationship Dictionaries</h1>
-
-        <!-- Explanation Section -->
-        <section class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Benefic Friendliness Score Explanation</h2>
-            <p class="mb-4">
-                The <strong>Benefic Friendliness Score</strong> is designed to optimize the effects of planetary relationships for a native by emphasizing cooperative relationships among benefics and isolating malefics. The rules for this score are as follows:
-            </p>
-            <ul class="list-disc list-inside mb-4">
-                <li><strong>Benefics</strong> should be friendly with other benefics to amplify positive influence.</li>
-                <li><strong>Malefics</strong> should be enemies with other malefics to minimize their disruptive potential.</li>
-                <li>Benefics should be friendly with weaker malefics to neutralize their harmful effects.</li>
-                <li>Malefics should be enemies with weaker benefics to disrupt their influence.</li>
-                <li>Neutrals should align with benefics as friends.</li>
-                <li>Neutrals should counteract malefics as enemies.</li>
-                <li>Neutrals remain neutral with other neutrals.</li>
-            </ul>
-            <p>This system ensures that benefics cooperate, malefics are isolated, and neutrals act as stabilizers for optimal planetary harmony.</p>
-        </section>
-
-        <!-- Compact Relationship Dictionaries Section -->
-        <section id="relationship-dictionaries"></section>
-
-        <!-- Full Relationship Dictionaries Section -->
-        <section id="full-relationship-dictionaries">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Full Relationship Dictionaries</h2>
-            <div id="full-dictionaries-content"></div>
-        </section>
+        <div id="relationship-dictionaries" class="container mx-auto py-10 px-4"></div>
     </div>
 </div>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-gray-300 py-4 text-center">
-    <p>&copy; 2024 Computational Astrology | All rights reserved.</p>
-</footer>
-
 <script>
-    async function loadDictionaries() {
-        try {
-            const response = await fetch('ascendant_matrices.json');
-            if (!response.ok) {
-                console.error("Failed to load file:", response.statusText);
-                return;
-            }
-            const data = await response.json();
-            const compactContainer = document.querySelector("#relationship-dictionaries");
-            const fullContainer = document.querySelector("#full-dictionaries-content");
-
-            Object.keys(data).forEach(ascendant => {
-                const dictionary = data[ascendant];
-                const benefics = dictionary.benefics;
-                const malefics = dictionary.malefics;
-                const neutrals = dictionary.neutrals;
-
-                // Compact Tables
-                const compactSection = document.createElement("div");
-                compactSection.className = "mb-8";
-
-                // Compact Title
-                const compactTitle = document.createElement("h2");
-                compactTitle.className = "text-2xl font-semibold text-gray-800 mb-4";
-                compactTitle.textContent = `${ascendant} Ascendant`;
-                compactSection.appendChild(compactTitle);
-
-                // Compact Table
-                const compactTable = document.createElement("table");
-                compactTable.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-4";
-
-                // Compact Table Header
-                const planets = Object.keys(dictionary.matrix);
-                const compactThead = document.createElement("thead");
-                compactThead.innerHTML = `
-                    <tr>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet</th>
-                        ${planets.map(planet => `<th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">${planet}</th>`).join('')}
-                    </tr>`;
-                compactTable.appendChild(compactThead);
-
-                // Compact Table Body
-                const compactTbody = document.createElement("tbody");
-                planets.forEach(planet1 => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td class="py-2 px-4 border-b font-semibold text-gray-700">${planet1}</td>
-                        ${planets.map(planet2 => {
-                            const relationship = dictionary.matrix[planet1][planet2];
-                            let cellClass = "text-gray-700"; // Default
-                            if (relationship === 2) cellClass = "text-green-500 font-bold";
-                            else if (relationship === -2) cellClass = "text-red-500 font-bold";
-                            else if (relationship === 0) cellClass = "text-gray-500";
-                            return `<td class="py-2 px-4 border-b ${cellClass}">${relationship}</td>`;
-                        }).join('')}
-                    `;
-                    compactTbody.appendChild(tr);
-                });
-                compactTable.appendChild(compactTbody);
-                compactSection.appendChild(compactTable);
-
-                // Benefics, Malefics, and Neutrals
-                const groupInfo = document.createElement("div");
-                groupInfo.innerHTML = `
-                    <p><strong>Benefics:</strong> ${benefics.join(', ')}</p>
-                    <p><strong>Malefics:</strong> ${malefics.join(', ')}</p>
-                    <p><strong>Neutrals:</strong> ${neutrals.join(', ')}</p>
-                `;
-                compactSection.appendChild(groupInfo);
-                compactContainer.appendChild(compactSection);
-
-                // Full Dictionaries
-                const fullSection = document.createElement("div");
-                fullSection.className = "mb-8";
-
-                const fullTitle = document.createElement("h3");
-                fullTitle.className = "text-xl font-semibold text-gray-800 mb-2";
-                fullTitle.textContent = `${ascendant} Ascendant - Full Dictionary`;
-                fullSection.appendChild(fullTitle);
-
-                const fullContent = document.createElement("pre");
-                fullContent.className = "bg-gray-100 p-4 rounded shadow overflow-x-auto";
-                fullContent.textContent = JSON.stringify(dictionary.matrix, null, 2);
-                fullSection.appendChild(fullContent);
-
-                fullContainer.appendChild(fullSection);
-            });
-        } catch (error) {
-            console.error("Error loading dictionaries:", error);
+async function loadDictionaries() {
+    try {
+        const response = await fetch('ascendant_matrices.json');
+        if (!response.ok) {
+            console.error("Failed to load JSON file:", response.statusText);
+            return;
         }
-    }
+        const dictionaries = await response.json();
+        console.log("Loaded dictionaries:", dictionaries); // Debugging output
 
-    document.addEventListener("DOMContentLoaded", loadDictionaries);
+        const container = document.querySelector("#relationship-dictionaries");
+
+        Object.keys(dictionaries).forEach(ascendant => {
+            const entries = dictionaries[ascendant];
+
+            // Debugging: Ensure each ascendant is processed
+            console.log(`Processing ${ascendant}:`, entries);
+
+            // Create a section for each Ascendant
+            const sectionElement = document.createElement("div");
+            sectionElement.className = "mb-8";
+
+            // Add title
+            const titleElement = document.createElement("h2");
+            titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
+            titleElement.textContent = `${ascendant} Ascendant`;
+            sectionElement.appendChild(titleElement);
+
+            // Create table
+            const table = document.createElement("table");
+            table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md";
+
+            // Table header
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 1</th>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 2</th>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Relationship</th>
+                </tr>`;
+            table.appendChild(thead);
+
+            // Table body
+            const tbody = document.createElement("tbody");
+            entries.forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td class="py-2 px-4 border-b">${row.planet1}</td>
+                    <td class="py-2 px-4 border-b">${row.planet2}</td>
+                    <td class="py-2 px-4 border-b">${row.relationship}</td>`;
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            sectionElement.appendChild(table);
+            container.appendChild(sectionElement);
+        });
+    } catch (error) {
+        console.error("Error loading dictionaries:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadDictionaries);
 </script>
+
 
 </body>
 </html>
