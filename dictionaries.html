@@ -22,9 +22,9 @@
 
 <div class="container mx-auto py-10 px-4 flex">
     <!-- Sidebar -->
-    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6 h-fit">
+    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
         <h2 class="text-xl font-semibold mb-4">Pages</h2>
-        <ul class="space-y-2">
+        <ul class="space-y-2 text-sm">
             <li><a href="about.html" class="text-blue-500 hover:text-blue-700">General</a></li>
             <li><a href="dictionaries.html" class="text-blue-500 hover:text-blue-700">Relationship Dictionaries</a></li>
         </ul>
@@ -40,7 +40,7 @@
             <p class="mb-4">
                 The <strong>Benefic Friendliness Score</strong> is designed to optimize the effects of planetary relationships for a native by emphasizing cooperative relationships among benefics and isolating malefics. The rules for this score are as follows:
             </p>
-            <ul class="list-disc list-inside mb-4">
+            <ul class="list-disc list-inside mb-4 text-sm">
                 <li><strong>Benefics</strong> should be friendly with other benefics to amplify positive influence.</li>
                 <li><strong>Malefics</strong> should be enemies with other malefics to minimize their disruptive potential.</li>
                 <li>Benefics should be friendly with weaker malefics to neutralize their harmful effects.</li>
@@ -49,7 +49,7 @@
                 <li>Neutrals should counteract malefics as enemies.</li>
                 <li>Neutrals remain neutral with other neutrals.</li>
             </ul>
-            <p>This system ensures that benefics cooperate, malefics are isolated, and neutrals act as stabilizers for optimal planetary harmony.</p>
+            <p class="text-sm">This system ensures that benefics cooperate, malefics are isolated, and neutrals act as stabilizers for optimal planetary harmony.</p>
         </section>
 
         <!-- Relationship Dictionaries Section -->
@@ -126,8 +126,6 @@ const beneficsMaleficsData = {
     }
 };
 
-
-
 async function loadDictionaries() {
     try {
         const response = await fetch('ascendant_matrices.json');
@@ -136,27 +134,22 @@ async function loadDictionaries() {
             return;
         }
         const dictionaries = await response.json();
-
         const container = document.querySelector("#relationship-dictionaries");
 
         Object.keys(dictionaries).forEach(ascendant => {
             const relationships = dictionaries[ascendant];
 
-            // Create a section for each Ascendant
             const sectionElement = document.createElement("div");
             sectionElement.className = "mb-6";
 
-            // Add title
             const titleElement = document.createElement("h2");
             titleElement.className = "text-xl font-semibold text-gray-800 mb-4";
             titleElement.textContent = `${ascendant} Ascendant`;
             sectionElement.appendChild(titleElement);
 
-            // Create compact horizontal-vertical table
             const table = document.createElement("table");
             table.className = "w-full text-sm text-center border-collapse border border-gray-300 mb-4";
 
-            // Table header row
             const thead = document.createElement("thead");
             const headerRow = document.createElement("tr");
             headerRow.innerHTML = `<th class="py-1 px-2 border border-gray-300 font-medium bg-gray-100"></th>` +
@@ -164,7 +157,6 @@ async function loadDictionaries() {
             thead.appendChild(headerRow);
             table.appendChild(thead);
 
-            // Table body
             const tbody = document.createElement("tbody");
             Object.keys(relationships).forEach(planet1 => {
                 const tr = document.createElement("tr");
@@ -172,9 +164,7 @@ async function loadDictionaries() {
                     Object.keys(relationships).map(planet2 => {
                         const relationship = relationships[planet1][planet2];
                         const value = relationship === "Extreme Friend" ? 2 :
-                                      relationship === "Friend" ? 1 :
                                       relationship === "Neutral" ? 0 :
-                                      relationship === "Enemy" ? -1 :
                                       relationship === "Extreme Enemy" ? -2 : "-";
                         return `<td class="py-1 px-2 border border-gray-300">${value}</td>`;
                     }).join('');
@@ -184,7 +174,6 @@ async function loadDictionaries() {
 
             sectionElement.appendChild(table);
 
-            // Add benefics, malefics, neutrals
             const groups = beneficsMaleficsData[ascendant];
             const groupsElement = document.createElement("div");
             groupsElement.className = "text-sm text-gray-700";
