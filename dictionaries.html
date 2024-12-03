@@ -43,15 +43,20 @@ async function loadDictionaries() {
     try {
         const response = await fetch('ascendant_matrices.json');
         if (!response.ok) {
-            console.error("Failed to load file:", response.statusText);
+            console.error("Failed to load JSON file:", response.statusText);
             return;
         }
         const dictionaries = await response.json();
+        console.log("Loaded dictionaries:", dictionaries); // Debugging output
+
         const container = document.querySelector("#relationship-dictionaries");
 
         Object.keys(dictionaries).forEach(ascendant => {
             const entries = dictionaries[ascendant];
-            
+
+            // Debugging: Ensure each ascendant is processed
+            console.log(`Processing ${ascendant}:`, entries);
+
             // Create a section for each Ascendant
             const sectionElement = document.createElement("div");
             sectionElement.className = "mb-8";
@@ -78,12 +83,12 @@ async function loadDictionaries() {
 
             // Table body
             const tbody = document.createElement("tbody");
-            entries.forEach(entry => {
+            entries.forEach(row => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td class="py-2 px-4 border-b">${entry.planet1}</td>
-                    <td class="py-2 px-4 border-b">${entry.planet2}</td>
-                    <td class="py-2 px-4 border-b">${entry.relationship}</td>`;
+                    <td class="py-2 px-4 border-b">${row.planet1}</td>
+                    <td class="py-2 px-4 border-b">${row.planet2}</td>
+                    <td class="py-2 px-4 border-b">${row.relationship}</td>`;
                 tbody.appendChild(tr);
             });
             table.appendChild(tbody);
@@ -98,6 +103,7 @@ async function loadDictionaries() {
 
 document.addEventListener("DOMContentLoaded", loadDictionaries);
 </script>
+
 
 </body>
 </html>
