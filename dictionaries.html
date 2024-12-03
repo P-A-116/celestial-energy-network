@@ -40,6 +40,69 @@
 </div>
 
 <script>
+const beneficsMaleficsData = {
+    Aries: {
+        benefics: ['Sun', 'Jupiter'],
+        malefics: ['Saturn', 'Mercury', 'Venus'],
+        neutrals: ['Rahu', 'Ketu', 'Mars', 'Moon']
+    },
+    Taurus: {
+        benefics: ['Saturn', 'Sun'],
+        malefics: ['Jupiter', 'Moon', 'Venus'],
+        neutrals: ['Rahu', 'Ketu', 'Mars', 'Mercury']
+    },
+    Gemini: {
+        benefics: ['Venus', 'Mercury'],
+        malefics: ['Sun', 'Jupiter', 'Mars'],
+        neutrals: ['Rahu', 'Ketu', 'Saturn', 'Moon']
+    },
+    Cancer: {
+        benefics: ['Mars', 'Jupiter', 'Moon'],
+        malefics: ['Venus', 'Mercury'],
+        neutrals: ['Rahu', 'Ketu', 'Sun', 'Saturn']
+    },
+    Leo: {
+        benefics: ['Mars', 'Jupiter', 'Sun'],
+        malefics: ['Saturn', 'Venus', 'Mercury'],
+        neutrals: ['Rahu', 'Ketu', 'Moon']
+    },
+    Virgo: {
+        benefics: ['Mercury', 'Venus'],
+        malefics: ['Moon', 'Jupiter', 'Mars'],
+        neutrals: ['Rahu', 'Ketu', 'Saturn', 'Sun']
+    },
+    Libra: {
+        benefics: ['Mercury', 'Saturn'],
+        malefics: ['Sun', 'Jupiter', 'Mars'],
+        neutrals: ['Rahu', 'Ketu', 'Moon', 'Venus']
+    },
+    Scorpio: {
+        benefics: ['Moon', 'Jupiter'],
+        malefics: ['Venus', 'Mercury', 'Saturn'],
+        neutrals: ['Rahu', 'Ketu', 'Sun', 'Mars']
+    },
+    Sagittarius: {
+        benefics: ['Mars', 'Sun'],
+        malefics: ['Venus'],
+        neutrals: ['Rahu', 'Ketu', 'Mercury', 'Jupiter', 'Saturn', 'Moon']
+    },
+    Capricorn: {
+        benefics: ['Venus', 'Mercury'],
+        malefics: ['Mars', 'Jupiter', 'Moon'],
+        neutrals: ['Rahu', 'Ketu', 'Sun', 'Saturn']
+    },
+    Aquarius: {
+        benefics: ['Venus', 'Saturn'],
+        malefics: ['Mars', 'Jupiter', 'Moon'],
+        neutrals: ['Rahu', 'Ketu', 'Mercury']
+    },
+    Pisces: {
+        benefics: ['Venus', 'Saturn', 'Sun', 'Mercury'],
+        malefics: ['Mars', 'Moon'],
+        neutrals: ['Rahu', 'Ketu', 'Jupiter']
+    }
+};
+
 async function loadDictionaries() {
     try {
         const response = await fetch('ascendant_matrices.json');
@@ -66,7 +129,7 @@ async function loadDictionaries() {
 
             // Create compact horizontal-vertical table
             const table = document.createElement("table");
-            table.className = "w-full text-sm text-center border-collapse border border-gray-300";
+            table.className = "w-full text-sm text-center border-collapse border border-gray-300 mb-4";
 
             // Table header row
             const thead = document.createElement("thead");
@@ -95,6 +158,18 @@ async function loadDictionaries() {
             table.appendChild(tbody);
 
             sectionElement.appendChild(table);
+
+            // Add benefics, malefics, neutrals
+            const groups = beneficsMaleficsData[ascendant];
+            const groupsElement = document.createElement("div");
+            groupsElement.className = "text-sm text-gray-700";
+            groupsElement.innerHTML = `
+                <p><strong>Benefics:</strong> ${groups.benefics.join(', ')}</p>
+                <p><strong>Malefics:</strong> ${groups.malefics.join(', ')}</p>
+                <p><strong>Neutrals:</strong> ${groups.neutrals.join(', ')}</p>
+            `;
+            sectionElement.appendChild(groupsElement);
+
             container.appendChild(sectionElement);
         });
     } catch (error) {
