@@ -46,46 +46,30 @@
 </div>
 
 <script>
-    const dictionaries = {
-        "Virgo Ascendant": {
-            "Sun, Sun": "-", "Sun, Moon": "Extreme Enemy", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Extreme Friend",
-            "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Extreme Friend", "Sun, Saturn": "Neutral", "Sun, Rahu": "Neutral",
-            "Sun, Ketu": "Neutral",
-            "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Extreme Friend",
-            "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Extreme Friend", "Moon, Saturn": "Neutral", "Moon, Rahu": "Neutral",
-            "Moon, Ketu": "Neutral"
-        },
-        "Libra Ascendant": {
-            "Sun, Sun": "-", "Sun, Moon": "Neutral", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Extreme Friend",
-            "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Neutral", "Sun, Saturn": "Extreme Friend", "Sun, Rahu": "Neutral",
-            "Sun, Ketu": "Neutral",
-            "Moon, Sun": "Extreme Enemy", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Extreme Friend",
-            "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Neutral", "Moon, Saturn": "Extreme Friend", "Moon, Rahu": "Neutral",
-            "Moon, Ketu": "Neutral"
-        },
-        "Scorpio Ascendant": {
-            "Sun, Sun": "-", "Sun, Moon": "Extreme Friend", "Sun, Mars": "Neutral", "Sun, Mercury": "Extreme Enemy",
-            "Sun, Jupiter": "Extreme Friend", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Extreme Enemy", "Sun, Rahu": "Neutral",
-            "Sun, Ketu": "Neutral",
-            "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Neutral", "Moon, Mercury": "Extreme Enemy",
-            "Moon, Jupiter": "Extreme Friend", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Extreme Enemy", "Moon, Rahu": "Neutral",
-            "Moon, Ketu": "Neutral"
-        }
-    };
+    // Function to load dictionaries from a file
+    async function loadDictionaries() {
+        const response = await fetch('ascendant_matrices.txt');
+        const text = await response.text();
 
-    document.addEventListener("DOMContentLoaded", () => {
+        // Split the text into dictionaries based on empty lines
+        const dictionaries = text.split('\n\n');
+
         const container = document.querySelector("#relationship-dictionaries");
 
-        Object.entries(dictionaries).forEach(([ascendant, relationships]) => {
+        dictionaries.forEach(dictionary => {
+            const lines = dictionary.trim().split('\n');
+            const title = lines[0];
+            const data = lines.slice(1);
+
             // Create section for each Ascendant
             const section = document.createElement("div");
             section.className = "mb-8";
 
             // Ascendant title
-            const title = document.createElement("h2");
-            title.className = "text-2xl font-semibold text-gray-800 mb-4";
-            title.textContent = ascendant;
-            section.appendChild(title);
+            const titleElement = document.createElement("h2");
+            titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
+            titleElement.textContent = title;
+            section.appendChild(titleElement);
 
             // Create table
             const table = document.createElement("table");
@@ -103,8 +87,8 @@
 
             // Table body
             const tbody = document.createElement("tbody");
-            Object.entries(relationships).forEach(([planets, relationship]) => {
-                const [planet1, planet2] = planets.split(", ");
+            data.forEach(line => {
+                const [planet1, planet2, relationship] = line.split(',').map(item => item.trim());
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td class="py-2 px-4 border-b">${planet1}</td>
@@ -117,7 +101,11 @@
             section.appendChild(table);
             container.appendChild(section);
         });
-    });
+    }
+
+    // Load dictionaries on page load
+    document.addEventListener("DOMContentLoaded", loadDictionaries);
 </script>
+
 </body>
 </html>
