@@ -269,3 +269,16 @@ aside ul li a:hover::before {
     color: #1d4ed8; /* Makes the arrow visible on hover */
     transform: translateX(3px); /* Slides the arrow slightly on hover */
 }
+
+#relationship-dictionaries {
+    width: 100%;
+}
+
+table {
+    border: 2px dashed red;
+    background-color: lightyellow;
+}
+
+#relationship-dictionaries {
+    border: 2px solid blue;
+}
