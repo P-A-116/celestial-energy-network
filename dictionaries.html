@@ -1,0 +1,105 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const dictionaries = {
+        "Aries Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Neutral", "Sun, Mars": "Neutral", "Sun, Mercury": "Extreme Enemy",
+            "Sun, Jupiter": "Extreme Friend", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Extreme Enemy",
+            "Sun, Rahu": "Neutral", "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Extreme Friend", "Moon, Moon": "-", "Moon, Mars": "Neutral", "Moon, Mercury": "Extreme Enemy",
+            "Moon, Jupiter": "Extreme Friend", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Extreme Enemy",
+            "Moon, Rahu": "Neutral", "Moon, Ketu": "Neutral",
+            "Mars, Sun": "Extreme Friend", "Mars, Moon": "Neutral", "Mars, Mars": "-", "Mars, Mercury": "Extreme Enemy",
+            "Mars, Jupiter": "Extreme Friend", "Mars, Venus": "Extreme Enemy", "Mars, Saturn": "Extreme Enemy",
+            "Mars, Rahu": "Neutral", "Mars, Ketu": "Neutral"
+        },
+        "Taurus Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Extreme Enemy", "Sun, Mars": "Neutral", "Sun, Mercury": "Neutral",
+            "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Extreme Friend",
+            "Sun, Rahu": "Neutral", "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Extreme Friend", "Moon, Moon": "-", "Moon, Mars": "Neutral", "Moon, Mercury": "Neutral",
+            "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Extreme Friend",
+            "Moon, Rahu": "Neutral", "Moon, Ketu": "Neutral",
+            "Mars, Sun": "Extreme Friend", "Mars, Moon": "Extreme Enemy", "Mars, Mars": "-", "Mars, Mercury": "Neutral",
+            "Mars, Jupiter": "Extreme Enemy", "Mars, Venus": "Extreme Enemy", "Mars, Saturn": "Extreme Friend",
+            "Mars, Rahu": "Neutral", "Mars, Ketu": "Neutral"
+        },
+        "Gemini Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Neutral", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Neutral",
+            "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Extreme Friend", "Sun, Saturn": "Neutral",
+            "Sun, Rahu": "Neutral", "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Extreme Enemy", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Neutral",
+            "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Extreme Friend", "Moon, Saturn": "Neutral",
+            "Moon, Rahu": "Neutral", "Moon, Ketu": "Neutral",
+            "Mars, Sun": "Extreme Enemy", "Mars, Moon": "Neutral", "Mars, Mars": "-", "Mars, Mercury": "Neutral",
+            "Mars, Jupiter": "Extreme Enemy", "Mars, Venus": "Extreme Friend", "Mars, Saturn": "Neutral",
+            "Mars, Rahu": "Neutral", "Mars, Ketu": "Neutral"
+        },
+        "Cancer Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Extreme Friend", "Sun, Mars": "Extreme Friend", "Sun, Mercury": "Neutral",
+            "Sun, Jupiter": "Extreme Friend", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Neutral",
+            "Sun, Rahu": "Neutral", "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Extreme Friend", "Moon, Mercury": "Neutral",
+            "Moon, Jupiter": "Extreme Friend", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Neutral",
+            "Moon, Rahu": "Neutral", "Moon, Ketu": "Neutral",
+            "Mars, Sun": "Neutral", "Mars, Moon": "Extreme Friend", "Mars, Mars": "-", "Mars, Mercury": "Neutral",
+            "Mars, Jupiter": "Extreme Friend", "Mars, Venus": "Extreme Enemy", "Mars, Saturn": "Neutral",
+            "Mars, Rahu": "Neutral", "Mars, Ketu": "Neutral"
+        },
+        "Leo Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Neutral", "Sun, Mars": "Extreme Friend", "Sun, Mercury": "Extreme Enemy",
+            "Sun, Jupiter": "Extreme Friend", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Extreme Enemy",
+            "Sun, Rahu": "Neutral", "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Extreme Friend", "Moon, Moon": "-", "Moon, Mars": "Extreme Friend", "Moon, Mercury": "Extreme Enemy",
+            "Moon, Jupiter": "Extreme Friend", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Extreme Enemy",
+            "Moon, Rahu": "Neutral", "Moon, Ketu": "Neutral",
+            "Mars, Sun": "Extreme Friend", "Mars, Moon": "Neutral", "Mars, Mars": "-", "Mars, Mercury": "Extreme Enemy",
+            "Mars, Jupiter": "Extreme Friend", "Mars, Venus": "Extreme Enemy", "Mars, Saturn": "Extreme Enemy",
+            "Mars, Rahu": "Neutral", "Mars, Ketu": "Neutral"
+        }
+    };
+
+    const container = document.querySelector("#relationship-dictionaries");
+
+    Object.entries(dictionaries).forEach(([ascendant, relationships]) => {
+        // Create a section for each Ascendant
+        const section = document.createElement("div");
+        section.className = "mb-6";
+
+        // Add Ascendant title
+        const title = document.createElement("h3");
+        title.className = "text-xl font-bold text-gray-600 mt-4";
+        title.textContent = ascendant;
+        section.appendChild(title);
+
+        // Create table
+        const table = document.createElement("table");
+        table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6";
+
+        // Create table header
+        const thead = document.createElement("thead");
+        thead.innerHTML = `
+            <tr>
+                <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet 1</th>
+                <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet 2</th>
+                <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Relationship</th>
+            </tr>`;
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement("tbody");
+
+        Object.entries(relationships).forEach(([planets, relationship]) => {
+            const [planet1, planet2] = planets.split(", ");
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td class="py-2 px-4 border-b">${planet1}</td>
+                <td class="py-2 px-4 border-b">${planet2}</td>
+                <td class="py-2 px-4 border-b">${relationship}</td>`;
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        section.appendChild(table);
+        container.appendChild(section);
+    });
+});

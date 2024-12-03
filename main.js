@@ -55,3 +55,69 @@ document.getElementById('horoscope-form').addEventListener('submit', async (even
     document.getElementById('benefic-score-display').innerText = 
         `The total sum of absolute differences is: ${totalDifference}`;
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const dictionaries = {
+        "Aries Ascendant": {
+            'Sun, Moon': 'Neutral',
+            'Sun, Mars': 'Neutral',
+            'Sun, Mercury': 'Extreme Enemy',
+            'Sun, Jupiter': 'Extreme Friend',
+            // Add remaining relationships for Aries
+        },
+        "Taurus Ascendant": {
+            'Sun, Moon': 'Extreme Enemy',
+            'Sun, Mars': 'Neutral',
+            'Sun, Mercury': 'Neutral',
+            'Sun, Jupiter': 'Extreme Enemy',
+            // Add remaining relationships for Taurus
+        },
+        // Add other Ascendants...
+    };
+
+    const container = document.querySelector("#relationship-dictionaries");
+
+    Object.entries(dictionaries).forEach(([ascendant, relationships]) => {
+        // Create a section for each Ascendant
+        const section = document.createElement("div");
+        section.className = "mb-6";
+
+        // Add Ascendant title
+        const title = document.createElement("h3");
+        title.className = "text-xl font-bold text-gray-600 mt-4";
+        title.textContent = ascendant;
+        section.appendChild(title);
+
+        // Create table
+        const table = document.createElement("table");
+        table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6";
+
+        // Create table header
+        const thead = document.createElement("thead");
+        thead.innerHTML = `
+            <tr>
+                <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet 1</th>
+                <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Planet 2</th>
+                <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">Relationship</th>
+            </tr>`;
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement("tbody");
+
+        Object.entries(relationships).forEach(([planets, relationship]) => {
+            const [planet1, planet2] = planets.split(", ");
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td class="py-2 px-4 border-b">${planet1}</td>
+                <td class="py-2 px-4 border-b">${planet2}</td>
+                <td class="py-2 px-4 border-b">${relationship}</td>`;
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        section.appendChild(table);
+        container.appendChild(section);
+    });
+});
