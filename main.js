@@ -54,6 +54,9 @@ document.getElementById('horoscope-form').addEventListener('submit', async (even
 
     document.getElementById('benefic-score-display').innerText = 
         `The total sum of absolute differences is: ${totalDifference}`;
+	    // Show the hidden containers after calculations
+    document.getElementById('relationship-matrix').removeAttribute('hidden');
+    document.getElementById('score-distribution-container').removeAttribute('hidden');
 });
 
 document.addEventListener("DOMContentLoaded", () => {

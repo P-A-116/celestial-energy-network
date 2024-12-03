@@ -89,31 +89,30 @@
         </form>
     </div>
 
-    <!-- Relationship Matrix Container -->
-    <div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto">
-        <h2 class="text-center text-2xl font-semibold mb-4">Relationship Table</h2>
-        <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
-            <table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
-                <!-- Table headers and rows will be dynamically populated -->
-            </table>
-        </div>
-    </div>
-
-
-    <!-- Score and Distribution Chart Container -->
-    <div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto">
-        <!-- Percentile Display -->
-		<div id="percentile-display" class="text-left w-1/4 pr-4">
-		<!-- Score display content populated by JavaScript -->
-		</div>
-
-        <!-- Distribution Chart -->
-        <div id="score-distribution" class="w-full">
-            <h2 class="text-center text-2xl font-semibold mb-4">Friendliness Score Distribution</h2>
-            <div id="distribution-chart"></div>
-        </div>
+<!-- Relationship Matrix Container -->
+<div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto" id="relationship-matrix" hidden>
+    <h2 class="text-center text-2xl font-semibold mb-4">Relationship Table</h2>
+    <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
+        <table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
+            <!-- Table headers and rows will be dynamically populated -->
+        </table>
     </div>
 </div>
+
+<!-- Score and Distribution Chart Container -->
+<div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto" id="score-distribution-container" hidden>
+    <!-- Percentile Display -->
+    <div id="percentile-display" class="text-left w-1/4 pr-4">
+        <!-- Score display content populated by JavaScript -->
+    </div>
+
+    <!-- Distribution Chart -->
+    <div id="score-distribution" class="w-full">
+        <h2 class="text-center text-2xl font-semibold mb-4">Friendliness Score Distribution</h2>
+        <div id="distribution-chart"></div>
+    </div>
+</div>
+
 
 <!-- Footer -->
 <footer class="bg-gray-800 text-gray-300 py-4 text-center">
