@@ -126,6 +126,8 @@ table {
     max-width: 80%; /* Makes the table smaller */
     margin: 0 auto; /* Centers the table */
     border-collapse: collapse; /* Optional: neatens borders */
+    border: 2px solid red; /* Debugging border */
+    background-color: lightyellow; /* Debugging background */
 }
 
 
