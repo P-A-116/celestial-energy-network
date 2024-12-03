@@ -64,33 +64,33 @@ async function loadDictionaries() {
             titleElement.textContent = `${ascendant} Ascendant`;
             sectionElement.appendChild(titleElement);
 
-            // Create compact table
+            // Create compact horizontal-vertical table
             const table = document.createElement("table");
-            table.className = "w-full text-sm text-left border-collapse border border-gray-300";
+            table.className = "w-full text-sm text-center border-collapse border border-gray-300";
 
-            // Table header
+            // Table header row
             const thead = document.createElement("thead");
-            thead.innerHTML = `
-                <tr class="bg-gray-100">
-                    <th class="py-1 px-2 border border-gray-300 font-medium">Planet 1</th>
-                    <th class="py-1 px-2 border border-gray-300 font-medium">Planet 2</th>
-                    <th class="py-1 px-2 border border-gray-300 font-medium">Relationship</th>
-                </tr>`;
+            const headerRow = document.createElement("tr");
+            headerRow.innerHTML = `<th class="py-1 px-2 border border-gray-300 font-medium bg-gray-100"></th>` +
+                Object.keys(relationships).map(planet => `<th class="py-1 px-2 border border-gray-300 font-medium bg-gray-100">${planet}</th>`).join('');
+            thead.appendChild(headerRow);
             table.appendChild(thead);
 
             // Table body
             const tbody = document.createElement("tbody");
             Object.keys(relationships).forEach(planet1 => {
-                const relatedPlanets = relationships[planet1];
-                Object.keys(relatedPlanets).forEach(planet2 => {
-                    const relationship = relatedPlanets[planet2];
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td class="py-1 px-2 border border-gray-300">${planet1}</td>
-                        <td class="py-1 px-2 border border-gray-300">${planet2}</td>
-                        <td class="py-1 px-2 border border-gray-300">${relationship}</td>`;
-                    tbody.appendChild(tr);
-                });
+                const tr = document.createElement("tr");
+                tr.innerHTML = `<td class="py-1 px-2 border border-gray-300 font-medium bg-gray-100">${planet1}</td>` +
+                    Object.keys(relationships).map(planet2 => {
+                        const relationship = relationships[planet1][planet2];
+                        const value = relationship === "Extreme Friend" ? 2 :
+                                      relationship === "Friend" ? 1 :
+                                      relationship === "Neutral" ? 0 :
+                                      relationship === "Enemy" ? -1 :
+                                      relationship === "Extreme Enemy" ? -2 : "-";
+                        return `<td class="py-1 px-2 border border-gray-300">${value}</td>`;
+                    }).join('');
+                tbody.appendChild(tr);
             });
             table.appendChild(tbody);
 
