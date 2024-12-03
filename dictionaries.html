@@ -5,20 +5,20 @@
     <title>Relationship Dictionaries</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="icon.png">
+    <script defer src="dictionaries.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
 <!-- Navigation Bar -->
 <nav class="bg-gray-800">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-center">
-      <div class="flex items-center space-x-4">
-        <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
-        <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-        <a href="dictionaries.html" class="rounded-md px-3 py-2 text-sm font-medium text-white bg-gray-700">Dictionaries</a>
-      </div>
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-center">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+                <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 
 <div class="container mx-auto py-10 px-4 flex">
@@ -32,92 +32,71 @@
     </aside>
 
     <!-- Main Content -->
-    <div id="relationship-dictionaries" class="w-3/4 max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+    <div class="w-3/4 max-w-3xl bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Relationship Dictionaries</h1>
-        <p class="mb-4 text-gray-600">
-            Explore the relationships between planets for each Ascendant sign. The tables below dynamically display the relationships defined in the input data.
-        </p>
+        <div id="relationship-dictionaries" class="container mx-auto py-10 px-4"></div>
     </div>
 </div>
 
 <script>
-    // The provided async function to load and render dictionaries
-    async function loadDictionaries() {
-        try {
-            const response = await fetch('ascendant_matrices.txt');
-            if (!response.ok) {
-                console.error("Failed to load file:", response.statusText);
-                return;
-            }
-            const text = await response.text();
-
-            // Split the content by Ascendant sections
-            const ascendantSections = text.split('Relationship Dictionary for ').filter(Boolean);
-
-            const container = document.querySelector("#relationship-dictionaries");
-
-            ascendantSections.forEach(section => {
-                // Extract the title and dictionary content
-                const [titleLine, ...contentLines] = section.split('\n').filter(line => line.trim());
-                const title = titleLine.trim().replace(':', '');
-                const dictionaryString = contentLines.join('\n').trim();
-
-                // Remove enclosing braces and split key-value pairs
-                const dictionaryEntries = dictionaryString.slice(1, -1).split(',').map(entry => entry.trim());
-
-                const rows = dictionaryEntries.map(entry => {
-                    const match = entry.match(/\('([^']*)', '([^']*)'\): '([^']*)'/);
-                    if (match) {
-                        return { planet1: match[1], planet2: match[2], relationship: match[3] };
-                    }
-                    return null;
-                }).filter(Boolean);
-
-                // Create section for each Ascendant
-                const sectionElement = document.createElement("div");
-                sectionElement.className = "mb-8";
-
-                // Add title
-                const titleElement = document.createElement("h2");
-                titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
-                titleElement.textContent = `${title} Ascendant`;
-                sectionElement.appendChild(titleElement);
-
-                // Create table
-                const table = document.createElement("table");
-                table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md";
-
-                // Table header
-                const thead = document.createElement("thead");
-                thead.innerHTML = `
-                    <tr>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 1</th>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 2</th>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Relationship</th>
-                    </tr>`;
-                table.appendChild(thead);
-
-                // Table body
-                const tbody = document.createElement("tbody");
-                rows.forEach(row => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td class="py-2 px-4 border-b">${row.planet1}</td>
-                        <td class="py-2 px-4 border-b">${row.planet2}</td>
-                        <td class="py-2 px-4 border-b">${row.relationship}</td>`;
-                    tbody.appendChild(tr);
-                });
-                table.appendChild(tbody);
-
-                sectionElement.appendChild(table);
-                container.appendChild(sectionElement);
-            });
-        } catch (error) {
-            console.error("Error loading dictionaries:", error);
+async function loadDictionaries() {
+    try {
+        const response = await fetch('ascendant_matrices.json');
+        if (!response.ok) {
+            console.error("Failed to load file:", response.statusText);
+            return;
         }
-    }
+        const dictionaries = await response.json();
+        const container = document.querySelector("#relationship-dictionaries");
 
-    document.addEventListener("DOMContentLoaded", loadDictionaries);
+        Object.keys(dictionaries).forEach(ascendant => {
+            const entries = dictionaries[ascendant];
+            
+            // Create a section for each Ascendant
+            const sectionElement = document.createElement("div");
+            sectionElement.className = "mb-8";
+
+            // Add title
+            const titleElement = document.createElement("h2");
+            titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
+            titleElement.textContent = `${ascendant} Ascendant`;
+            sectionElement.appendChild(titleElement);
+
+            // Create table
+            const table = document.createElement("table");
+            table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md";
+
+            // Table header
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 1</th>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 2</th>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Relationship</th>
+                </tr>`;
+            table.appendChild(thead);
+
+            // Table body
+            const tbody = document.createElement("tbody");
+            entries.forEach(entry => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td class="py-2 px-4 border-b">${entry.planet1}</td>
+                    <td class="py-2 px-4 border-b">${entry.planet2}</td>
+                    <td class="py-2 px-4 border-b">${entry.relationship}</td>`;
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            sectionElement.appendChild(table);
+            container.appendChild(sectionElement);
+        });
+    } catch (error) {
+        console.error("Error loading dictionaries:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadDictionaries);
 </script>
 
 </body>

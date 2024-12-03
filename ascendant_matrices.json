@@ -1,0 +1,1214 @@
+{
+    "Aries": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Friend",
+            "Moon": "-",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "-",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "-",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "-",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "-",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Taurus": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Friend",
+            "Moon": "-",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "-",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "-",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "-",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "-",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Neutral",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Gemini": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Enemy",
+            "Moon": "-",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "-",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "-",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "-",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "-",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Cancer": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Neutral",
+            "Moon": "-",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "-",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "-",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "-",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "-",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Leo": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Friend",
+            "Moon": "-",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "-",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "-",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "-",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "-",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Virgo": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Neutral",
+            "Moon": "-",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "-",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "-",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "-",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "-",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Libra": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Enemy",
+            "Moon": "-",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "-",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "-",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "-",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "-",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Enemy",
+            "Moon": "Neutral",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Neutral",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Scorpio": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Neutral",
+            "Moon": "-",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "-",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "-",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "-",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "-",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Friend",
+            "Mars": "Neutral",
+            "Mercury": "Extreme Enemy",
+            "Jupiter": "Extreme Friend",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Extreme Enemy",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Sagittarius": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Friend",
+            "Moon": "-",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "-",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "-",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "-",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "-",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Neutral",
+            "Mars": "Extreme Friend",
+            "Mercury": "Neutral",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Enemy",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Capricorn": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Neutral",
+            "Moon": "-",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "-",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "-",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "-",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "-",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Neutral",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Aquarius": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Neutral",
+            "Moon": "-",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "-",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "-",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "-",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "-",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Neutral",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Neutral",
+            "Jupiter": "Extreme Enemy",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    },
+    "Pisces": {
+        "Sun": {
+            "Sun": "-",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Moon": {
+            "Sun": "Extreme Friend",
+            "Moon": "-",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mars": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "-",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Mercury": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "-",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Jupiter": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "-",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Venus": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "-",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Saturn": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "-",
+            "Rahu": "Neutral",
+            "Ketu": "Neutral"
+        },
+        "Rahu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "-",
+            "Ketu": "Neutral"
+        },
+        "Ketu": {
+            "Sun": "Extreme Friend",
+            "Moon": "Extreme Enemy",
+            "Mars": "Extreme Enemy",
+            "Mercury": "Extreme Friend",
+            "Jupiter": "Neutral",
+            "Venus": "Extreme Friend",
+            "Saturn": "Extreme Friend",
+            "Rahu": "Neutral",
+            "Ketu": "-"
+        }
+    }
+}
