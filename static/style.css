@@ -123,15 +123,14 @@ button:hover {
 }
 
 .container {
-    display: flex; /* Ensure layout consistency */
-    gap: 1.5rem; /* Add spacing between elements */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 3px 0 6px rgba(0, 0, 0, 0.1); /* Balanced shadow */
-    border-radius: 0.5rem; /* Optional: for a rounded look */
+    padding: 10px 20px; /* Add some padding to the sides */
+    box-sizing: border-box; /* Ensure padding doesn't break layout */
 }
 
-.w-3/4 {
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Add deeper shadow on the right part */
-    border-radius: 0.5rem; /* Ensure the shadow aligns with the container shape */
+.container.mx-auto {
+    margin-right: auto; /* Center align container */
+    margin-left: auto;
+    border-right: 1px solid #ccc; /* Add a border to the right */
 }
 
 
