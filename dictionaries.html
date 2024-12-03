@@ -46,20 +46,28 @@
 </div>
 
 <script>
-    // Function to load dictionaries from a file
     async function loadDictionaries() {
         const response = await fetch('ascendant_matrices.txt');
         const text = await response.text();
 
-        // Split the text into dictionaries based on empty lines
-        const dictionaries = text.split('\n\n');
+        // Split the text into individual Ascendant sections
+        const dictionaries = text.split('Relationship Dictionary for ').filter(Boolean);
 
         const container = document.querySelector("#relationship-dictionaries");
 
         dictionaries.forEach(dictionary => {
             const lines = dictionary.trim().split('\n');
-            const title = lines[0];
-            const data = lines.slice(1);
+            const titleLine = lines.shift().trim();
+            const title = titleLine.endsWith(':') ? titleLine.slice(0, -1) : titleLine;
+
+            // Remove enclosing `{}` from the dictionary string
+            const dataString = lines.join('\n').replace(/[\{\}]/g, '').trim();
+
+            // Parse relationships into rows
+            const rows = dataString.split(',').map(entry => {
+                const match = entry.match(/\('([^']*)', '([^']*)'\): '([^']*)'/);
+                return match ? { planet1: match[1], planet2: match[2], relationship: match[3] } : null;
+            }).filter(Boolean);
 
             // Create section for each Ascendant
             const section = document.createElement("div");
@@ -68,7 +76,7 @@
             // Ascendant title
             const titleElement = document.createElement("h2");
             titleElement.className = "text-2xl font-semibold text-gray-800 mb-4";
-            titleElement.textContent = title;
+            titleElement.textContent = `${title} Ascendant`;
             section.appendChild(titleElement);
 
             // Create table
@@ -87,14 +95,13 @@
 
             // Table body
             const tbody = document.createElement("tbody");
-            data.forEach(line => {
-                const [planet1, planet2, relationship] = line.split(',').map(item => item.trim());
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td class="py-2 px-4 border-b">${planet1}</td>
-                    <td class="py-2 px-4 border-b">${planet2}</td>
-                    <td class="py-2 px-4 border-b">${relationship}</td>`;
-                tbody.appendChild(row);
+            rows.forEach(row => {
+                const tableRow = document.createElement("tr");
+                tableRow.innerHTML = `
+                    <td class="py-2 px-4 border-b">${row.planet1}</td>
+                    <td class="py-2 px-4 border-b">${row.planet2}</td>
+                    <td class="py-2 px-4 border-b">${row.relationship}</td>`;
+                tbody.appendChild(tableRow);
             });
 
             table.appendChild(tbody);
@@ -103,7 +110,6 @@
         });
     }
 
-    // Load dictionaries on page load
     document.addEventListener("DOMContentLoaded", loadDictionaries);
 </script>
 
