@@ -157,8 +157,11 @@ async function loadDictionaries() {
             titleElement.textContent = `${ascendant} Ascendant`;
             sectionElement.appendChild(titleElement);
 
+            const tableContainer = document.createElement("div");
+            tableContainer.className = "overflow-x-auto mb-4";
+
             const table = document.createElement("table");
-            table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6";
+            table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md";
 
             const thead = document.createElement("thead");
             const headerRow = document.createElement("tr");
@@ -182,7 +185,8 @@ async function loadDictionaries() {
             });
             table.appendChild(tbody);
 
-            sectionElement.appendChild(table);
+            tableContainer.appendChild(table);
+            sectionElement.appendChild(tableContainer);
 
             const groups = beneficsMaleficsData[ascendant];
             const groupsElement = document.createElement("div");
