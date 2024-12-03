@@ -146,56 +146,57 @@ async function loadDictionaries() {
         const dictionaries = await response.json();
         const container = document.querySelector("#relationship-dictionaries");
 
-        Object.keys(dictionaries).forEach(ascendant => {
-            const relationships = dictionaries[ascendant];
+Object.keys(dictionaries).forEach(ascendant => {
+    const relationships = dictionaries[ascendant];
 
-            const sectionElement = document.createElement("div");
-            sectionElement.className = "mb-6";
+    const sectionElement = document.createElement("div");
+    sectionElement.className = "mb-6";
 
-            const titleElement = document.createElement("h2");
-            titleElement.className = "text-xl font-semibold text-gray-800 mb-4 center";
-            titleElement.textContent = `${ascendant} Ascendant`;
-            sectionElement.appendChild(titleElement);
+    const titleElement = document.createElement("h2");
+    titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center"; // Added text-center
+    titleElement.textContent = `${ascendant} Ascendant`;
+    sectionElement.appendChild(titleElement);
 
-            const table = document.createElement("table");
-            table.className = "w-[95%] mx-auto bg-white border border-gray-300 rounded-lg shadow-md";
+    const table = document.createElement("table");
+    table.className = "w-[95%] mx-auto bg-white border border-gray-300 rounded-lg shadow-md";
 
-            const thead = document.createElement("thead");
-            const headerRow = document.createElement("tr");
-            headerRow.innerHTML = `<th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100"></th>` +
-                Object.keys(relationships).map(planet => `<th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">${planet}</th>`).join('');
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    headerRow.innerHTML = `<th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100"></th>` +
+        Object.keys(relationships).map(planet => `<th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">${planet}</th>`).join('');
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
 
-            const tbody = document.createElement("tbody");
-            Object.keys(relationships).forEach(planet1 => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `<td class="py-2 px-4 border-b text-left font-medium text-gray-700">${planet1}</td>` +
-                    Object.keys(relationships).map(planet2 => {
-                        const relationship = relationships[planet1][planet2];
-                        const value = relationship === "Extreme Friend" ? "+2" :
-                                      relationship === "Neutral" ? "0" :
-                                      relationship === "Extreme Enemy" ? "-2" : "-";
-                        return `<td class="py-2 px-4 border-b text-center text-gray-600">${value}</td>`;
-                    }).join('');
-                tbody.appendChild(tr);
-            });
-            table.appendChild(tbody);
+    const tbody = document.createElement("tbody");
+    Object.keys(relationships).forEach(planet1 => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="py-2 px-4 border-b text-left font-medium text-gray-700">${planet1}</td>` +
+            Object.keys(relationships).map(planet2 => {
+                const relationship = relationships[planet1][planet2];
+                const value = relationship === "Extreme Friend" ? "+2" :
+                              relationship === "Neutral" ? "0" :
+                              relationship === "Extreme Enemy" ? "-2" : "-";
+                return `<td class="py-2 px-4 border-b text-center text-gray-600">${value}</td>`;
+            }).join('');
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
 
-            sectionElement.appendChild(table);
+    sectionElement.appendChild(table);
 
-            const groups = beneficsMaleficsData[ascendant];
-            const groupsElement = document.createElement("div");
-            groupsElement.className = "text-sm text-gray-700";
-            groupsElement.innerHTML = `
-                <p><strong>Benefics:</strong> ${groups.benefics.join(', ')}</p>
-                <p><strong>Malefics:</strong> ${groups.malefics.join(', ')}</p>
-                <p><strong>Neutrals:</strong> ${groups.neutrals.join(', ')}</p>
-            `;
-            sectionElement.appendChild(groupsElement);
+    const groups = beneficsMaleficsData[ascendant];
+    const groupsElement = document.createElement("div");
+    groupsElement.className = "text-sm text-gray-700";
+    groupsElement.innerHTML = `
+        <p><strong>Benefics:</strong> ${groups.benefics.join(', ')}</p>
+        <p><strong>Malefics:</strong> ${groups.malefics.join(', ')}</p>
+        <p><strong>Neutrals:</strong> ${groups.neutrals.join(', ')}</p>
+    `;
+    sectionElement.appendChild(groupsElement);
 
-            container.appendChild(sectionElement);
-        });
+    container.appendChild(sectionElement);
+});
+
     } catch (error) {
         console.error("Error loading dictionaries:", error);
     }

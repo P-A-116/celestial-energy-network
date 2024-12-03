@@ -122,6 +122,16 @@ button:hover {
     padding-top: 0.5rem;
 }
 
+.container {
+    padding: 10px 20px; /* Add some padding to the sides */
+    box-sizing: border-box; /* Ensure padding doesn't break layout */
+}
+
+.container.mx-auto {
+    margin-right: auto; /* Center align container */
+    margin-left: auto;
+    border-right: 1px solid #ccc; /* Add a border to the right */
+}
 
 
 .legend text {
