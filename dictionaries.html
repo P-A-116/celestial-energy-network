@@ -2,121 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relationship Dictionaries</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9fafb;
-            color: #1a202c;
-        }
-    </style>
+    <link rel="icon" href="icon.png">
 </head>
-<body>
-    <div class="min-h-screen flex">
-        <!-- Sidebar -->
-        <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
-            <h2 class="text-xl font-semibold mb-4">Pages</h2>
-            <ul class="space-y-2">
-                <li><a href="about.html" class="text-blue-500 hover:text-blue-700">General</a></li>
-                <li><a href="dictionaries.html" class="text-blue-500 hover:text-blue-700">Relationship Dictionaries</a></li>
-            </ul>
-        </aside>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-        <!-- Main Content -->
-        <main class="w-3/4 bg-white rounded-lg shadow-lg p-6">
-            <h1 class="text-2xl font-bold mb-6">Relationship Dictionaries</h1>
-            <div id="relationship-dictionaries" class="space-y-8">
-                <!-- Dynamic Content Will Load Here -->
-            </div>
-        </main>
+<!-- Navigation Bar -->
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <div class="flex items-center space-x-4">
+                <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+                <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+                <a href="dictionaries.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dictionaries</a>
+      </div>
     </div>
+  </div>
+</nav>
 
-    <script>
-        const dictionaries = {
-            "Virgo Ascendant": {
-                "Sun, Sun": "-", "Sun, Moon": "Extreme Enemy", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Extreme Friend",
-                "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Extreme Friend", "Sun, Saturn": "Neutral", "Sun, Rahu": "Neutral",
-                "Sun, Ketu": "Neutral",
-                "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Extreme Friend",
-                "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Extreme Friend", "Moon, Saturn": "Neutral", "Moon, Rahu": "Neutral",
-                "Moon, Ketu": "Neutral",
-                "Mars, Sun": "Neutral", "Mars, Moon": "Extreme Enemy", "Mars, Mars": "-", "Mars, Mercury": "Extreme Friend",
-                "Mars, Jupiter": "Extreme Enemy", "Mars, Venus": "Extreme Friend", "Mars, Saturn": "Neutral", "Mars, Rahu": "Neutral",
-                "Mars, Ketu": "Neutral"
-            },
-            "Libra Ascendant": {
-                "Sun, Sun": "-", "Sun, Moon": "Neutral", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Extreme Friend",
-                "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Neutral", "Sun, Saturn": "Extreme Friend", "Sun, Rahu": "Neutral",
-                "Sun, Ketu": "Neutral",
-                "Moon, Sun": "Extreme Enemy", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Extreme Friend",
-                "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Neutral", "Moon, Saturn": "Extreme Friend", "Moon, Rahu": "Neutral",
-                "Moon, Ketu": "Neutral",
-                "Mars, Sun": "Extreme Enemy", "Mars, Moon": "Neutral", "Mars, Mars": "-", "Mars, Mercury": "Extreme Friend",
-                "Mars, Jupiter": "Extreme Enemy", "Mars, Venus": "Neutral", "Mars, Saturn": "Extreme Friend", "Mars, Rahu": "Neutral",
-                "Mars, Ketu": "Neutral"
-            },
-            "Scorpio Ascendant": {
-                "Sun, Sun": "-", "Sun, Moon": "Extreme Friend", "Sun, Mars": "Neutral", "Sun, Mercury": "Extreme Enemy",
-                "Sun, Jupiter": "Extreme Friend", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Extreme Enemy", "Sun, Rahu": "Neutral",
-                "Sun, Ketu": "Neutral",
-                "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Neutral", "Moon, Mercury": "Extreme Enemy",
-                "Moon, Jupiter": "Extreme Friend", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Extreme Enemy", "Moon, Rahu": "Neutral",
-                "Moon, Ketu": "Neutral",
-                "Mars, Sun": "Neutral", "Mars, Moon": "Extreme Friend", "Mars, Mars": "-", "Mars, Mercury": "Extreme Enemy",
-                "Mars, Jupiter": "Extreme Friend", "Mars, Venus": "Extreme Enemy", "Mars, Saturn": "Extreme Enemy", "Mars, Rahu": "Neutral",
-                "Mars, Ketu": "Neutral"
-            },
-            // Add Sagittarius, Capricorn, Aquarius, and Pisces similarly...
-        };
+<div class="container mx-auto py-10 px-4 flex">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
+        <h2 class="text-xl font-semibold mb-4">Pages</h2>
+        <ul class="space-y-2">
+            <li><a href="about.html" class="text-blue-500 hover:text-blue-700">General</a></li>
+            <li><a href="dictionaries.html" class="text-blue-500 hover:text-blue-700">Relationship Dictionaries</a></li>
+        </ul>
+    </aside>
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.querySelector("#relationship-dictionaries");
+    <!-- Main Content -->
+    <div class="w-3/4 max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Relationship Dictionaries</h1>
 
-            Object.entries(dictionaries).forEach(([ascendant, relationships]) => {
-                // Create section for each Ascendant
-                const section = document.createElement("div");
-                section.className = "mb-8";
+        <p class="mb-4">
+            Below are the relationship dictionaries for different Ascendants. Each dictionary describes the relationship between planets specific to the Ascendant.
+        </p>
 
-                // Ascendant title
-                const title = document.createElement("h3");
-                title.className = "text-xl font-bold text-gray-800 mb-4";
-                title.textContent = ascendant;
-                section.appendChild(title);
+        <div id="relationship-dictionaries" class="space-y-8">
+            <!-- Dynamic dictionaries will load here -->
+        </div>
+    </div>
+</div>
 
-                // Create table
-                const table = document.createElement("table");
-                table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-sm";
+<script>
+    const dictionaries = {
+        "Virgo Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Extreme Enemy", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Extreme Friend",
+            "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Extreme Friend", "Sun, Saturn": "Neutral", "Sun, Rahu": "Neutral",
+            "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Extreme Friend",
+            "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Extreme Friend", "Moon, Saturn": "Neutral", "Moon, Rahu": "Neutral",
+            "Moon, Ketu": "Neutral"
+        },
+        "Libra Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Neutral", "Sun, Mars": "Extreme Enemy", "Sun, Mercury": "Extreme Friend",
+            "Sun, Jupiter": "Extreme Enemy", "Sun, Venus": "Neutral", "Sun, Saturn": "Extreme Friend", "Sun, Rahu": "Neutral",
+            "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Extreme Enemy", "Moon, Moon": "-", "Moon, Mars": "Extreme Enemy", "Moon, Mercury": "Extreme Friend",
+            "Moon, Jupiter": "Extreme Enemy", "Moon, Venus": "Neutral", "Moon, Saturn": "Extreme Friend", "Moon, Rahu": "Neutral",
+            "Moon, Ketu": "Neutral"
+        },
+        "Scorpio Ascendant": {
+            "Sun, Sun": "-", "Sun, Moon": "Extreme Friend", "Sun, Mars": "Neutral", "Sun, Mercury": "Extreme Enemy",
+            "Sun, Jupiter": "Extreme Friend", "Sun, Venus": "Extreme Enemy", "Sun, Saturn": "Extreme Enemy", "Sun, Rahu": "Neutral",
+            "Sun, Ketu": "Neutral",
+            "Moon, Sun": "Neutral", "Moon, Moon": "-", "Moon, Mars": "Neutral", "Moon, Mercury": "Extreme Enemy",
+            "Moon, Jupiter": "Extreme Friend", "Moon, Venus": "Extreme Enemy", "Moon, Saturn": "Extreme Enemy", "Moon, Rahu": "Neutral",
+            "Moon, Ketu": "Neutral"
+        }
+    };
 
-                // Table header
-                const thead = document.createElement("thead");
-                thead.innerHTML = `
-                    <tr>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 1</th>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 2</th>
-                        <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Relationship</th>
-                    </tr>`;
-                table.appendChild(thead);
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector("#relationship-dictionaries");
 
-                // Table body
-                const tbody = document.createElement("tbody");
+        Object.entries(dictionaries).forEach(([ascendant, relationships]) => {
+            // Create section for each Ascendant
+            const section = document.createElement("div");
+            section.className = "mb-8";
 
-                Object.entries(relationships).forEach(([planets, relationship]) => {
-                    const [planet1, planet2] = planets.split(", ");
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td class="py-2 px-4 border-b">${planet1}</td>
-                        <td class="py-2 px-4 border-b">${planet2}</td>
-                        <td class="py-2 px-4 border-b">${relationship}</td>`;
-                    tbody.appendChild(row);
-                });
+            // Ascendant title
+            const title = document.createElement("h2");
+            title.className = "text-2xl font-semibold text-gray-800 mb-4";
+            title.textContent = ascendant;
+            section.appendChild(title);
 
-                table.appendChild(tbody);
-                section.appendChild(table);
-                container.appendChild(section);
+            // Create table
+            const table = document.createElement("table");
+            table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md";
+
+            // Table header
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 1</th>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Planet 2</th>
+                    <th class="py-2 px-4 border-b font-semibold text-gray-700 bg-gray-100 text-left">Relationship</th>
+                </tr>`;
+            table.appendChild(thead);
+
+            // Table body
+            const tbody = document.createElement("tbody");
+            Object.entries(relationships).forEach(([planets, relationship]) => {
+                const [planet1, planet2] = planets.split(", ");
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td class="py-2 px-4 border-b">${planet1}</td>
+                    <td class="py-2 px-4 border-b">${planet2}</td>
+                    <td class="py-2 px-4 border-b">${relationship}</td>`;
+                tbody.appendChild(row);
             });
+
+            table.appendChild(tbody);
+            section.appendChild(table);
+            container.appendChild(section);
         });
-    </script>
+    });
+</script>
 </body>
 </html>
