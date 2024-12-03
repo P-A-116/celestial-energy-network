@@ -159,6 +159,10 @@ Object.keys(dictionaries).forEach(ascendant => {
 
     const table = document.createElement("table");
     table.className = "mx-auto w-[95%] bg-white border border-gray-300 rounded-lg shadow-md";
+	
+	table.style.margin = "0 auto"; // Centers the table
+	table.style.maxWidth = "80%"; // Reduces the table width
+
 
 
     const thead = document.createElement("thead");
@@ -206,8 +210,6 @@ Object.keys(dictionaries).forEach(ascendant => {
 
 document.addEventListener("DOMContentLoaded", loadDictionaries);
 
-table.style.margin = "0 auto"; // Centers the table
-table.style.maxWidth = "80%"; // Reduces the table width
 </script>
 
 </body>
