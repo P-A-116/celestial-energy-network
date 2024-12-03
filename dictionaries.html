@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relationship Dictionaries</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="icon.png">
-    <script defer src="dictionaries.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
 <!-- Navigation Bar -->
 <nav class="bg-gray-800">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-center">
-            <div class="flex items-center space-x-4">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center">
+            <div class="flex space-x-4">
                 <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
                 <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
             </div>
@@ -21,21 +20,10 @@
     </div>
 </nav>
 
-<div class="container mx-auto py-10 px-4 flex">
-    <!-- Sidebar -->
-    <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-6">
-        <h2 class="text-xl font-semibold mb-4">Pages</h2>
-        <ul class="space-y-2">
-            <li><a href="about.html" class="text-blue-500 hover:text-blue-700">General</a></li>
-            <li><a href="dictionaries.html" class="text-blue-500 hover:text-blue-700">Relationship Dictionaries</a></li>
-        </ul>
-    </aside>
+<div class="container mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center mb-6">Relationship Dictionaries</h1>
 
-    <!-- Main Content -->
-    <div class="w-3/4 max-w-3xl bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Relationship Dictionaries</h1>
-        <div id="relationship-dictionaries" class="container mx-auto py-10 px-4"></div>
-    </div>
+    <div id="relationship-dictionaries" class="space-y-10"></div>
 </div>
 
 <script>
@@ -47,15 +35,11 @@ async function loadDictionaries() {
             return;
         }
         const dictionaries = await response.json();
-        console.log("Loaded dictionaries:", dictionaries); // Debugging output
 
         const container = document.querySelector("#relationship-dictionaries");
 
         Object.keys(dictionaries).forEach(ascendant => {
-            const entries = dictionaries[ascendant];
-
-            // Debugging: Ensure each ascendant is processed
-            console.log(`Processing ${ascendant}:`, entries);
+            const relationships = dictionaries[ascendant];
 
             // Create a section for each Ascendant
             const sectionElement = document.createElement("div");
@@ -83,13 +67,17 @@ async function loadDictionaries() {
 
             // Table body
             const tbody = document.createElement("tbody");
-            entries.forEach(row => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td class="py-2 px-4 border-b">${row.planet1}</td>
-                    <td class="py-2 px-4 border-b">${row.planet2}</td>
-                    <td class="py-2 px-4 border-b">${row.relationship}</td>`;
-                tbody.appendChild(tr);
+            Object.keys(relationships).forEach(planet1 => {
+                const relatedPlanets = relationships[planet1];
+                Object.keys(relatedPlanets).forEach(planet2 => {
+                    const relationship = relatedPlanets[planet2];
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td class="py-2 px-4 border-b">${planet1}</td>
+                        <td class="py-2 px-4 border-b">${planet2}</td>
+                        <td class="py-2 px-4 border-b">${relationship}</td>`;
+                    tbody.appendChild(tr);
+                });
             });
             table.appendChild(tbody);
 
@@ -103,7 +91,6 @@ async function loadDictionaries() {
 
 document.addEventListener("DOMContentLoaded", loadDictionaries);
 </script>
-
 
 </body>
 </html>
