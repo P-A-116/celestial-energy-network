@@ -94,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Create table
         const table = document.createElement("table");
         table.className = "min-w-full bg-white border border-gray-300 rounded-lg shadow-md mb-6";
-		table.style.margin = "0 auto";
 
         // Create table header
         const thead = document.createElement("thead");
