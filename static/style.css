@@ -264,16 +264,10 @@ nav a.active {
 
 #distribution-chart {
     width: 100%;
-    max-width: 900px;
-    height: 600px;
-    margin: 20px auto;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    position: relative;
+    height: 400px;
+    min-height: 300px;
+    padding: 10px;
 }
-
 /* Card Styling */
 #score-distribution-container {
     background-color: #fff;
