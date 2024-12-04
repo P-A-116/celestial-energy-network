@@ -135,12 +135,10 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
 
 
 
-function renderDistributionHistogram(cumulativeData, totalScore) {
-    console.log("Rendering cumulative histogram with data:", cumulativeData, "Total Score:", totalScore);
-
+// Render cumulative histogram
+function renderCumulativeHistogram(cumulativeData, totalScore) {
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
-    const containerWidth = document.getElementById('distribution-chart').offsetWidth;
-    const width = Math.min(containerWidth - margin.left - margin.right, 800);
+    const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
     const svg = d3.select("#distribution-chart")
@@ -151,67 +149,54 @@ function renderDistributionHistogram(cumulativeData, totalScore) {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Convert cumulative data into percentages for the Y-axis
-    const cumulativeDataPoints = Object.keys(cumulativeData).map(score => ({
-        score: parseInt(score, 10),
-        cumulative: cumulativeData[score]
-    }));
-
-    const xScale = d3.scaleBand()
-        .domain(cumulativeDataPoints.map(d => d.score))
-        .range([0, width])
-        .padding(0.1);
+    const xScale = d3.scaleLinear()
+        .domain([d3.min(cumulativeData, d => d.score), d3.max(cumulativeData, d => d.score)])
+        .range([0, width]);
 
     const yScale = d3.scaleLinear()
-        .domain([0, 100]) // Cumulative percentages range from 0 to 100
+        .domain([0, 100]) // Percent values (0% to 100%)
         .range([height, 0]);
 
-    // Add X-axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickFormat(d => d.toString()))
-        .append("text")
-        .attr("x", width / 2)
-        .attr("y", 40)
-        .attr("fill", "#333")
-        .style("text-anchor", "middle")
-        .text("Friendliness Score");
+        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
 
-    // Add Y-axis
     svg.append("g")
-        .call(d3.axisLeft(yScale))
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2)
-        .attr("y", -35)
-        .attr("fill", "#333")
-        .style("text-anchor", "middle")
-        .text("Cumulative Frequency (%)");
+        .call(d3.axisLeft(yScale).ticks(10).tickFormat(d => `${d}%`));
 
-    // Draw bars
-    svg.selectAll(".bar")
-        .data(cumulativeDataPoints)
-        .enter()
-        .append("rect")
-        .attr("x", d => xScale(d.score))
-        .attr("width", xScale.bandwidth())
-        .attr("y", d => yScale(d.cumulative))
-        .attr("height", d => height - yScale(d.cumulative))
-        .attr("fill", d => d.score === totalScore ? "red" : "steelblue");
+    svg.append("path")
+        .datum(cumulativeData)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+            .x(d => xScale(d.score))
+            .y(d => yScale(d.percentile))
+        );
 
-    // Highlight Total Score on Chart
+    // Highlight the total score point
+    svg.append("circle")
+        .attr("cx", xScale(totalScore))
+        .attr("cy", yScale(cumulativeData.find(d => d.score === totalScore)?.percentile || 0))
+        .attr("r", 6)
+        .attr("fill", "red");
+
     svg.append("text")
-        .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
-        .attr("y", yScale(cumulativeDataPoints.find(d => d.score === totalScore)?.cumulative || 0))
-        .attr("dy", -5)
+        .attr("x", xScale(totalScore))
+        .attr("y", yScale(cumulativeData.find(d => d.score === totalScore)?.percentile || 0) - 10)
         .attr("fill", "red")
-        .style("text-anchor", "middle")
+        .attr("text-anchor", "middle")
         .text(`Your Score: ${totalScore}`);
 }
 
+// Example cumulative data
+const cumulativeData = Object.keys(percentileMapping).map(score => ({
+    score: parseInt(score, 10),
+    percentile: percentileMapping[score]
+}));
 
-
-
+// Example call (ensure you pass the correct totalScore from form processing)
+renderCumulativeHistogram(cumulativeData, 15); // Replace 15 with the user's score
 
 
 // Form submission handler

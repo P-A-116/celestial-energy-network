@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="icon.png">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
@@ -15,7 +16,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-center">
             <div class="flex items-center space-x-4">
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+                <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">Home</a>
                 <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
             </div>
         </div>
@@ -24,14 +25,14 @@
 
 <!-- Main Content -->
 <div class="container mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Horoscope Analyzer</h1>
+    <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Horoscope</h1>
     
-    <!-- Instructions -->
+    <!-- Instructional Text -->
     <div class="instructions mx-auto text-center max-w-lg bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-        <p>Select your Ascendant and fill in house positions for each planet. Click "Analyze" to view results.</p>
+        <p>Please select your Ascendant and fill in the house positions for each planet. Once done, click "Analyze" to view the results.</p>
     </div>
     
-    <!-- Horoscope Form -->
+    <!-- Horoscope Input Form -->
     <div class="flex justify-center mb-6">
         <form id="horoscope-form" class="bg-white rounded-lg shadow-md p-6 max-w-lg space-y-6">
             <fieldset>
@@ -57,28 +58,34 @@
                         </select>
                         
                         <label for="sun" class="block text-lg font-medium">Sun:</label>
-                        <input type="number" id="sun" name="sun" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="sun" name="sun" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                         
                         <label for="moon" class="block text-lg font-medium">Moon:</label>
-                        <input type="number" id="moon" name="moon" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="moon" name="moon" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                         
                         <label for="mars" class="block text-lg font-medium">Mars:</label>
-                        <input type="number" id="mars" name="mars" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="mars" name="mars" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="rahu" class="block text-lg font-medium">Rahu:</label>
+                        <input type="number" id="rahu" name="rahu" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                     </div>
                     
                     <!-- Right Column -->
                     <div class="space-y-4">
                         <label for="mercury" class="block text-lg font-medium">Mercury:</label>
-                        <input type="number" id="mercury" name="mercury" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="mercury" name="mercury" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                         
                         <label for="venus" class="block text-lg font-medium">Venus:</label>
-                        <input type="number" id="venus" name="venus" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="venus" name="venus" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                         
                         <label for="jupiter" class="block text-lg font-medium">Jupiter:</label>
-                        <input type="number" id="jupiter" name="jupiter" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="jupiter" name="jupiter" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                         
                         <label for="saturn" class="block text-lg font-medium">Saturn:</label>
-                        <input type="number" id="saturn" name="saturn" min="1" max="12" required class="w-full p-2 border rounded" placeholder="House">
+                        <input type="number" id="saturn" name="saturn" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="ketu" class="block text-lg font-medium">Ketu:</label>
+                        <input type="number" id="ketu" name="ketu" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
                     </div>
                 </div>
             </fieldset>
@@ -89,11 +96,25 @@
         </form>
     </div>
 
-    <!-- Graph Container -->
-    <div id="graph-container" class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto" hidden>
-        <h2 class="text-center text-2xl font-semibold mb-4">Friendliness Score Distribution</h2>
-        <div id="distribution-chart" style="width: 100%; height: 400px;"></div>
+    <!-- Relationship Matrix Container -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto overflow-x-auto" id="relationship-matrix" hidden>
+
+        <h2 class="text-center text-2xl font-semibold mb-4">Relationship Table</h2>
+        <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
+            <p class="text-gray-500 text-center" id="relationship-placeholder">Data will appear here after analysis.</p>
+            <table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
+                <!-- Table headers and rows dynamically populated -->
+            </table>
+        </div>
     </div>
+
+    <!-- Score and Distribution Chart Container -->
+<div id="score-distribution-container" hidden>
+    <h2 class="text-center text-2xl font-semibold mb-4">Friendliness Score Distribution</h2>
+    <div id="percentile-display" class="mb-4 text-gray-700 font-medium"></div>
+    <div id="distribution-chart" style="width: 100%; height: 400px;"></div>
+</div>
+
 </div>
 
 <!-- Footer -->
@@ -101,37 +122,7 @@
     <p>&copy; 2024 Computational Astrology | All rights reserved.</p>
 </footer>
 
-<!-- Scripts -->
+
 <script src="static/graph.js"></script>
-<script>
-document.getElementById("horoscope-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const planetPositions = {};
-    const inputs = ['sun', 'moon', 'mars', 'mercury', 'venus', 'jupiter', 'saturn'];
-    let isValid = true;
-
-    inputs.forEach(id => {
-        const value = parseInt(document.getElementById(id).value, 10);
-        if (isNaN(value) || value < 1 || value > 12) {
-            document.getElementById(id).classList.add('border-red-500');
-            isValid = false;
-        } else {
-            document.getElementById(id).classList.remove('border-red-500');
-            planetPositions[id.charAt(0).toUpperCase() + id.slice(1)] = value;
-        }
-    });
-
-    if (!isValid) {
-        alert("Please fill all inputs correctly!");
-        return;
-    }
-
-    document.getElementById("graph-container").removeAttribute("hidden");
-
-    const { totalScore } = calculateFriendlinessScore(planetPositions);
-    renderDistributionHistogram(percentileMapping, totalScore);
-});
-</script>
 </body>
 </html>
