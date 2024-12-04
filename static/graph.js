@@ -128,25 +128,23 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     renderDistributionHistogram(nonCumulativeData, totalScore);
 }
 
-// Render histogram
 function renderDistributionHistogram(nonCumulativeData, totalScore) {
-    // Set up dimensions and margins
+    console.log("Non-cumulative data:", nonCumulativeData);
+    console.log("Total Score:", totalScore);
+
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
-    const container = document.getElementById('distribution-chart');
-    const containerWidth = container.offsetWidth || 800; // Fallback to 800px
-    const width = containerWidth - margin.left - margin.right;
+    const containerWidth = document.getElementById('distribution-chart').offsetWidth;
+    const width = Math.min(containerWidth - margin.left - margin.right, 800);
     const height = 400 - margin.top - margin.bottom;
 
-    // Clear existing content
     const svg = d3.select("#distribution-chart")
-        .html("") // Clear previous chart
+        .html("") // Clear existing content
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Scales for X and Y axes
     const xScale = d3.scaleBand()
         .domain(nonCumulativeData.map(d => d.score))
         .range([0, width])
@@ -156,29 +154,26 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .domain([0, d3.max(nonCumulativeData, d => d.frequency)])
         .range([height, 0]);
 
-    // Draw X axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
+        .call(d3.axisBottom(xScale))
         .append("text")
         .attr("x", width / 2)
         .attr("y", 40)
-        .attr("fill", "black")
+        .attr("fill", "#333")
         .style("text-anchor", "middle")
         .text("Friendliness Score");
 
-    // Draw Y axis
     svg.append("g")
         .call(d3.axisLeft(yScale))
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("x", -height / 2)
         .attr("y", -35)
-        .attr("fill", "black")
+        .attr("fill", "#333")
         .style("text-anchor", "middle")
         .text("Frequency (%)");
 
-    // Draw bars
     svg.selectAll(".bar")
         .data(nonCumulativeData)
         .enter()
@@ -189,7 +184,6 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .attr("height", d => height - yScale(d.frequency))
         .attr("fill", d => d.score === totalScore ? "red" : "steelblue");
 
-    // Highlight the user's score
     svg.append("text")
         .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
         .attr("y", yScale(nonCumulativeData.find(d => d.score === totalScore)?.frequency || 0))
@@ -198,6 +192,7 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .style("text-anchor", "middle")
         .text(`Your Score: ${totalScore}`);
 }
+
 
 
 // Form submission handler
@@ -225,7 +220,8 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
     }
 
     const { matrix, totalScore, planets } = calculateFriendlinessScore(planetPositions);
+	displayRelationshipMatrix(matrix, totalScore, planets);
+
     document.getElementById('relationship-matrix').removeAttribute('hidden');
     document.getElementById('score-distribution-container').removeAttribute('hidden');
-    displayRelationshipMatrix(matrix, totalScore, planets);
 });
