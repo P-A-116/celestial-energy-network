@@ -32,14 +32,16 @@ function convertToNumerical(qualitativeMatrix) {
 function calculateSumOfDifferences(ascendantMatrix, userMatrixNumerical) {
     let totalDifference = 0;
     const planets = Object.keys(ascendantMatrix);
+
     planets.forEach((planet1, i) => {
         planets.forEach((planet2, j) => {
-            const ascendantValue = mapping[ascendantMatrix[planet1][planet2]];
-            const userValue = userMatrixNumerical[i][j];
+            const ascendantValue = mapping[ascendantMatrix[planet1][planet2]] ?? null;
+            const userValue = userMatrixNumerical[i][j] ?? null;
             if (ascendantValue === null || userValue === null) return;
             totalDifference += Math.abs(ascendantValue - userValue);
         });
     });
+
     return totalDifference;
 }
 
@@ -47,13 +49,14 @@ function calculateSumOfDifferences(ascendantMatrix, userMatrixNumerical) {
 document.getElementById('horoscope-form').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const ascendant = document.getElementById('ascendant').value;
+    const ascendant = document.getElementById('ascendant').value.trim();
     const qualitativeMatrixText = document.getElementById('qualitative-matrix').value.trim();
 
     if (!ascendant) {
         alert("Please select an ascendant.");
         return;
     }
+
     if (!qualitativeMatrixText) {
         alert("Please enter the qualitative matrix data.");
         return;
@@ -76,6 +79,7 @@ document.getElementById('horoscope-form').addEventListener('submit', async (even
         const userMatrixNumerical = convertToNumerical(userMatrixQualitative);
         const totalDifference = calculateSumOfDifferences(ascendantMatrix, userMatrixNumerical);
 
+        // Display the result
         document.getElementById('benefic-score-display').innerText =
             `The total sum of absolute differences is: ${totalDifference}`;
 
@@ -95,6 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!ascendantMatrices) return;
 
         const container = document.querySelector("#relationship-dictionaries");
+        container.innerHTML = ""; // Clear existing content
 
         Object.entries(ascendantMatrices).forEach(([ascendant, relationships]) => {
             // Create a section for each Ascendant
