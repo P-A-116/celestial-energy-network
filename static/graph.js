@@ -126,15 +126,22 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     });
 
     const adjustedScore = ((totalScore + 65) / 116) * 100;
-    const percentile = percentileMapping[totalScore.toString()] || "N/A";
     percentileDisplay.innerText = 
-        `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
-renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the user's score
+        `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%`;
+    renderNonCumulativeHistogram(nonCumulativeData, totalScore);
 }
 
+// Prepare non-cumulative data
+const nonCumulativeData = Object.keys(percentileMapping).map((score, i, scores) => {
+    const currentPercentile = percentileMapping[score];
+    const previousPercentile = i > 0 ? percentileMapping[scores[i - 1]] : 0;
+    return {
+        score: parseInt(score, 10),
+        change: currentPercentile - previousPercentile
+    };
+});
 
-
-// Render cumulative histogram
+// Render non-cumulative histogram
 function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
     const width = 800 - margin.left - margin.right;
@@ -149,7 +156,7 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const xScale = d3.scaleLinear()
-        .domain([d3.min(cumulativeData, d => d.score), d3.max(cumulativeData, d => d.score)])
+        .domain([d3.min(nonCumulativeData, d => d.score), d3.max(nonCumulativeData, d => d.score)])
         .range([0, width]);
 
     const yScale = d3.scaleLinear()
@@ -161,7 +168,7 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
         .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
 
     svg.append("g")
-        .call(d3.axisLeft(yScale).ticks(10).tickFormat(d => `${d}%`));
+        .call(d3.axisLeft(yScale).ticks(10));
 
     svg.selectAll("rect")
         .data(nonCumulativeData)
@@ -172,35 +179,7 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
         .attr("width", 10)
         .attr("height", d => height - yScale(d.change))
         .attr("fill", "steelblue");
-
-    // Highlight the total score point
-    svg.append("circle")
-        .attr("cx", xScale(totalScore))
-        .attr("cy", yScale(cumulativeData.find(d => d.score === totalScore)?.percentile || 0))
-        .attr("r", 6)
-        .attr("fill", "red");
-
-    svg.append("text")
-        .attr("x", xScale(totalScore))
-        .attr("y", yScale(cumulativeData.find(d => d.score === totalScore)?.percentile || 0) - 10)
-        .attr("fill", "red")
-        .attr("text-anchor", "middle")
-        .text(`Your Score: ${totalScore}`);
 }
-
-// Example cumulative data
-const nonCumulativeData = Object.keys(percentileMapping).map((score, i, scores) => {
-    const currentPercentile = percentileMapping[score];
-    const previousPercentile = i > 0 ? percentileMapping[scores[i - 1]] : 0;
-    return {
-        score: parseInt(score, 10),
-        change: currentPercentile - previousPercentile
-    };
-});
-
-// Example call (ensure you pass the correct totalScore from form processing)
-renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the user's score
-
 
 // Form submission handler
 document.getElementById('horoscope-form').addEventListener('submit', function(event) {
@@ -227,8 +206,8 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
     }
 
     const { matrix, totalScore, planets } = calculateFriendlinessScore(planetPositions);
-	displayRelationshipMatrix(matrix, totalScore, planets);
+    displayRelationshipMatrix(matrix, totalScore, planets);
 
     document.getElementById('relationship-matrix').removeAttribute('hidden');
     document.getElementById('score-distribution-container').removeAttribute('hidden');
-});
+}
