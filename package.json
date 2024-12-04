@@ -1,7 +1,7 @@
 {
   "name": "astrological-graph",
   "version": "1.0.0",
-  "description": "Astrological graph generation using Node.js and Netlify Functions",
+  "description": "Astrological Analysis",
   "main": "index.js",
   "scripts": {},
   "dependencies": {
