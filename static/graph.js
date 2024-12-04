@@ -84,6 +84,17 @@ function calculateFriendlinessScore(planetPositions) {
 // Display relationship matrix and scores
 function displayRelationshipMatrix(matrix, totalScore, planets) {
     const table = document.getElementById("relationship-table");
+    const percentileDisplay = document.getElementById("percentile-display");
+
+    if (!table) {
+        console.error("Error: Element with ID 'relationship-table' not found.");
+        return;
+    }
+    if (!percentileDisplay) {
+        console.error("Error: Element with ID 'percentile-display' not found.");
+        return;
+    }
+
     table.innerHTML = ""; // Clear previous content
 
     // Create table header
@@ -114,19 +125,19 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
         table.appendChild(tableRow);
     });
 
-    // Display friendliness score
     const adjustedScore = ((totalScore + 65) / 116) * 100;
     const percentile = percentileMapping[totalScore.toString()] || "N/A";
-    document.getElementById('percentile-display').innerText = 
+    percentileDisplay.innerText = 
         `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
 
-    // Render distribution histogram
+    // Render histogram
     const nonCumulativeData = Object.keys(percentileMapping).map(score => ({
         score: parseInt(score, 10),
         frequency: percentileMapping[score]
     }));
     renderDistributionHistogram(nonCumulativeData, totalScore);
 }
+
 
 function renderDistributionHistogram(nonCumulativeData, totalScore) {
     console.log("Rendering histogram with data:", nonCumulativeData);
