@@ -129,8 +129,7 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     const percentile = percentileMapping[totalScore.toString()] || "N/A";
     percentileDisplay.innerText = 
         `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
-
-    renderDistributionHistogram(percentileMapping, totalScore);
+renderCumulativeHistogram(cumulativeData, 15); // Replace 15 with the user's score
 }
 
 
