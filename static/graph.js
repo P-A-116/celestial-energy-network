@@ -83,9 +83,8 @@ function calculateFriendlinessScore(planetPositions) {
 
 // Display relationship matrix and scores
 function displayRelationshipMatrix(matrix, totalScore, planets) {
-	const table = document.getElementById("relationship-table"); 
-	table.innerHTML = ""; // Clear previous content
-
+    const table = document.getElementById("relationship-table");
+    table.innerHTML = ""; // Clear previous content
 
     // Create table header
     const headerRow = document.createElement('tr');
@@ -93,6 +92,7 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     planets.forEach(planet => {
         const th = document.createElement('th');
         th.innerText = planet;
+        th.className = "border border-gray-400 text-center";
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
@@ -102,6 +102,7 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
         const tableRow = document.createElement('tr');
         const rowHeader = document.createElement('th');
         rowHeader.innerText = planets[i];
+        rowHeader.className = "border border-gray-400 text-center";
         tableRow.appendChild(rowHeader);
 
         row.forEach(cell => {
@@ -194,7 +195,7 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
     }
 
     const { matrix, totalScore, planets } = calculateFriendlinessScore(planetPositions);
-    document.getElementById('relationship-matrix').removeAttribute('hidden'); // Ensure visibility
-    document.getElementById('score-distribution-container').removeAttribute('hidden'); // Ensure visibility
+    document.getElementById('relationship-matrix').removeAttribute('hidden');
+    document.getElementById('score-distribution-container').removeAttribute('hidden');
     displayRelationshipMatrix(matrix, totalScore, planets);
 });
