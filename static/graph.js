@@ -139,6 +139,7 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
 }
 
 
+
 function renderDistributionHistogram(nonCumulativeData, totalScore) {
     console.log("Rendering histogram with data:", nonCumulativeData);
     console.log("Highlighting total score:", totalScore);
