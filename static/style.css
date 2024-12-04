@@ -1,98 +1,129 @@
+/* General Body Styling */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    line-height: 1.6; /* Improve text readability */
 }
 
 h1 {
     color: #333;
     margin-top: 20px;
+    font-size: 2rem; /* Enhance heading size */
+    font-weight: bold; /* Make it more prominent */
 }
 
+/* Form Styling */
 form {
     display: inline-block;
-    margin: 20px 0;
-    padding: 15px;
+    margin: 20px auto;
+    padding: 20px;
     border: 1px solid #ccc;
     background-color: #fff;
     border-radius: 8px;
-    width: 400px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+    width: 90%;
+    max-width: 500px; /* Limit maximum width for larger screens */
 }
 
 .form-row {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 10px; /* Add spacing between rows */
 }
 
 .column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 48%;
+    width: 48%; /* Ensure consistent column width */
 }
 
 /* Instructional Text Styling */
 .instructions {
     color: #555;
-    font-size: 0.9rem; /* Slightly smaller font size */
+    font-size: 0.9rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    border-left: 4px solid #4A90E2; /* Accent border for emphasis */
-    background-color: #f1f8ff; /* Light blue background for readability */
+    border-left: 4px solid #4A90E2;
+    background-color: #f1f8ff;
     border-radius: 4px;
     line-height: 1.4;
+    text-align: left; /* Align instructional text for readability */
 }
 
-
+/* Form Elements */
 form label {
     margin-top: 10px;
     font-weight: bold;
+    text-align: left;
+    width: 100%;
 }
 
 form input, form select {
     margin-bottom: 15px;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 150px;
+    width: 90%;
     text-align: center;
+    font-size: 1rem; /* Increase font size for better usability */
+    box-sizing: border-box; /* Ensure padding doesn't break layout */
+}
+
+form input:focus, form select:focus {
+    border-color: #4A90E2;
+    outline: none;
+    box-shadow: 0px 0px 4px rgba(74, 144, 226, 0.8); /* Add subtle focus effect */
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #45a049;
+    transform: scale(1.05); /* Add slight hover scaling effect */
 }
 
+button:active {
+    background-color: #3e8e41;
+}
+
+/* Relationship Container Styling */
 #relationship-container {
     margin: 20px auto;
-    width: 80%;
+    width: 90%;
+    max-width: 1000px;
 }
 
 #relationship-container table {
     margin: 20px auto;
     border-collapse: collapse;
+    width: 100%;
 }
 
 #relationship-container th,
 #relationship-container td {
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 8px;
     text-align: center;
+    font-size: 1rem; /* Ensure text is legible */
 }
 
 #relationship-container th {
     background-color: #f0f0f0;
+    font-weight: bold;
 }
 
 #relationship-container p {
@@ -101,8 +132,10 @@ button:hover {
     text-align: center;
 }
 
+/* Graph Container */
 #graph-container {
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
     height: 600px;
     margin: 20px auto;
     border: 1px solid #ddd;
@@ -112,43 +145,32 @@ button:hover {
     position: relative;
 }
 
-/* Smaller Font for Score Display */
+/* Percentile Display */
 #percentile-display {
-    font-size: 0.8rem; /* Smaller font size */
-    color: #555; /* Slightly muted color */
-    font-weight: normal; /* Normal font weight */
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: normal;
     line-height: 1.4;
     text-align: left;
-    padding-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f1f8ff;
+    border-radius: 4px;
 }
 
+/* Container Utility */
 .container {
-    padding: 10px 20px; /* Add some padding to the sides */
-    box-sizing: border-box; /* Ensure padding doesn't break layout */
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1000px;
 }
 
-.container.mx-auto {
-    margin-right: auto; /* Center align container */
-    margin-left: auto;
-    border-right: 1px solid #ccc; /* Add a border to the right */
-}
-
-
-.legend text {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-}
-
-.legend .legend-item {
-    cursor: default;
-}
-
-
-/* Navigation Bar Styles */
+/* Navigation Bar Styling */
 nav {
     background-color: #333;
     overflow: hidden;
     text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav a {
@@ -157,7 +179,8 @@ nav a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav a:hover {
@@ -181,6 +204,7 @@ nav a.active {
 .content h2 {
     color: #333;
     margin-top: 20px;
+    font-size: 1.8rem;
 }
 
 .content p, .content ul, .content ol {
@@ -192,6 +216,10 @@ nav a.active {
     margin-left: 20px;
 }
 
+.content ul li, .content ol li {
+    margin-bottom: 10px;
+}
+
 .legend-color {
     display: inline-block;
     width: 16px;
@@ -200,6 +228,7 @@ nav a.active {
     margin-right: 8px;
 }
 
+/* Formula Styling */
 .formula {
     font-family: 'Courier New', Courier, monospace;
     background-color: #f9f9f9;
@@ -208,56 +237,78 @@ nav a.active {
     margin: 10px 0;
 }
 
-/* Adjustments for the legend in the About page */
-.content ul li {
-    margin-bottom: 10px;
-}
-
 /* Sidebar Styling */
 aside {
-    background-color: #f8fafc; /* Light gray background for the sidebar */
-    border: 1px solid #e5e7eb; /* Subtle border around the sidebar */
-    border-radius: 8px; /* Rounded corners */
-    padding: 1.5rem; /* Increased padding for spacing */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-/* Sidebar Links Styling */
+    background-color: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
 aside ul li a {
     display: block;
-    padding: 0.5rem 1rem; /* Adds padding for a larger clickable area */
-    color: #2563eb; /* Primary blue color */
+    padding: 0.5rem 1rem;
+    color: #2563eb;
     font-size: 1rem;
     font-weight: 500;
     border-radius: 6px;
-    transition: all 0.3s ease-in-out; /* Smooth animation for hover effects */
+    transition: all 0.3s ease-in-out;
     position: relative;
 }
 
-/* Sidebar Link Hover Effects */
 aside ul li a:hover {
-    background-color: #e0f2fe; /* Light blue background on hover */
-    color: #1d4ed8; /* Darker blue text color on hover */
-    transform: translateX(5px); /* Subtle right slide effect */
+    background-color: #e0f2fe;
+    color: #1d4ed8;
+    transform: translateX(5px);
 }
 
-/* Active Link Style */
 aside ul li a.active, aside ul li a:focus {
-    background-color: #bfdbfe; /* Slightly darker blue background for active link */
-    color: #1e3a8a; /* Dark blue for active text */
+    background-color: #bfdbfe;
+    color: #1e3a8a;
     font-weight: 600;
 }
 
-/* Link Icon Before */
 aside ul li a::before {
-    content: '→'; /* Arrow icon before each link */
+    content: '→';
     color: transparent;
     transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
     position: absolute;
-    left: -1.5rem; /* Positions the icon slightly to the left of the link */
+    left: -1.5rem;
 }
 
-/* Icon Hover Effect */
 aside ul li a:hover::before {
-    color: #1d4ed8; /* Makes the arrow visible on hover */
-    transform: translateX(3px); /* Slides the arrow slightly on hover */
+    color: #1d4ed8;
+    transform: translateX(3px);
 }
 
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    form {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #graph-container {
+        width: 100%;
+        height: auto;
+    }
+
+    nav a {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .content {
+        padding: 0 10px;
+    }
+
+    #relationship-container {
+        width: 100%;
+    }
+
+    aside {
+        padding: 1rem;
+    }
+}
