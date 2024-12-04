@@ -205,8 +205,6 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
         .text(`Your Score: ${totalScore}`);
 }
 
-console.log("Rendering non-cumulative histogram...");
-renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the actual score
 
 
 // Form submission handler
