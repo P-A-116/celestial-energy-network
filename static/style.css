@@ -230,3 +230,14 @@ nav a.active {
         width: 100%;
     }
 }
+
+#relationship-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+#relationship-table th, #relationship-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
