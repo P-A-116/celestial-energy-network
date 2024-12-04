@@ -205,7 +205,7 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
 
 
 // Form submission handler
-document.getElementById('horoscope-form').addEventListener('submit', function(event)) {
+document.getElementById('horoscope-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const planetPositions = {};
@@ -233,4 +233,4 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
 
     document.getElementById('relationship-matrix').removeAttribute('hidden');
     document.getElementById('score-distribution-container').removeAttribute('hidden');
-}
+});
