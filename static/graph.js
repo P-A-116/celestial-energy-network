@@ -205,7 +205,6 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
         .text(`Your Score: ${totalScore}`);
 }
 
-// Example call to verify rendering
 console.log("Rendering non-cumulative histogram...");
 renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the actual score
 
