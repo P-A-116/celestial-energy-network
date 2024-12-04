@@ -43,15 +43,7 @@ function determineNaturalRelationship(planet1, planet2) {
 // Calculate temporary relationship
 function calculateTemporaryRelationship(house1, house2) {
     const difference = (house2 - house1 + 12) % 12;
-    if ([1, 2, 3, 9, 10, 11].includes(difference) ||
-        (house1 === 4 && house2 === 10) ||
-        (house1 === 10 && house2 === 4) ||
-        (house1 === 2 && house2 === 12) ||
-        (house1 === 12 && house2 === 2) ||
-        (house1 === 3 && house2 === 11) ||
-        (house1 === 11 && house2 === 3)) {
-        return 'Friend';
-    }
+    if ([1, 2, 3, 9, 10, 11].includes(difference)) return 'Friend';
     return 'Enemy';
 }
 
@@ -62,29 +54,6 @@ function calculateCompoundRelationship(natural, temporary) {
     if (natural === 'Enemy' && temporary === 'Enemy') return { type: 'E. En', score: -2 };
     if ((natural === 'Enemy' && temporary === 'Neutral') || (natural === 'Neutral' && temporary === 'Enemy')) return { type: 'Enemy', score: -1 };
     return { type: 'Neutral', score: 0 };
-}
-
-// Convert cumulative percentiles to non-cumulative frequencies
-function convertToNonCumulative(percentileMapping) {
-    const scores = Object.keys(percentileMapping).map(score => parseInt(score, 10)).sort((a, b) => a - b);
-    const nonCumulativeData = [];
-
-    for (let i = 0; i < scores.length; i++) {
-        const score = scores[i];
-        const percentile = percentileMapping[score.toString()];
-        let frequency;
-
-        if (i === 0) {
-            frequency = percentile; // First item has no previous to subtract from
-        } else {
-            const previousPercentile = percentileMapping[scores[i - 1].toString()];
-            frequency = percentile - previousPercentile;
-        }
-
-        nonCumulativeData.push({ score, frequency });
-    }
-
-    return nonCumulativeData;
 }
 
 // Calculate friendliness score matrix
@@ -123,7 +92,6 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     planets.forEach(planet => {
         const th = document.createElement('th');
         th.innerText = planet;
-        th.className = "border border-gray-400 p-2";
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
@@ -133,28 +101,28 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
         const tableRow = document.createElement('tr');
         const rowHeader = document.createElement('th');
         rowHeader.innerText = planets[i];
-        rowHeader.className = "border border-gray-400 p-2";
         tableRow.appendChild(rowHeader);
 
         row.forEach(cell => {
             const td = document.createElement('td');
             td.innerText = cell;
-            td.className = "border border-gray-400 p-2 text-center";
+            td.className = "border border-gray-400 text-center";
             tableRow.appendChild(td);
         });
         table.appendChild(tableRow);
     });
 
-    // Calculate adjusted score
+    // Display friendliness score
     const adjustedScore = ((totalScore + 65) / 116) * 100;
     const percentile = percentileMapping[totalScore.toString()] || "N/A";
+    document.getElementById('percentile-display').innerText = 
+        `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
 
-    // Update the score display
-    const percentileDisplay = document.getElementById('percentile-display');
-    percentileDisplay.innerText = `Total Friendliness Score: ${totalScore} \nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
-
-    // Generate non-cumulative data and render histogram
-    const nonCumulativeData = convertToNonCumulative(percentileMapping);
+    // Render distribution histogram
+    const nonCumulativeData = Object.keys(percentileMapping).map(score => ({
+        score: parseInt(score, 10),
+        frequency: percentileMapping[score]
+    }));
     renderDistributionHistogram(nonCumulativeData, totalScore);
 }
 
@@ -166,7 +134,7 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
     const height = 400 - margin.top - margin.bottom;
 
     const svg = d3.select("#distribution-chart")
-        .html("") // Clear existing content
+        .html("")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -184,7 +152,7 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
+        .call(d3.axisBottom(xScale));
 
     svg.append("g")
         .call(d3.axisLeft(yScale));
@@ -198,14 +166,6 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .attr("y", d => yScale(d.frequency))
         .attr("height", d => height - yScale(d.frequency))
         .attr("fill", d => d.score === totalScore ? "red" : "steelblue");
-
-    svg.append("text")
-        .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
-        .attr("y", yScale(nonCumulativeData.find(d => d.score === totalScore)?.frequency || 0))
-        .attr("dy", -5)
-        .attr("fill", "red")
-        .style("text-anchor", "middle")
-        .text(`Your Score: ${totalScore}`);
 }
 
 // Form submission handler
@@ -233,5 +193,7 @@ document.getElementById('horoscope-form').addEventListener('submit', function(ev
     }
 
     const { matrix, totalScore, planets } = calculateFriendlinessScore(planetPositions);
+    document.getElementById('relationship-matrix').removeAttribute('hidden'); // Ensure visibility
+    document.getElementById('score-distribution-container').removeAttribute('hidden'); // Ensure visibility
     displayRelationshipMatrix(matrix, totalScore, planets);
 });
