@@ -263,11 +263,8 @@ nav a.active {
 }
 
 #distribution-chart {
-    display: block; /* Ensure visibility */
+    display: block;
     width: 100%;
     height: 400px;
-    min-height: 300px;
-    padding: 10px;
-    box-sizing: border-box;
+    background-color: #f9f9f9; /* Optional for visibility */
 }
-
