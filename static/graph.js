@@ -8,7 +8,7 @@ const percentileMapping = {
     "35": 98.166, "39": 99.315, "43": 99.757, "47": 99.974, "51": 100
 };
 
-// Define natural relationships
+// Natural friendships and enmities
 const naturalFriends = {
     'Sun': ['Moon', 'Mars', 'Jupiter'],
     'Moon': ['Sun', 'Mercury'],
@@ -87,7 +87,7 @@ function convertToNonCumulative(percentileMapping) {
     return nonCumulativeData;
 }
 
-// Calculate matrix and total score
+// Calculate friendliness score matrix
 function calculateFriendlinessScore(planetPositions) {
     const planets = Object.keys(planetPositions);
     const matrix = [];
@@ -112,27 +112,28 @@ function calculateFriendlinessScore(planetPositions) {
     return { matrix, totalScore, planets };
 }
 
-// Display matrix and score in HTML
-// Function to display the relationship matrix and adjusted score
+// Display relationship matrix and scores
 function displayRelationshipMatrix(matrix, totalScore, planets) {
     const table = document.getElementById('relationship-table');
     table.innerHTML = ""; // Clear existing table content
 
     // Create table header
     const headerRow = document.createElement('tr');
-    headerRow.appendChild(document.createElement('th'));  // Empty top-left cell
+    headerRow.appendChild(document.createElement('th')); // Empty top-left cell
     planets.forEach(planet => {
         const th = document.createElement('th');
         th.innerText = planet;
+        th.className = "border border-gray-400 p-2";
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
 
-    // Create table rows for each planet
+    // Create table rows
     matrix.forEach((row, i) => {
         const tableRow = document.createElement('tr');
         const rowHeader = document.createElement('th');
         rowHeader.innerText = planets[i];
+        rowHeader.className = "border border-gray-400 p-2";
         tableRow.appendChild(rowHeader);
 
         row.forEach(cell => {
@@ -148,35 +149,30 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     const adjustedScore = ((totalScore + 65) / 116) * 100;
     const percentile = percentileMapping[totalScore.toString()] || "N/A";
 
-    // Debugging logs
-    console.log("Total Score:", totalScore);
-    console.log("Adjusted Score:", adjustedScore);
-    console.log("Percentile:", percentile);
-
-    // Display total score, adjusted score, and percentile
+    // Update the score display
     const percentileDisplay = document.getElementById('percentile-display');
     percentileDisplay.innerText = `Total Friendliness Score: ${totalScore} \nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
-	const nonCumulativeData = convertToNonCumulative(percentileMapping);
-	
-	renderDistributionHistogram(nonCumulativeData, totalScore);
+
+    // Generate non-cumulative data and render histogram
+    const nonCumulativeData = convertToNonCumulative(percentileMapping);
+    renderDistributionHistogram(nonCumulativeData, totalScore);
 }
 
+// Render histogram
 function renderDistributionHistogram(nonCumulativeData, totalScore) {
-    // Set up dimensions and margins
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
-    const width = 800 - margin.left - margin.right;
+    const containerWidth = document.getElementById('distribution-chart').offsetWidth;
+    const width = Math.min(containerWidth - margin.left - margin.right, 800);
     const height = 400 - margin.top - margin.bottom;
 
-    // Create SVG element
     const svg = d3.select("#distribution-chart")
-        .html("")  // Clear existing content
+        .html("") // Clear existing content
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Define scales
     const xScale = d3.scaleBand()
         .domain(nonCumulativeData.map(d => d.score))
         .range([0, width])
@@ -186,43 +182,23 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .domain([0, d3.max(nonCumulativeData, d => d.frequency)])
         .range([height, 0]);
 
-    // Add X axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
-        .append("text")
-        .attr("class", "axis-label")
-        .attr("x", width / 2)
-        .attr("y", 40)
-        .attr("fill", "black")
-        .style("text-anchor", "middle")
-        .text("Friendliness Score");
+        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
 
-    // Add Y axis
     svg.append("g")
-        .call(d3.axisLeft(yScale))
-        .append("text")
-        .attr("class", "axis-label")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2)
-        .attr("y", -35)
-        .attr("fill", "black")
-        .style("text-anchor", "middle")
-        .text("Frequency (%)");
+        .call(d3.axisLeft(yScale));
 
-    // Add bars for histogram
     svg.selectAll(".bar")
         .data(nonCumulativeData)
         .enter()
         .append("rect")
-        .attr("class", "bar")
         .attr("x", d => xScale(d.score))
         .attr("width", xScale.bandwidth())
         .attr("y", d => yScale(d.frequency))
         .attr("height", d => height - yScale(d.frequency))
         .attr("fill", d => d.score === totalScore ? "red" : "steelblue");
 
-    // Add label for the user's score
     svg.append("text")
         .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
         .attr("y", yScale(nonCumulativeData.find(d => d.score === totalScore)?.frequency || 0))
@@ -232,26 +208,30 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .text(`Your Score: ${totalScore}`);
 }
 
-
-
 // Form submission handler
 document.getElementById('horoscope-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Retrieve planet positions from form inputs
-    const planetPositions = {
-        Sun: parseInt(document.getElementById('sun').value),
-        Moon: parseInt(document.getElementById('moon').value),
-        Mars: parseInt(document.getElementById('mars').value),
-        Mercury: parseInt(document.getElementById('mercury').value),
-        Jupiter: parseInt(document.getElementById('jupiter').value),
-        Venus: parseInt(document.getElementById('venus').value),
-        Saturn: parseInt(document.getElementById('saturn').value),
-        Rahu: parseInt(document.getElementById('rahu').value),
-        Ketu: parseInt(document.getElementById('ketu').value)
-    };
+    const planetPositions = {};
+    const inputs = ['sun', 'moon', 'mars', 'mercury', 'jupiter', 'venus', 'saturn', 'rahu', 'ketu'];
+    let isValid = true;
 
-    // Retrieve planet positions and calculate score as before
+    inputs.forEach(id => {
+        const value = parseInt(document.getElementById(id).value);
+        if (isNaN(value) || value < 1 || value > 12) {
+            document.getElementById(id).classList.add('border-red-500');
+            isValid = false;
+        } else {
+            document.getElementById(id).classList.remove('border-red-500');
+            planetPositions[id.charAt(0).toUpperCase() + id.slice(1)] = value;
+        }
+    });
+
+    if (!isValid) {
+        alert('Please ensure all inputs are valid (1-12).');
+        return;
+    }
+
     const { matrix, totalScore, planets } = calculateFriendlinessScore(planetPositions);
     displayRelationshipMatrix(matrix, totalScore, planets);
 });
