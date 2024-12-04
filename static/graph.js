@@ -141,27 +141,15 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
 
 
 function renderDistributionHistogram(nonCumulativeData, totalScore) {
-    console.log("Rendering histogram with data:", nonCumulativeData);
-    console.log("Highlighting total score:", totalScore);
+    console.log("Rendering histogram with data:", nonCumulativeData, "Total Score:", totalScore);
 
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
-    const container = document.getElementById('distribution-chart');
-
-    // Ensure container exists and clear previous content
-    if (!container) {
-        console.error("Error: Distribution chart container not found.");
-        return;
-    }
-
-    const containerWidth = container.offsetWidth;
+    const containerWidth = document.getElementById('distribution-chart').offsetWidth;
     const width = Math.min(containerWidth - margin.left - margin.right, 800);
     const height = 400 - margin.top - margin.bottom;
 
-    // Clear previous content
-    container.innerHTML = '';
-
-    // Create SVG
     const svg = d3.select("#distribution-chart")
+        .html("") // Clear existing content
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -177,10 +165,9 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .domain([0, d3.max(nonCumulativeData, d => d.frequency)])
         .range([height, 0]);
 
-    // Add X-axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
+        .call(d3.axisBottom(xScale))
         .append("text")
         .attr("x", width / 2)
         .attr("y", 40)
@@ -188,7 +175,6 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .style("text-anchor", "middle")
         .text("Friendliness Score");
 
-    // Add Y-axis
     svg.append("g")
         .call(d3.axisLeft(yScale))
         .append("text")
@@ -199,7 +185,6 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .style("text-anchor", "middle")
         .text("Frequency (%)");
 
-    // Draw bars
     svg.selectAll(".bar")
         .data(nonCumulativeData)
         .enter()
@@ -210,18 +195,15 @@ function renderDistributionHistogram(nonCumulativeData, totalScore) {
         .attr("height", d => height - yScale(d.frequency))
         .attr("fill", d => d.score === totalScore ? "red" : "steelblue");
 
-    // Highlight total score
-    const scoreData = nonCumulativeData.find(d => d.score === totalScore);
-    if (scoreData) {
-        svg.append("text")
-            .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
-            .attr("y", yScale(scoreData.frequency))
-            .attr("dy", -5)
-            .attr("fill", "red")
-            .style("text-anchor", "middle")
-            .text(`Your Score: ${totalScore}`);
-    }
+    svg.append("text")
+        .attr("x", xScale(totalScore) + xScale.bandwidth() / 2)
+        .attr("y", yScale(nonCumulativeData.find(d => d.score === totalScore)?.frequency || 0))
+        .attr("dy", -5)
+        .attr("fill", "red")
+        .style("text-anchor", "middle")
+        .text(`Your Score: ${totalScore}`);
 }
+
 
 
 
