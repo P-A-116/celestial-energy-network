@@ -141,9 +141,6 @@ const nonCumulativeData = Object.keys(percentileMapping).map((score, i, scores) 
     };
 });
 
-// Log data for debugging
-console.log("Non-Cumulative Data:", nonCumulativeData);
-
 
 // Render non-cumulative histogram
 function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
@@ -208,7 +205,7 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
 
 
 // Form submission handler
-document.getElementById('horoscope-form').addEventListener('submit', function(event) {
+document.getElementById('horoscope-form').addEventListener('submit', function(event)) {
     event.preventDefault();
 
     const planetPositions = {};
