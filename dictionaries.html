@@ -9,15 +9,9 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
 
 <!-- Navigation Bar -->
-<<<<<<< HEAD
 <nav class="bg-gray-800 sticky top-0">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-center">
-=======
-<nav class="bg-gray-800 sticky top-0 z-50">
-    <div class="max-w-full px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between">
->>>>>>> parent of 089e850 (68)
             <div class="flex items-center space-x-4">
                 <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
                 <a href="about.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
@@ -26,15 +20,9 @@
     </div>
 </nav>
 
-<<<<<<< HEAD
 <div class="container mx-auto py-10 px-4 flex items-start space-x-6">
     <!-- Sidebar -->
     <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4">
-=======
-<div class="container mx-auto py-10 px-4 flex flex-wrap lg:space-x-6 gap-6">
-    <!-- Sidebar -->
-    <aside class="flex-shrink-0 w-full lg:w-1/4 bg-white rounded-lg shadow-lg p-4">
->>>>>>> parent of 089e850 (68)
         <h2 class="text-xl font-semibold mb-4">Pages</h2>
         <ul class="space-y-2 text-sm">
             <li>
@@ -53,11 +41,7 @@
     </aside>
 
     <!-- Main Content -->
-<<<<<<< HEAD
     <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-=======
-    <div class="w-full lg:max-w-3xl bg-white p-6 rounded-lg shadow-lg">
->>>>>>> parent of 089e850 (68)
         <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Relationship Dictionaries</h1>
 
         <!-- Explanation Section -->
@@ -80,37 +64,6 @@
 
         <!-- Relationship Dictionaries Section -->
         <div id="relationship-dictionaries"></div>
-<<<<<<< HEAD
-		<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-    }
-    th {
-        background-color: #f4f4f4;
-        color: #333;
-        font-weight: bold;
-    }
-    tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    tr:hover {
-        background-color: #f1f1f1;
-    }
-    td:first-child {
-        text-align: left;
-        font-weight: 500;
-        color: #555;
-    }
-</style>
-=======
->>>>>>> parent of 089e850 (68)
     </div>
 </div>
 
@@ -193,48 +146,38 @@ async function loadDictionaries() {
         const dictionaries = await response.json();
         const container = document.querySelector("#relationship-dictionaries");
 
-<<<<<<< HEAD
 Object.keys(dictionaries).forEach(ascendant => {
     const relationships = dictionaries[ascendant];
 
     const sectionElement = document.createElement("div");
     sectionElement.className = "mb-6";
 
-<<<<<<< HEAD
     const titleElement = document.createElement("h2");
-    titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center";
-    titleElement.textContent = ${ascendant} Ascendant;
+    titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center"; // Center title
+    titleElement.textContent = `${ascendant} Ascendant`;
     sectionElement.appendChild(titleElement);
-=======
-            const titleElement = document.createElement("h2");
-            titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center";
-            titleElement.textContent = `${ascendant} Ascendant`;
-            sectionElement.appendChild(titleElement);
->>>>>>> parent of 4207f0d (62)
 
     const table = document.createElement("table");
-    table.className = "w-full max-w-[80%] border border-gray-300 rounded-lg shadow-md";
-    table.style.marginLeft = "auto"; // Equal left margin
-    table.style.marginRight = "auto"; // Equal right margin
+    table.className = "mx-auto w-[95%] bg-white border border-gray-300 rounded-lg shadow-md";
 
-<<<<<<< HEAD
+
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
-    headerRow.innerHTML = <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100"></th> +
-        Object.keys(relationships).map(planet => <th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">${planet}</th>).join('');
+    headerRow.innerHTML = `<th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100"></th>` +
+        Object.keys(relationships).map(planet => `<th class="py-2 px-4 border-b text-left font-semibold text-gray-700 bg-gray-100">${planet}</th>`).join('');
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
     const tbody = document.createElement("tbody");
     Object.keys(relationships).forEach(planet1 => {
         const tr = document.createElement("tr");
-        tr.innerHTML = <td class="py-2 px-4 border-b text-left font-medium text-gray-700">${planet1}</td> +
+        tr.innerHTML = `<td class="py-2 px-4 border-b text-left font-medium text-gray-700">${planet1}</td>` +
             Object.keys(relationships).map(planet2 => {
                 const relationship = relationships[planet1][planet2];
                 const value = relationship === "Extreme Friend" ? "+2" :
                               relationship === "Neutral" ? "0" :
                               relationship === "Extreme Enemy" ? "-2" : "-";
-                return <td class="py-2 px-4 border-b text-center text-gray-600">${value}</td>;
+                return `<td class="py-2 px-4 border-b text-center text-gray-600">${value}</td>`;
             }).join('');
         tbody.appendChild(tr);
     });
@@ -244,114 +187,25 @@ Object.keys(dictionaries).forEach(ascendant => {
 
     const groups = beneficsMaleficsData[ascendant];
     const groupsElement = document.createElement("div");
-    groupsElement.className = "text-sm text-gray-700 text-center mt-4";
-    groupsElement.innerHTML = 
+    groupsElement.className = "text-sm text-gray-700 text-center mt-4"; // Add text-center class here
+    groupsElement.innerHTML = `
         <p><strong>Benefics:</strong> ${groups.benefics.join(', ')}</p>
         <p><strong>Malefics:</strong> ${groups.malefics.join(', ')}</p>
         <p><strong>Neutrals:</strong> ${groups.neutrals.join(', ')}</p>
-    ;
+    `;
     sectionElement.appendChild(groupsElement);
 
     container.appendChild(sectionElement);
 });
 
 
-
     } catch (error) {
         console.error("Error loading dictionaries:", error);
     }
 }
 
-=======
-        Object.keys(dictionaries).forEach(ascendant => {
-            const relationships = dictionaries[ascendant];
-
-            const sectionElement = document.createElement("div");
-            sectionElement.className = "mb-6";
-
-            const titleElement = document.createElement("h2");
-            titleElement.className = "text-xl font-semibold text-gray-800 mb-4 text-center";
-            titleElement.textContent = `${ascendant} Ascendant`;
-            sectionElement.appendChild(titleElement);
-
-            const table = document.createElement("table");
-            table.className = "table-auto border-collapse border border-gray-300 rounded-lg";
-            table.style.width = "auto"; // Automatically adjusts to content size
-
-=======
->>>>>>> parent of 4207f0d (62)
-            const thead = document.createElement("thead");
-            const headerRow = document.createElement("tr");
-            headerRow.innerHTML = `<th class="py-2 px-4 border-b bg-gray-100 text-left">Planet</th>` +
-                Object.keys(relationships).map(planet => `<th class="py-2 px-4 border-b bg-gray-100 text-center">${planet}</th>`).join('');
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-
-            const tbody = document.createElement("tbody");
-            Object.keys(relationships).forEach(planet1 => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `<td class="py-2 px-4 border-b text-left font-medium">${planet1}</td>` +
-                    Object.keys(relationships).map(planet2 => {
-                        const relationship = relationships[planet1][planet2];
-                        const value = relationship === "Extreme Friend" ? "+2" :
-                                      relationship === "Neutral" ? "0" :
-                                      relationship === "Extreme Enemy" ? "-2" : "-";
-                        return `<td class="py-2 px-4 border-b text-center">${value}</td>`;
-                    }).join('');
-                tbody.appendChild(tr);
-            });
-            table.appendChild(tbody);
-
-            sectionElement.appendChild(table);
-
-            const groups = beneficsMaleficsData[ascendant];
-            const groupsElement = document.createElement("div");
-            groupsElement.className = "text-sm text-gray-700 text-center mt-4";
-            groupsElement.innerHTML = `
-                <p><strong>Benefics:</strong> ${groups.benefics.join(', ')}</p>
-                <p><strong>Malefics:</strong> ${groups.malefics.join(', ')}</p>
-                <p><strong>Neutrals:</strong> ${groups.neutrals.join(', ')}</p>
-            `;
-            sectionElement.appendChild(groupsElement);
-
-            container.appendChild(sectionElement);
-        });
-    } catch (error) {
-        console.error("Error loading dictionaries:", error);
-    }
-<<<<<<< HEAD
-}
-// Add dynamic resizing for tables
-function adjustTableSize(table) {
-    const columnCount = table.querySelectorAll("thead th").length;
-    const rowCount = table.querySelectorAll("tbody tr").length;
-
-    // Calculate ideal width based on column and row content
-    const idealWidth = Math.min(columnCount * 150, window.innerWidth * 0.9); // 150px per column max
-    table.style.width = `${idealWidth}px`;
-=======
->>>>>>> parent of 4207f0d (62)
-}
-
-// Call the resizing function for each table
-function adjustAllTables() {
-    document.querySelectorAll("table").forEach(adjustTableSize);
-}
-
-// Adjust tables after DOM is fully loaded and whenever the window is resized
-document.addEventListener("DOMContentLoaded", () => {
-    adjustAllTables();
-    window.addEventListener("resize", adjustAllTables);
-});
-
->>>>>>> parent of 089e850 (68)
 document.addEventListener("DOMContentLoaded", loadDictionaries);
-
 </script>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> parent of 089e850 (68)

@@ -122,15 +122,6 @@ button:hover {
     padding-top: 0.5rem;
 }
 
-table {
-    max-width: 80%; /* Makes the table smaller */
-    margin: 0 auto; /* Centers the table */
-    border-collapse: collapse; /* Optional: neatens borders */
-    border: 2px solid red; /* Debugging border */
-    background-color: lightyellow; /* Debugging background */
-}
-
-
 .container {
     padding: 10px 20px; /* Add some padding to the sides */
     box-sizing: border-box; /* Ensure padding doesn't break layout */
@@ -269,3 +260,4 @@ aside ul li a:hover::before {
     color: #1d4ed8; /* Makes the arrow visible on hover */
     transform: translateX(3px); /* Slides the arrow slightly on hover */
 }
+
