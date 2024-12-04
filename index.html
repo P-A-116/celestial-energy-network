@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computational Astrology</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="icon.png">
@@ -10,8 +11,8 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
 
 <!-- Navigation Bar -->
-<nav class="bg-gray-800 sticky top-0">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+<nav class="bg-gray-800 sticky top-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-center">
             <div class="flex items-center space-x-4">
                 <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page">Home</a>
@@ -21,105 +22,122 @@
     </div>
 </nav>
 
-
+<!-- Main Content -->
 <div class="container mx-auto py-10 px-4">
     <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">Horoscope</h1>
+    
     <!-- Instructional Text -->
-    <div class="instructions mx-auto text-center max-w-lg">
+    <div class="instructions mx-auto text-center max-w-lg bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
         <p>Please select your Ascendant and fill in the house positions for each planet. Once done, click "Analyze" to view the results.</p>
     </div>
-	 <div class="flex justify-center mb-6">
-        <!-- Horoscope Input Form -->
+    
+    <!-- Horoscope Input Form -->
+    <div class="flex justify-center mb-6">
         <form id="horoscope-form" class="bg-white rounded-lg shadow-md p-6 max-w-lg space-y-6">
-            <div class="grid grid-cols-2 gap-4">
-                <!-- Left Column -->
-                <div class="space-y-4">
-                    <label for="ascendant" class="block text-lg font-medium">Ascendant:</label>
-                    <select id="ascendant" name="ascendant" required class="w-full p-2 border rounded">
-                        <option value="">Select Ascendant Sign</option>
-                        <option value="1">Aries</option>
-                        <option value="2">Taurus</option>
-                        <option value="3">Gemini</option>
-                        <option value="4">Cancer</option>
-                        <option value="5">Leo</option>
-                        <option value="6">Virgo</option>
-                        <option value="7">Libra</option>
-                        <option value="8">Scorpio</option>
-                        <option value="9">Sagittarius</option>
-                        <option value="10">Capricorn</option>
-                        <option value="11">Aquarius</option>
-                        <option value="12">Pisces</option>
-                    </select>
-
-                    <label for="sun" class="block text-lg font-medium">Sun:</label>
-                    <input type="number" id="sun" name="sun" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="moon" class="block text-lg font-medium">Moon:</label>
-                    <input type="number" id="moon" name="moon" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="mars" class="block text-lg font-medium">Mars:</label>
-                    <input type="number" id="mars" name="mars" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="rahu" class="block text-lg font-medium">Rahu:</label>
-                    <input type="number" id="rahu" name="rahu" min="1" max="12" required class="w-full p-2 border rounded">
+            <fieldset>
+                <legend class="sr-only">Horoscope Details</legend>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Left Column -->
+                    <div class="space-y-4">
+                        <label for="ascendant" class="block text-lg font-medium">Ascendant:</label>
+                        <select id="ascendant" name="ascendant" required class="w-full p-2 border rounded">
+                            <option value="">Select Ascendant Sign</option>
+                            <option value="1">Aries</option>
+                            <option value="2">Taurus</option>
+                            <option value="3">Gemini</option>
+                            <option value="4">Cancer</option>
+                            <option value="5">Leo</option>
+                            <option value="6">Virgo</option>
+                            <option value="7">Libra</option>
+                            <option value="8">Scorpio</option>
+                            <option value="9">Sagittarius</option>
+                            <option value="10">Capricorn</option>
+                            <option value="11">Aquarius</option>
+                            <option value="12">Pisces</option>
+                        </select>
+                        
+                        <label for="sun" class="block text-lg font-medium">Sun:</label>
+                        <input type="number" id="sun" name="sun" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="moon" class="block text-lg font-medium">Moon:</label>
+                        <input type="number" id="moon" name="moon" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="mars" class="block text-lg font-medium">Mars:</label>
+                        <input type="number" id="mars" name="mars" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="rahu" class="block text-lg font-medium">Rahu:</label>
+                        <input type="number" id="rahu" name="rahu" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="space-y-4">
+                        <label for="mercury" class="block text-lg font-medium">Mercury:</label>
+                        <input type="number" id="mercury" name="mercury" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="venus" class="block text-lg font-medium">Venus:</label>
+                        <input type="number" id="venus" name="venus" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="jupiter" class="block text-lg font-medium">Jupiter:</label>
+                        <input type="number" id="jupiter" name="jupiter" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="saturn" class="block text-lg font-medium">Saturn:</label>
+                        <input type="number" id="saturn" name="saturn" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                        
+                        <label for="ketu" class="block text-lg font-medium">Ketu:</label>
+                        <input type="number" id="ketu" name="ketu" min="1" max="12" required class="w-full p-2 border rounded" placeholder="Enter house position">
+                    </div>
                 </div>
-
-                <!-- Right Column -->
-                <div class="space-y-4">
-                    <label for="mercury" class="block text-lg font-medium">Mercury:</label>
-                    <input type="number" id="mercury" name="mercury" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="venus" class="block text-lg font-medium">Venus:</label>
-                    <input type="number" id="venus" name="venus" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="jupiter" class="block text-lg font-medium">Jupiter:</label>
-                    <input type="number" id="jupiter" name="jupiter" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="saturn" class="block text-lg font-medium">Saturn:</label>
-                    <input type="number" id="saturn" name="saturn" min="1" max="12" required class="w-full p-2 border rounded">
-
-                    <label for="ketu" class="block text-lg font-medium">Ketu:</label>
-                    <input type="number" id="ketu" name="ketu" min="1" max="12" required class="w-full p-2 border rounded">
-                </div>
-            </div>
-
+            </fieldset>
+            
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">
                 Analyze
             </button>
         </form>
     </div>
 
-<!-- Relationship Matrix Container -->
-<div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto" id="relationship-matrix" hidden>
-    <h2 class="text-center text-2xl font-semibold mb-4">Relationship Table</h2>
-    <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
-        <table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
-            <!-- Table headers and rows will be dynamically populated -->
-        </table>
-    </div>
-</div>
-
-<!-- Score and Distribution Chart Container -->
-<div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto" id="score-distribution-container" hidden>
-    <!-- Percentile Display -->
-    <div id="percentile-display" class="text-left w-1/4 pr-4">
-        <!-- Score display content populated by JavaScript -->
+    <!-- Relationship Matrix Container -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto overflow-x-auto" id="relationship-matrix" hidden>
+        <h2 class="text-center text-2xl font-semibold mb-4">Relationship Table</h2>
+        <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
+            <p class="text-gray-500 text-center" id="relationship-placeholder">Data will appear here after analysis.</p>
+            <table id="relationship-table" class="w-full border-collapse border border-gray-400 text-center">
+                <!-- Table headers and rows dynamically populated -->
+            </table>
+        </div>
     </div>
 
-    <!-- Distribution Chart -->
-    <div id="score-distribution" class="w-full">
+    <!-- Score and Distribution Chart Container -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto overflow-x-auto" id="score-distribution-container" hidden>
         <h2 class="text-center text-2xl font-semibold mb-4">Friendliness Score Distribution</h2>
         <div id="distribution-chart"></div>
     </div>
 </div>
 
-</div>
 <!-- Footer -->
 <footer class="bg-gray-800 text-gray-300 py-4 text-center">
     <p>&copy; 2024 Computational Astrology | All rights reserved.</p>
 </footer>
 
-<script src="/static/graph.js"></script>
+<!-- Inline Debugging Script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("horoscope-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("Analyze button clicked");
+        
+        const relationshipMatrix = document.getElementById("relationship-matrix");
+        const scoreDistribution = document.getElementById("score-distribution-container");
+
+        // Show hidden sections
+        relationshipMatrix.removeAttribute("hidden");
+        scoreDistribution.removeAttribute("hidden");
+
+        // Clear placeholder for relationship matrix (if used dynamically)
+        const placeholder = document.getElementById("relationship-placeholder");
+        if (placeholder) placeholder.style.display = "none";
+    });
+});
+</script>
 
 </body>
 </html>
