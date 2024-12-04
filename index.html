@@ -122,27 +122,7 @@
     <p>&copy; 2024 Computational Astrology | All rights reserved.</p>
 </footer>
 
-<!-- Inline Debugging Script -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("horoscope-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        console.log("Analyze button clicked");
-        
-        const relationshipMatrix = document.getElementById("relationship-matrix");
-        const scoreDistribution = document.getElementById("score-distribution-container");
 
-        // Show hidden sections
-        relationshipMatrix.removeAttribute("hidden");
-        scoreDistribution.removeAttribute("hidden");
-
-        // Clear placeholder for relationship matrix (if used dynamically)
-		const placeholder = document.getElementById("relationship-placeholder");
-		if (placeholder) placeholder.style.display = "none";
-
-    });
-});
-</script>
 <script src="static/graph.js"></script>
 </body>
 </html>

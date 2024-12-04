@@ -130,12 +130,7 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     percentileDisplay.innerText = 
         `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
 
-    // Render histogram
-    const nonCumulativeData = Object.keys(percentileMapping).map(score => ({
-        score: parseInt(score, 10),
-        frequency: percentileMapping[score]
-    }));
-    renderDistributionHistogram(nonCumulativeData, totalScore);
+    renderDistributionHistogram(percentileMapping, totalScore);
 }
 
 
