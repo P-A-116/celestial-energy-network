@@ -129,13 +129,13 @@ function displayRelationshipMatrix(matrix, totalScore, planets) {
     const percentile = percentileMapping[totalScore.toString()] || "N/A";
     percentileDisplay.innerText = 
         `Total Friendliness Score: ${totalScore}\nNormalized Score: ${adjustedScore.toFixed(2)}%\nPercentile: ${percentile}%`;
-renderCumulativeHistogram(cumulativeData, 15); // Replace 15 with the user's score
+renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the user's score
 }
 
 
 
 // Render cumulative histogram
-function renderCumulativeHistogram(cumulativeData, totalScore) {
+function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
@@ -153,7 +153,7 @@ function renderCumulativeHistogram(cumulativeData, totalScore) {
         .range([0, width]);
 
     const yScale = d3.scaleLinear()
-        .domain([0, 100]) // Percent values (0% to 100%)
+        .domain([0, d3.max(nonCumulativeData, d => d.change)]) // Max change value
         .range([height, 0]);
 
     svg.append("g")
@@ -163,15 +163,15 @@ function renderCumulativeHistogram(cumulativeData, totalScore) {
     svg.append("g")
         .call(d3.axisLeft(yScale).ticks(10).tickFormat(d => `${d}%`));
 
-    svg.append("path")
-        .datum(cumulativeData)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 2)
-        .attr("d", d3.line()
-            .x(d => xScale(d.score))
-            .y(d => yScale(d.percentile))
-        );
+    svg.selectAll("rect")
+        .data(nonCumulativeData)
+        .enter()
+        .append("rect")
+        .attr("x", d => xScale(d.score) - 5) // Adjust bar width
+        .attr("y", d => yScale(d.change))
+        .attr("width", 10)
+        .attr("height", d => height - yScale(d.change))
+        .attr("fill", "steelblue");
 
     // Highlight the total score point
     svg.append("circle")
@@ -189,13 +189,17 @@ function renderCumulativeHistogram(cumulativeData, totalScore) {
 }
 
 // Example cumulative data
-const cumulativeData = Object.keys(percentileMapping).map(score => ({
-    score: parseInt(score, 10),
-    percentile: percentileMapping[score]
-}));
+const nonCumulativeData = Object.keys(percentileMapping).map((score, i, scores) => {
+    const currentPercentile = percentileMapping[score];
+    const previousPercentile = i > 0 ? percentileMapping[scores[i - 1]] : 0;
+    return {
+        score: parseInt(score, 10),
+        change: currentPercentile - previousPercentile
+    };
+});
 
 // Example call (ensure you pass the correct totalScore from form processing)
-renderCumulativeHistogram(cumulativeData, 15); // Replace 15 with the user's score
+renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the user's score
 
 
 // Form submission handler
