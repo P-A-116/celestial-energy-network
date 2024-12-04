@@ -141,8 +141,17 @@ const nonCumulativeData = Object.keys(percentileMapping).map((score, i, scores) 
     };
 });
 
+// Log data for debugging
+console.log("Non-Cumulative Data:", nonCumulativeData);
+
+
 // Render non-cumulative histogram
 function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
+    if (!nonCumulativeData || nonCumulativeData.length === 0) {
+        console.error("Non-cumulative data is empty or undefined.");
+        return;
+    }
+
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
@@ -179,7 +188,27 @@ function renderNonCumulativeHistogram(nonCumulativeData, totalScore) {
         .attr("width", 10)
         .attr("height", d => height - yScale(d.change))
         .attr("fill", "steelblue");
+
+    // Highlight the total score point
+    const matchedData = nonCumulativeData.find(d => d.score === totalScore) || { score: totalScore, change: 0 };
+    svg.append("circle")
+        .attr("cx", xScale(matchedData.score))
+        .attr("cy", yScale(matchedData.change))
+        .attr("r", 6)
+        .attr("fill", "red");
+
+    svg.append("text")
+        .attr("x", xScale(matchedData.score))
+        .attr("y", yScale(matchedData.change) - 10)
+        .attr("fill", "red")
+        .attr("text-anchor", "middle")
+        .text(`Your Score: ${totalScore}`);
 }
+
+// Example call to verify rendering
+console.log("Rendering non-cumulative histogram...");
+renderNonCumulativeHistogram(nonCumulativeData, 15); // Replace 15 with the actual score
+
 
 // Form submission handler
 document.getElementById('horoscope-form').addEventListener('submit', function(event) {
