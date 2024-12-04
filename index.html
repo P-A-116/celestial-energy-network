@@ -97,6 +97,7 @@
 
     <!-- Relationship Matrix Container -->
     <div class="bg-white rounded-lg shadow-md p-6 mt-4 max-w-4xl mx-auto overflow-x-auto" id="relationship-matrix" hidden>
+
         <h2 class="text-center text-2xl font-semibold mb-4">Relationship Table</h2>
         <div id="relationship-container" class="mt-8 max-w-4xl mx-auto">
             <p class="text-gray-500 text-center" id="relationship-placeholder">Data will appear here after analysis.</p>
@@ -133,11 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreDistribution.removeAttribute("hidden");
 
         // Clear placeholder for relationship matrix (if used dynamically)
-        const placeholder = document.getElementById("relationship-placeholder");
-        if (placeholder) placeholder.style.display = "none";
+		const placeholder = document.getElementById("relationship-placeholder");
+		if (placeholder) placeholder.style.display = "none";
+
     });
 });
 </script>
+<script src="graph.js"></script>
 
 </body>
 </html>

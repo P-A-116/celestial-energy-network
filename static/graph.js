@@ -83,8 +83,9 @@ function calculateFriendlinessScore(planetPositions) {
 
 // Display relationship matrix and scores
 function displayRelationshipMatrix(matrix, totalScore, planets) {
-    const table = document.getElementById('relationship-table');
-    table.innerHTML = ""; // Clear existing table content
+	const table = document.getElementById("relationship-table"); 
+	table.innerHTML = ""; // Clear previous content
+
 
     // Create table header
     const headerRow = document.createElement('tr');
